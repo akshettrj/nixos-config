@@ -2,38 +2,32 @@
 
 {
   imports = [
-    ../generic/configuration.nix
+    ../../../common/nixos/generic/configuration.nix
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
-
-    ../modules/nvidia-intel.nix
   ];
-
-  # MODULE SETTINGS - NVIDIA
-  nvidia = {
-    enable = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-    intelBusId = "PCI:0:2.0";
-    nvidiaBusId = "PCI:1:0.0";
-  };
 
   # SYSTEM SETTINGS
   username = "akshettrj";
   sudoWithoutPassword.enable = true;
-  timezone = "Asia/Kolkata";
-  hostname = "alienrj";
-  bluetooth.enable = true;
-  enablePrinting = true;
+  timezone = "UTC";
+  hostname = "oracle_amd_2";
+  bluetooth.enable = false;
+  enablePrinting = false;
   enableFirewall = true;
   firewallTCPPorts = [22];
   firewallUDPPorts = [];
+  swap = {
+    enable = true;
+    path = "/var/lib/swapfile";
+    size = 4 * 1024;
+  };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs; inherit pkgs; };
     users = {
       "akshettrj" = { ... }: {
-        imports = [ ../../home-manager/generic/configuration.nix ];
+        imports = [ ../../../common/home-manager/generic/configuration.nix ];
 
         username = "akshettrj";
         homedirectory = "/home/akshettrj";
@@ -46,13 +40,8 @@
 
         starship.enable = true;
 
-        hyprland.enable = true;
-
-        bemenu = {
-          enable = true;
-          fontSize = 15;
-          fontName = "Iosevka NF";
-        };
+        hyprland.enable = false;
+        bemenu.enable = false;
       };
     };
   };

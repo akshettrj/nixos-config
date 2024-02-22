@@ -64,6 +64,24 @@
         List of UDP ports to be opened in the firewall
       '';
     };
+
+    swap = {
+      enable = mkEnableOption("Enable swap memory");
+      device = mkOption {
+        type = types.path;
+        example = "/var/lib/swapfile";
+        description = ''
+          The location of swap
+        '';
+      };
+      size = mkOption {
+        type = types.number;
+        example = 4 * 1024;
+        description = ''
+          Size of the swap in MBs
+        '';
+      };
+    };
   };
 
   config = {
@@ -73,6 +91,11 @@
     boot.loader.grub.useOSProber = true;
 
     boot.loader.efi.canTouchEfiVariables = true;
+
+    swapDevices = lib.mkIf config.swap.enable [{
+      device = config.swap.device;
+      size = config.swap.size;
+    }];
 
     networking.hostName = "${config.hostname}";
     networking.networkmanager.enable = true;
@@ -139,6 +162,7 @@
       automake
       binutils
       bison
+      coreutils
       debugedit
       fakeroot
       file
@@ -147,6 +171,7 @@
       gawk
       gcc
       gettext
+      gitFull
       gnugrep
       gnumake
       gnused

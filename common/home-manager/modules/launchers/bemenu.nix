@@ -26,8 +26,8 @@
   };
 
   config = {
-    programs.bemenu = {
-      enable = config.bemenu.enable;
+    programs.bemenu = lib.mkIf config.bemenu.enable {
+      enable = true;
       settings = {
         prompt = "Run: ";
         ignorecase = true;
