@@ -19,7 +19,7 @@
   firewallUDPPorts = [];
   swap = {
     enable = true;
-    path = "/var/lib/swapfile";
+    device = "/var/lib/swapfile";
     size = 4 * 1024;
   };
 
