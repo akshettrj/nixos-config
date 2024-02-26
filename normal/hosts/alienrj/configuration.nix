@@ -24,6 +24,7 @@
   timezone = "Asia/Kolkata";
   hostname = "alienrj";
   bluetooth.enable = true;
+  pipewire.enable = true;
   enablePrinting = true;
   enableFirewall = true;
   firewallTCPPorts = [22];

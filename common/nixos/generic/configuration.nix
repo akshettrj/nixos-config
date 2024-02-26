@@ -49,6 +49,8 @@
       '';
     };
 
+    pipewire.enable = mkEnableOption("Enable pipewire");
+
     firewallTCPPorts = mkOption {
       type = types.listOf(types.port);
       example = [22];
@@ -118,8 +120,8 @@
 
     services.printing.enable = config.enablePrinting;
 
-    security.rtkit.enable = true;
-    services.pipewire = {
+    security.rtkit.enable = lib.mkIf config.pipewire.enable true;
+    services.pipewire = lib.mkIf config.pipewire.enable {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
@@ -189,7 +191,6 @@
       texinfo
       which
 
-      bluetuith
       clang
       cmake
       curl
@@ -202,6 +203,10 @@
       tailscale
       vim
       wget
+    ] ++ lib.optionals config.bluetooth.enable [
+      bluetuith
+    ] ++ lib.optionals config.pipewire.enable [
+      pulsemixer
     ];
 
     programs.zsh.enable = true;

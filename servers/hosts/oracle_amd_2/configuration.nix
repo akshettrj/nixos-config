@@ -13,6 +13,7 @@
   timezone = "UTC";
   hostname = "oracle_amd_2";
   bluetooth.enable = false;
+  pipewire.enable = false;
   enablePrinting = false;
   enableFirewall = true;
   firewallTCPPorts = [22];
