@@ -6,6 +6,7 @@
     ../modules/launchers/bemenu.nix
     ../modules/shells/zsh.nix
     ../modules/shells/starship.nix
+    ../modules/file_explorers/lf.nix
   ];
 
   options = let
@@ -29,41 +30,46 @@
       '';
     };
 
-    defaultEditor = mkOption {
-      type = types.enum(known_editors);
-      example = "neovim";
-      description = ''
-        The default editor
-      '';
+    hasDisplay = mkEnableOption("Set to true if system has a display");
+
+    editors = {
+      main = mkOption {
+        type = types.enum(known_editors);
+        example = "neovim";
+        description = ''
+          The main editor
+        '';
+      };
+      backup = mkOption {
+        type = types.enum(known_editors);
+        example = "helix";
+        description = ''
+          The backup editor
+        '';
+      };
     };
 
-    backupEditor = mkOption {
-      type = types.enum(known_editors);
-      example = "helix";
-      description = ''
-        The backup editor
-      '';
-    };
-
-    mainTerminal = mkOption {
-      type = types.enum(known_terminals);
-      example = "wezterm";
-      description = ''
-        The default terminal
-      '';
-    };
-
-    backupTerminal = mkOption {
-      type = types.enum(known_terminals);
-      example = "alacritty";
-      description = ''
-        The backup terminal
-      '';
+    terminals = {
+      enable = mkEnableOption("Enable terminals");
+      main = mkOption {
+        type = types.enum(known_terminals);
+        example = "wezterm";
+        description = ''
+          The main terminal
+        '';
+      };
+      backup = mkOption {
+        type = types.enum(known_terminals);
+        example = "alacritty";
+        description = ''
+          The backup terminal
+        '';
+      };
     };
   };
 
   config = let
-    terminals = {
+    terminal_configs = {
       "alacritty" = rec {
         package = pkgs.alacritty;
         binary = "${package}/bin/alacritty";
@@ -76,7 +82,7 @@
       };
     };
 
-    editors = {
+    editor_configs = {
       "neovim" = rec {
         package = pkgs.neovim;
         binary = "${package}/bin/nvim";
@@ -89,12 +95,18 @@
       };
     };
 
-    mainEditor = editors."${config.defaultEditor}";
-    backupEditor = editors."${config.backupEditor}";
+    editors = {
+      main = editor_configs."${config.editors.main}";
+      backup = editor_configs."${config.editors.backup}";
+    };
 
-    mainTerminal = terminals."${config.mainTerminal}";
-    backupTerminal = terminals."${config.backupTerminal}";
+    terminals = lib.mkIf config.terminals.enable {
+      main = terminal_configs."${config.terminals.main}";
+      backup = terminal_configs."${config.terminals.backup}";
+    };
+
   in {
+
     home.username = "${config.username}";
     home.homeDirectory = "${config.homedirectory}";
 
@@ -106,11 +118,12 @@
       pkgs.btop
       pkgs.ripgrep
 
-      mainEditor.package
-      backupEditor.package
+      editors.main.package
+      editors.backup.package
 
-      mainTerminal.package
-      backupTerminal.package
+    ] ++ lib.optionals config.terminals.enable [
+      terminals.main.package
+      terminals.backup.package
     ];
 
     home.file = {
@@ -142,9 +155,10 @@
     #  /etc/profiles/per-user/akshettrj/etc/profile.d/hm-session-vars.sh
     #
     home.sessionVariables = {
-      EDITOR = "${mainEditor.binary}";
-      VISUAL = "${mainEditor.binary}";
-      TERMINAL = "${mainTerminal.binary}";
+      EDITOR = "${editors.main.binary}";
+      VISUAL = "${editors.main.binary}";
+    } // lib.optionalAttrs config.terminals.enable {
+      TERMINAL = "${terminals.main.binary}";
     };
 
     programs.git = {
@@ -153,11 +167,11 @@
       userEmail = "jindalakshett@gmail.com";
     };
 
-    hyprland = {
-      terminalCommand = mainTerminal.command;
-      backupTerminalCommand = backupTerminal.command;
-      terminalCommandExecutor = "${mainTerminal.binary} -e";
-      backupTerminalCommandExecutor = "${backupTerminal.binary} -e";
+    hyprland = lib.mkIf config.hyprland.enable {
+      terminalCommand = terminals.main.command;
+      backupTerminalCommand = terminals.backup.command;
+      terminalCommandExecutor = "${terminals.main.binary} -e";
+      backupTerminalCommandExecutor = "${terminals.backup.binary} -e";
     };
 
     programs.bash = {

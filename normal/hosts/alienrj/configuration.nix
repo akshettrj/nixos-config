@@ -38,11 +38,15 @@
         username = "akshettrj";
         homedirectory = "/home/akshettrj";
 
-        defaultEditor = "neovim";
-        backupEditor = "helix";
+        editors = {
+          main = "neovim";
+          backup = "helix";
+        };
 
-        mainTerminal = "wezterm";
-        backupTerminal = "alacritty";
+        terminals = {
+          main = "wezterm";
+          backup = "alacritty";
+        };
 
         starship.enable = true;
 

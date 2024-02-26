@@ -17,11 +17,10 @@
   enableFirewall = true;
   firewallTCPPorts = [22];
   firewallUDPPorts = [];
-  swap = {
-    enable = true;
+  swaps = [{
     device = "/var/lib/swapfile";
     size = 4 * 1024;
-  };
+  }];
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; inherit pkgs; };
@@ -32,14 +31,14 @@
         username = "akshettrj";
         homedirectory = "/home/akshettrj";
 
-        defaultEditor = "neovim";
-        backupEditor = "helix";
-
-        mainTerminal = "wezterm";
-        backupTerminal = "alacritty";
+        editors = {
+          main = "neovim";
+          backup = "helix";
+        };
 
         starship.enable = true;
 
+        terminals.enable = false;
         hyprland.enable = false;
         bemenu.enable = false;
       };
