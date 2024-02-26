@@ -30,8 +30,6 @@
       '';
     };
 
-    hasDisplay = mkEnableOption("Set to true if system has a display");
-
     editors = {
       main = mkOption {
         type = types.enum(known_editors);
@@ -100,7 +98,7 @@
       backup = editor_configs."${config.editors.backup}";
     };
 
-    terminals = lib.mkIf config.terminals.enable {
+    terminals = {
       main = terminal_configs."${config.terminals.main}";
       backup = terminal_configs."${config.terminals.backup}";
     };

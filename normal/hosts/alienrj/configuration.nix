@@ -28,6 +28,7 @@
   enableFirewall = true;
   firewallTCPPorts = [22];
   firewallUDPPorts = [];
+  swaps = [];
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; inherit pkgs; };
@@ -44,6 +45,7 @@
         };
 
         terminals = {
+          enable = true;
           main = "wezterm";
           backup = "alacritty";
         };
