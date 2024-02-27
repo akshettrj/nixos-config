@@ -25,6 +25,8 @@
     size = 4 * 1024;
   }];
 
+  garbageCollection.enable = false;
+
   home-manager = {
     extraSpecialArgs = { inherit inputs; inherit pkgs; };
     users = {

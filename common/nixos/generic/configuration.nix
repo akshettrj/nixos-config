@@ -26,6 +26,8 @@
     };
 
     pipewire.enable = mkEnableOption("Enable pipewire");
+
+    garbageCollection.enable = mkEnableOption("Enable automatic garbage collection");
   };
 
   config = {
@@ -92,7 +94,17 @@
     ];
     security.polkit.enable = true;
 
-    nix.settings.experimental-features = "nix-command flakes";
+    nix = {
+      settings = {
+        experimental-features = "nix-command flakes";
+        auto-optimise-store = true;
+      };
+      gc = lib.mkIf config.garbageCollection.enable {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+      };
+    };
 
     environment.systemPackages = with pkgs; [
       # BASE-DEVEL
