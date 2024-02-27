@@ -14,11 +14,13 @@
   hostname = "oracle_amd_2";
   bluetooth.enable = false;
   pipewire.enable = false;
-  enablePrinting = false;
-  enableFirewall = true;
-  firewallTCPPorts = [22];
-  firewallUDPPorts = [];
-  swaps = [{
+  printing.enable = false;
+  firewall = {
+    enable = true;
+    tcpPorts = [22];
+    udpPorts = [];
+  };
+  swapDevices = [{
     device = "/var/lib/swapfile";
     size = 4 * 1024;
   }];

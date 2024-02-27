@@ -6,87 +6,26 @@
   options = let
     inherit (lib) mkOption mkEnableOption types;
   in {
-    username = mkOption {
-      type = types.str;
-      example = "akshettrj";
-      description = ''
-        The username of the main user of the system
-      '';
-    };
+
+    username = mkOption { type = types.str; example = "akshettrj"; };
 
     sudoWithoutPassword.enable = mkEnableOption("Allow user to run sudo commands without password");
 
-    timezone = mkOption {
-      type = types.str;
-      example = "Asia/Kolkata";
-      description = ''
-        The timezone of your system
-      '';
-    };
+    timezone = mkOption { type = types.str; example = "Asia/Kolkata"; };
 
-    hostname = mkOption {
-      type = types.str;
-      description = ''
-        The networking hostname of the system
-      '';
-    };
+    hostname = mkOption { type = types.str; };
 
     bluetooth.enable = mkEnableOption("Enable bluetooth");
 
-    enablePrinting = mkOption {
-      type = types.bool;
-      example = false;
-      description = ''
-        Whether to enable CUPS printing in the system
-      '';
-    };
+    printing.enable = mkEnableOption("Enable CUPS printing");
 
-    enableFirewall = mkOption {
-      type = types.bool;
-      example = true;
-      description = ''
-        Whether to enable the network firewall in the system
-      '';
+    firewall = {
+      enable = mkEnableOption("Enable firewall");
+      tcpPorts = mkOption { type = types.listOf(types.port); example = [22]; };
+      udpPorts = mkOption { type = types.listOf(types.port); example = []; };
     };
 
     pipewire.enable = mkEnableOption("Enable pipewire");
-
-    firewallTCPPorts = mkOption {
-      type = types.listOf(types.port);
-      example = [22];
-      description = ''
-        List of TCP ports to be opened in the firewall
-      '';
-    };
-
-    firewallUDPPorts = mkOption {
-      type = types.listOf(types.port);
-      example = [];
-      description = ''
-        List of UDP ports to be opened in the firewall
-      '';
-    };
-
-    swaps = mkOption {
-      type = types.listOf(types.submodule {
-        options = {
-          device = mkOption {
-            type = types.path;
-            example = "/var/lib/swapfile";
-            description = ''
-              The location of swap
-            '';
-          };
-          size = mkOption {
-            type = types.number;
-            example = 4 * 1024;
-            description = ''
-              Size of the swap in MBs
-            '';
-          };
-        };
-      });
-    };
   };
 
   config = {
@@ -95,14 +34,9 @@
     boot.loader.grub.efiSupport = true;
     boot.loader.grub.useOSProber = true;
 
-    boot.tmp = {
-      useTmpfs = true;
-      cleanOnBoot = true;
-    };
+    boot.tmp = { useTmpfs = true; cleanOnBoot = true; };
 
     boot.loader.efi.canTouchEfiVariables = true;
-
-    swapDevices = config.swaps;
 
     networking.hostName = "${config.hostname}";
     networking.networkmanager.enable = true;
@@ -115,10 +49,12 @@
       useXkbConfig = true; # use xkb.options in tty.
     };
 
-    services.xserver.xkb.layout = "us";
-    services.xserver.xkb.options = "caps:swapescape";
+    services.xserver = {
+      xkb = { layout = "us"; options = "caps:swapescape"; };
+      libinput.enable = true;
+    };
 
-    services.printing.enable = config.enablePrinting;
+    services.printing.enable = config.printing.enable;
 
     security.rtkit.enable = lib.mkIf config.pipewire.enable true;
     services.pipewire = lib.mkIf config.pipewire.enable {
@@ -138,8 +74,6 @@
       };
     };
 
-    services.xserver.libinput.enable = true;
-
     users.users."${config.username}" = {
       isNormalUser = true;
       extraGroups = [ "networkmanager" "wheel" ];
@@ -152,10 +86,7 @@
       {
         users = ["${config.username}"];
         commands = [
-          {
-            command = "ALL";
-            options = ["NOPASSWD"];
-          }
+          { command = "ALL"; options = ["NOPASSWD"]; }
         ];
       }
     ];
@@ -223,9 +154,11 @@
       useRoutingFeatures = "both";
     };
 
-    networking.firewall.enable = config.enableFirewall;
-    networking.firewall.allowedTCPPorts = config.firewallTCPPorts;
-    networking.firewall.allowedUDPPorts = config.firewallUDPPorts;
+    networking.firewall = lib.mkIf config.firewall.enable {
+      enable = true;
+      allowedTCPPorts = config.firewall.tcpPorts;
+      allowedUDPPorts = config.firewall.udpPorts;
+    };
 
     # DO NOT DELETE
     system.stateVersion = "23.11"; # Did you read the comment?

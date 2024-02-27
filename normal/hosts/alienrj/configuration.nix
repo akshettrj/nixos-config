@@ -25,11 +25,14 @@
   hostname = "alienrj";
   bluetooth.enable = true;
   pipewire.enable = true;
-  enablePrinting = true;
-  enableFirewall = true;
-  firewallTCPPorts = [22];
-  firewallUDPPorts = [];
-  swaps = [];
+  printing.enable = true;
+  firewall = {
+    enable = true;
+    tcpPorts = [22];
+    udpPorts = [];
+  };
+
+  swapDevices = [];
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; inherit pkgs; };
