@@ -48,7 +48,7 @@
 
         starship.enable = true;
 
-        terminals.enable = false;
+        hasDisplay = false;
         hyprland.enable = false;
         bemenu.enable = false;
       };

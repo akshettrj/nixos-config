@@ -14,83 +14,34 @@
     known_terminals = ["wezterm" "alacritty"];
     known_editors = ["neovim" "helix"];
   in {
-    username = mkOption {
-      type = types.str;
-      example = "akshettrj";
-      description = ''
-        The username for the main user
-      '';
-    };
+    username = mkOption { type = types.str; example = "akshettrj"; };
 
-    homedirectory = mkOption {
-      type = types.str;
-      example = "/home/akshettrj";
-      description = ''
-        The home directory for the main user
-      '';
-    };
+    homedirectory = mkOption { type = types.str; example = "/home/akshettrj"; };
 
     editors = {
-      main = mkOption {
-        type = types.enum(known_editors);
-        example = "neovim";
-        description = ''
-          The main editor
-        '';
-      };
-      backup = mkOption {
-        type = types.enum(known_editors);
-        example = "helix";
-        description = ''
-          The backup editor
-        '';
-      };
+      main = mkOption { type = types.enum(known_editors); example = "neovim"; };
+      backup = mkOption { type = types.enum(known_editors); example = "helix"; };
     };
 
     terminals = {
       enable = mkEnableOption("Enable terminals");
-      main = mkOption {
-        type = types.enum(known_terminals);
-        example = "wezterm";
-        description = ''
-          The main terminal
-        '';
-      };
-      backup = mkOption {
-        type = types.enum(known_terminals);
-        example = "alacritty";
-        description = ''
-          The backup terminal
-        '';
-      };
+
+      main = mkOption { type = types.enum(known_terminals); example = "wezterm"; };
+      backup = mkOption { type = types.enum(known_terminals); example = "alacritty"; };
     };
+
+    hasDisplay = mkEnableOption("Enable if has display");
   };
 
   config = let
     terminal_configs = {
-      "alacritty" = rec {
-        package = pkgs.alacritty;
-        binary = "${package}/bin/alacritty";
-        command = "${package}/bin/alacritty";
-      };
-      "wezterm" = rec {
-        package = pkgs.wezterm;
-        binary = "${package}/bin/wezterm";
-        command = "${package}/bin/wezterm start --always-new-process";
-      };
+      "alacritty" = rec { package = pkgs.alacritty; binary = "${package}/bin/alacritty"; command = "${package}/bin/alacritty"; };
+      "wezterm" = rec { package = pkgs.wezterm; binary = "${package}/bin/wezterm"; command = "${package}/bin/wezterm start --always-new-process"; };
     };
 
     editor_configs = {
-      "neovim" = rec {
-        package = pkgs.neovim;
-        binary = "${package}/bin/nvim";
-        command = "${package}/bin/nvim";
-      };
-      "helix" = rec {
-        package = pkgs.helix;
-        binary = "${package}/bin/hx";
-        command = "${package}/bin/hx";
-      };
+      "neovim" = rec { package = pkgs.neovim; binary = "${package}/bin/nvim"; command = "${package}/bin/nvim"; };
+      "helix" = rec { package = pkgs.helix; binary = "${package}/bin/hx"; command = "${package}/bin/hx"; };
     };
 
     editors = {
@@ -115,13 +66,11 @@
 
       pkgs.btop
       pkgs.ripgrep
-
-      editors.main.package
-      editors.backup.package
-
-    ] ++ lib.optionals config.terminals.enable [
+    ] ++ lib.optionals config.hasDisplay [
       terminals.main.package
       terminals.backup.package
+
+      pkgs.telegram-desktop
     ];
 
     home.file = {
@@ -155,7 +104,7 @@
     home.sessionVariables = {
       EDITOR = "${editors.main.binary}";
       VISUAL = "${editors.main.binary}";
-    } // lib.optionalAttrs config.terminals.enable {
+    } // lib.optionalAttrs config.hasDisplay {
       TERMINAL = "${terminals.main.binary}";
     };
 

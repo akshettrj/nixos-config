@@ -49,13 +49,14 @@
           backup = "helix";
         };
 
+        starship.enable = true;
+
+        hasDisplay = true;
+
         terminals = {
-          enable = true;
           main = "wezterm";
           backup = "alacritty";
         };
-
-        starship.enable = true;
 
         hyprland.enable = true;
 
