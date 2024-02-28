@@ -104,8 +104,25 @@
     home.sessionVariables = {
       EDITOR = "${editors.main.binary}";
       VISUAL = "${editors.main.binary}";
+      SUDO_EDITOR = "${editors.main.binary}";
     } // lib.optionalAttrs config.hasDisplay {
       TERMINAL = "${terminals.main.binary}";
+    };
+
+    xdg = {
+      enable = true;
+      userDirs = {
+        enable = true;
+        createDirectories = true;
+        desktop = "${config.home.homeDirectory}/media/desktop";
+        documents = "${config.home.homeDirectory}/media/documents";
+        download = "${config.home.homeDirectory}/media/downloads";
+        music = "${config.home.homeDirectory}/media/music";
+        publicShare = "${config.home.homeDirectory}/media/public";
+        templates = "${config.home.homeDirectory}/media/templates";
+        videos = "${config.home.homeDirectory}/media/videos";
+        pictures = "${config.home.homeDirectory}/media/pictures";
+      };
     };
 
     programs.git = {

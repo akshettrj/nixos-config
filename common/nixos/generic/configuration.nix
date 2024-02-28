@@ -188,6 +188,8 @@
       allowedUDPPorts = config.firewall.udpPorts;
     };
 
+    environment.pathsToLink = [ "/share/zsh" ];
+
     # DO NOT DELETE
     system.stateVersion = "23.11"; # Did you read the comment?
   };
