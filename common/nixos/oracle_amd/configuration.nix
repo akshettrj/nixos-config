@@ -14,7 +14,7 @@
   printing.enable = false;
   firewall = {
     enable = true;
-    tcpPorts = [22];
+    tcpPorts = [22 993];
     udpPorts = [];
   };
   swapDevices = [{
@@ -23,6 +23,14 @@
   }];
 
   garbageCollection.enable = false;
+
+  openssh = {
+    enable = true;
+    ports = [22 993];
+    passwordAuthentication = false;
+    rootLogin = "no";
+    x11Forwarding = false;
+  };
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; inherit pkgs; };

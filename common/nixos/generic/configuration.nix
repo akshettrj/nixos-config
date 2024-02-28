@@ -28,6 +28,14 @@
     pipewire.enable = mkEnableOption("Enable pipewire");
 
     garbageCollection.enable = mkEnableOption("Enable automatic garbage collection");
+
+    openssh = {
+      enable = mkEnableOption("Enable OpenSSH server");
+      ports = mkOption { type = types.listOf(types.port); example = [22 993]; };
+      passwordAuthentication = mkOption { type = types.bool; example = true; };
+      rootLogin = mkOption { type = types.enum(["yes" "without-password" "prohibit-password" "forced-commands-only" "no"]); example = "no"; };
+      x11Forwarding = mkOption { type = types.bool; example = true; };
+    };
   };
 
   config = {
@@ -159,7 +167,15 @@
       defaultEditor = true;
     };
 
-    services.openssh.enable = true;
+    services.openssh = lib.mkIf config.openssh.enable {
+      enable = true;
+      ports = config.openssh.ports;
+      settings = {
+        PasswordAuthentication = config.openssh.passwordAuthentication;
+        PermitRootLogin = config.openssh.rootLogin;
+        X11Forwarding = config.openssh.x11Forwarding;
+      };
+    };
 
     services.tailscale = {
       enable = true;
