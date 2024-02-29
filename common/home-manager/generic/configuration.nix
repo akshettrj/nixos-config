@@ -62,16 +62,20 @@
     home.stateVersion = "23.11"; # Please read the comment before changing.
 
     home.packages = [
-      (pkgs.nerdfonts.override { fonts = [ "Iosevka" ]; })
 
       pkgs.btop
       pkgs.ripgrep
-    ] ++ lib.optionals config.hasDisplay [
+
+    ] ++ lib.optionals config.hasDisplay([
+
+      (pkgs.nerdfonts.override { fonts = [ "Iosevka" "JetBrainsMono" ]; })
+
       terminals.main.package
       terminals.backup.package
 
       pkgs.telegram-desktop
-    ];
+
+    ] ++ builtins.attrNames(pkgs.lohit-fonts));
 
     home.file = {
     #   # # Building this configuration will create a copy of 'dotfiles/screenrc' in
@@ -102,6 +106,8 @@
     #  /etc/profiles/per-user/akshettrj/etc/profile.d/hm-session-vars.sh
     #
     home.sessionVariables = {
+      UNISON = "${config.xdg.dataHome}/unison";
+
       EDITOR = "${editors.main.binary}";
       VISUAL = "${editors.main.binary}";
       SUDO_EDITOR = "${editors.main.binary}";
