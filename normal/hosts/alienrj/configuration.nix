@@ -65,6 +65,11 @@
           fontSize = 15;
           fontName = "Iosevka NF";
         };
+
+        browsers = {
+          main = "brave";
+          backups = ["firefox" "chromium"];
+        };
       };
     };
   };

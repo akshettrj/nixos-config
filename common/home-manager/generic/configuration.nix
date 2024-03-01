@@ -13,6 +13,7 @@
     inherit (lib) mkOption mkEnableOption types;
     known_terminals = ["wezterm" "alacritty"];
     known_editors = ["neovim" "helix"];
+    known_browsers = ["brave" "chrome" "firefox" "chromium"];
   in {
     username = mkOption { type = types.str; example = "akshettrj"; };
 
@@ -30,6 +31,11 @@
       backup = mkOption { type = types.enum(known_terminals); example = "alacritty"; };
     };
 
+    browsers = {
+      main = mkOption { type = types.enum(known_browsers); example = "brave"; };
+      backups = mkOption { type = types.listOf(types.enum(known_browsers)); example = ["firefox" "chrome"]; };
+    };
+
     hasDisplay = mkEnableOption("Enable if has display");
   };
 
@@ -44,6 +50,13 @@
       "helix" = rec { package = pkgs.helix; binary = "${package}/bin/hx"; command = "${package}/bin/hx"; };
     };
 
+    browser_configs = {
+      "brave" = rec { package = pkgs.brave; binary = "${package}/bin/brave"; command = "${binary}"; };
+      "chrome" = rec { package = pkgs.google-chrome; binary = "${package}/bin/google-chrome-stable"; command = "${binary}"; };
+      "firefox" = rec { package = pkgs.firefox; binary = "${package}/bin/firefox"; command = "${binary}"; };
+      "chromium" = rec { package = pkgs.chromium; binary = "${package}/bin/chromium"; command = "${binary}"; };
+    };
+
     editors = {
       main = editor_configs."${config.editors.main}";
       backup = editor_configs."${config.editors.backup}";
@@ -52,6 +65,11 @@
     terminals = {
       main = terminal_configs."${config.terminals.main}";
       backup = terminal_configs."${config.terminals.backup}";
+    };
+
+    browsers = {
+      main = browser_configs."${config.browsers.main}";
+      backups = map(b: browser_configs."${b}")(config.browsers.backups);
     };
 
   in {
@@ -66,16 +84,38 @@
       pkgs.btop
       pkgs.ripgrep
 
-    ] ++ lib.optionals config.hasDisplay([
+    ] ++ lib.optionals config.hasDisplay(
+      [
 
-      (pkgs.nerdfonts.override { fonts = [ "Iosevka" "JetBrainsMono" ]; })
+        (pkgs.nerdfonts.override { fonts = [ "Iosevka" "JetBrainsMono" ]; })
 
-      terminals.main.package
-      terminals.backup.package
+        terminals.main.package
+        terminals.backup.package
 
-      pkgs.telegram-desktop
+        browsers.main.package
 
-    ] ++ builtins.attrNames(pkgs.lohit-fonts));
+        pkgs.telegram-desktop
+
+        pkgs.lohit-fonts.assamese
+        pkgs.lohit-fonts.kannada
+        pkgs.lohit-fonts.marathi
+        pkgs.lohit-fonts.tamil
+        pkgs.lohit-fonts.bengali
+        pkgs.lohit-fonts.kashmiri
+        pkgs.lohit-fonts.nepali
+        pkgs.lohit-fonts.tamil-classical
+        pkgs.lohit-fonts.devanagari
+        pkgs.lohit-fonts.konkani
+        pkgs.lohit-fonts.odia
+        pkgs.lohit-fonts.telugu
+        pkgs.lohit-fonts.gujarati
+        pkgs.lohit-fonts.maithili
+        pkgs.lohit-fonts.gurmukhi
+        pkgs.lohit-fonts.malayalam
+        pkgs.lohit-fonts.sindhi
+
+      ] ++ map(b: b.package)(browsers.backups)
+    );
 
     home.file = {
     #   # # Building this configuration will create a copy of 'dotfiles/screenrc' in
@@ -113,6 +153,7 @@
       SUDO_EDITOR = "${editors.main.binary}";
     } // lib.optionalAttrs config.hasDisplay {
       TERMINAL = "${terminals.main.binary}";
+      BROWSER = "${browsers.main.binary}";
     };
 
     xdg = {
