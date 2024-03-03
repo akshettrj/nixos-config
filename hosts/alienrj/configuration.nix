@@ -2,11 +2,11 @@
 
 {
   imports = [
-    ../../../common/nixos/generic/configuration.nix
+    ../../common/nixos/generic/configuration.nix
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
 
-    ../../../common/nixos/modules/nvidia-intel.nix
+    ../../common/nixos/modules/nvidia-intel.nix
   ];
 
   # MODULE SETTINGS - NVIDIA
@@ -39,7 +39,7 @@
     extraSpecialArgs = { inherit inputs; inherit pkgs; };
     users = {
       "akshettrj" = { ... }: {
-        imports = [ ../../../common/home-manager/generic/configuration.nix ];
+        imports = [ ../../common/home-manager/generic/configuration.nix ];
 
         username = "akshettrj";
         homedirectory = "/home/akshettrj";

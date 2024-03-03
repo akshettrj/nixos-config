@@ -4,7 +4,7 @@
   imports = [
     ./hardware-configuration.nix
 
-    ../../../common/nixos/oracle_amd/configuration.nix
+    ../../common/nixos/oracle_amd/configuration.nix
   ];
 
   hostname = "oracle_amd_2";

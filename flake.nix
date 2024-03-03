@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "github:hyprwm/Hyprland";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
@@ -28,6 +28,7 @@
   in
   {
     nixosConfigurations = {
+
       alienrj = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
@@ -37,7 +38,17 @@
           ./hosts/alienrj/configuration.nix
         ];
       };
-    };
 
+      oracle_amd_2 = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          pkgs = x86_64-linux-pkgs;
+        };
+        modules = [
+          ./hosts/oracle_amd_2/configuration.nix
+        ];
+      };
+
+    };
   };
 }
