@@ -6,6 +6,7 @@
     ../modules/launchers/bemenu.nix
     ../modules/shells/zsh.nix
     ../modules/shells/starship.nix
+    ../modules/shells/zoxide.nix
     ../modules/file_explorers/lf.nix
   ];
 
@@ -188,6 +189,9 @@
     programs.bash = {
       enable = true;
     };
+
+    starship.enable = true;
+    zoxide.enable = true;
 
     programs.home-manager.enable = true;
   };

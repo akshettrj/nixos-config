@@ -46,8 +46,6 @@
           backup = "helix";
         };
 
-        starship.enable = true;
-
         hasDisplay = false;
         hyprland.enable = false;
         bemenu.enable = false;

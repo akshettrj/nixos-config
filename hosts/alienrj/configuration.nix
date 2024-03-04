@@ -49,8 +49,6 @@
           backup = "helix";
         };
 
-        starship.enable = true;
-
         hasDisplay = true;
 
         terminals = {
