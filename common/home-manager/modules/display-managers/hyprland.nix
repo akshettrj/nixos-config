@@ -144,7 +144,10 @@
         workspace_swipe_cancel_ratio = 0.001;
       };
 
-      "device:epic-mouse-v1".sensitivity = -0.5;
+      device = {
+        name = "epic-mouse-v1";
+        sensitivity = -0.5;
+      };
 
       misc = {
         disable_hyprland_logo = true;
