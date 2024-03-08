@@ -27,7 +27,7 @@
     };
 
     terminals = {
-      enable = mkEnableOption("Enable terminals");
+      enable = mkOption { type = types.bool; description = "Enable terminals"; };
 
       main = mkOption { type = types.enum(known_terminals); example = "wezterm"; };
       backup = mkOption { type = types.enum(known_terminals); example = "alacritty"; };
@@ -38,7 +38,7 @@
       backups = mkOption { type = types.listOf(types.enum(known_browsers)); example = ["firefox" "chrome"]; };
     };
 
-    hasDisplay = mkEnableOption("Enable if has display");
+    hasDisplay = mkOption { type = types.bool; description = "Enable if has display"; };
   };
 
   config = let

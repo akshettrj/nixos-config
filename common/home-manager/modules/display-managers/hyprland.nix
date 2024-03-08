@@ -9,7 +9,7 @@
   inherit (lib) mkOption mkEnableOption types;
   in {
     hyprland = {
-      enable = mkEnableOption("Whether to enable hyprland");
+      enable = mkOption { type = types.bool; description = "Whether to enable hyprland"; };
 
       terminalCommand = mkOption {
         type = types.str;

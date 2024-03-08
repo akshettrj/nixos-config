@@ -5,7 +5,7 @@
   inherit (lib) mkOption mkEnableOption types;
   in {
     bemenu = {
-      enable = mkEnableOption("Whether to enable bemenu");
+      enable = mkOption { type = types.bool; description = "Whether to enable bemenu"; };
 
       fontName = mkOption {
         type = types.str;

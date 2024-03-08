@@ -35,6 +35,15 @@
 
   garbageCollection.enable = true;
 
+  openssh = {
+    enable = true;
+    ports = [22];
+    passwordAuthentication = true;
+    rootLogin = "no";
+    x11Forwarding = true;
+  };
+
+
   home-manager = {
     extraSpecialArgs = { inherit inputs; inherit pkgs; };
     users = {

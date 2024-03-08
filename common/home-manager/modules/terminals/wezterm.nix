@@ -2,7 +2,7 @@
 
 {
   options = let
-  inherit (lib) mkOption mkEnableOption types;
+    inherit (lib) mkOption mkEnableOption types;
   in {
     wezterm.enable = mkOption {
       type = types.bool;

@@ -5,7 +5,7 @@
     inherit (lib) mkOption mkEnableOption types;
   in {
     nvidia = {
-      enable = mkEnableOption("Enable NVIDIA graphics card drivers");
+      enable = mkOption { type = types.bool; description = "Enable NVIDIA graphics card drivers"; };
 
       package = mkOption {
         type = types.anything;

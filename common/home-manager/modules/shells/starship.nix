@@ -1,8 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
-  options = {
-    starship.enable = lib.mkEnableOption("Enable starship prompt for shells");
+  options = let
+    inherit (lib) mkOption types;
+  in {
+    starship.enable = lib.mkOption { type = types.bool; description = "Enable starship prompt for shells"; };
   };
 
   config = {

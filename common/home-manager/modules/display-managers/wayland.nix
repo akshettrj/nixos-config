@@ -1,8 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
-  options = {
-    wayland_packages.enable = lib.mkEnableOption("Enable Wayland");
+  options = let
+    inherit (lib) mkOption types;
+  in {
+    wayland_packages.enable = lib.mkOption { type = types.bool; description = "Enable Wayland"; };
   };
 
   config = lib.mkIf config.wayland_packages.enable {

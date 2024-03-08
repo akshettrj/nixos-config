@@ -1,8 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
-  options = {
-    zoxide.enable = lib.mkEnableOption("Enable zoxide for shells");
+  options = let
+    inherit (lib) mkOption types;
+  in {
+    zoxide.enable = lib.mkOption { type = types.bool; description = "Enable zoxide for shells"; };
   };
 
   config = {

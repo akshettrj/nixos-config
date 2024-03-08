@@ -9,28 +9,28 @@
 
     username = mkOption { type = types.str; example = "akshettrj"; };
 
-    sudoWithoutPassword.enable = mkEnableOption("Allow user to run sudo commands without password");
+    sudoWithoutPassword.enable = mkOption { type = types.bool; description = "Allow user to run sudo commands without password"; };
 
     timezone = mkOption { type = types.str; example = "Asia/Kolkata"; };
 
     hostname = mkOption { type = types.str; };
 
-    bluetooth.enable = mkEnableOption("Enable bluetooth");
+    bluetooth.enable = mkOption { type = types.bool; description = "Enable bluetooth"; };
 
-    printing.enable = mkEnableOption("Enable CUPS printing");
+    printing.enable = mkOption { type = types.bool; description = "Enable CUPS printing"; };
 
     firewall = {
-      enable = mkEnableOption("Enable firewall");
+      enable = mkOption { type = types.bool; description = "Enable firewall"; };
       tcpPorts = mkOption { type = types.listOf(types.port); example = [22]; };
       udpPorts = mkOption { type = types.listOf(types.port); example = []; };
     };
 
-    pipewire.enable = mkEnableOption("Enable pipewire");
+    pipewire.enable = mkOption { type = types.bool; description = "Enable pipewire"; };
 
-    garbageCollection.enable = mkEnableOption("Enable automatic garbage collection");
+    garbageCollection.enable = mkOption { type = types.bool; description = "Enable automatic garbage collection"; };
 
     openssh = {
-      enable = mkEnableOption("Enable OpenSSH server");
+      enable = mkOption { type = types.bool; description = "Enable OpenSSH server"; };
       ports = mkOption { type = types.listOf(types.port); example = [22 993]; };
       passwordAuthentication = mkOption { type = types.bool; example = true; };
       rootLogin = mkOption { type = types.enum(["yes" "without-password" "prohibit-password" "forced-commands-only" "no"]); example = "no"; };
