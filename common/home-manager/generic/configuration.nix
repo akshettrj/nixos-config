@@ -8,6 +8,7 @@
     ../modules/shells/starship.nix
     ../modules/shells/zoxide.nix
     ../modules/file_explorers/lf.nix
+    ../modules/terminals/wezterm.nix
   ];
 
   options = let

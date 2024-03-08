@@ -44,6 +44,7 @@
       };
     };
   };
+
   config = lib.mkIf config.hyprland.enable {
     wayland_packages.enable = true;
 

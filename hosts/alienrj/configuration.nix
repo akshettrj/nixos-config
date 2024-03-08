@@ -68,6 +68,8 @@
           main = "brave";
           backups = ["firefox" "chromium"];
         };
+
+        wezterm.enable = true;
       };
     };
   };
