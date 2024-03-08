@@ -46,7 +46,7 @@
   };
 
   config = lib.mkIf config.hyprland.enable {
-    wayland_packages.enable = true;
+    wayland_packages.enable = lib.mkForce(true);
 
     wayland.windowManager.hyprland = {
       enable = true;

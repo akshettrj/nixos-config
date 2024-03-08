@@ -49,6 +49,8 @@
         hasDisplay = false;
         hyprland.enable = false;
         bemenu.enable = false;
+        wezterm.enable = false;
+        wayland_packages.enable = false;
       };
     };
   };
