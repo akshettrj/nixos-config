@@ -157,6 +157,7 @@
       clang
       cmake
       curl
+      dconf
       helix
       htop
       home-manager

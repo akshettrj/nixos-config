@@ -79,6 +79,14 @@
         };
 
         wezterm.enable = true;
+
+        theming = {
+          gtk = true;
+          qt = true;
+          cursorSize = 16;
+          font = "Iosevka NF";
+          fontSize = 15;
+        };
       };
     };
   };

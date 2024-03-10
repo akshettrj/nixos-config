@@ -9,6 +9,8 @@
     ../modules/shells/zoxide.nix
     ../modules/file_explorers/lf.nix
     ../modules/terminals/wezterm.nix
+    ../modules/gtk.nix
+    ../modules/qt.nix
   ];
 
   options = let
@@ -39,6 +41,14 @@
     };
 
     hasDisplay = mkOption { type = types.bool; description = "Enable if has display"; };
+
+    theming = {
+      gtk = mkOption { type = types.bool; example = true; };
+      qt = mkOption { type = types.bool; example = true; };
+      cursorSize = mkOption { type = types.number; example = 16; };
+      font = mkOption { type = types.str; example = "Iosevka NF"; };
+      fontSize = mkOption { type = types.number; example = 15; };
+    };
   };
 
   config = let
