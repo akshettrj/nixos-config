@@ -115,11 +115,12 @@
     };
 
     environment.systemPackages = with pkgs; [
-      # BASE-DEVEL
+      # BASE + BASE-DEVEL
       autoconf
       automake
       binutils
       bison
+      bzip2
       coreutils
       debugedit
       fakeroot
@@ -130,17 +131,28 @@
       gcc
       gettext
       gitFull
+      glibc
       gnugrep
       gnumake
       gnused
+      gnutar
       groff
       gzip
+      iproute2
+      iputils
+      libgcc
       libtool
       m4
       patch
+      pciutils
       pkgconf
+      procps
+      psmisc
+      shadow
       texinfo
+      util-linux
       which
+      xz
 
       clang
       cmake
