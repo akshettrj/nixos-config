@@ -105,6 +105,7 @@
         browsers.main.package
 
         telegram-desktop
+        pcmanfm
       ] ++ map(b: b.package)(browsers.backups)
     );
 
