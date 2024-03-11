@@ -29,8 +29,6 @@
       highlighters = [
         "brackets"
         "pattern"
-        "regexp"
-        "cursor"
         "root"
         "line"
       ];
