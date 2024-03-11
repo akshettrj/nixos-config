@@ -62,8 +62,8 @@
         hasDisplay = true;
 
         terminals = {
-          backup = "wezterm";
-          main = "alacritty";
+          main = "wezterm";
+          backup = "alacritty";
         };
 
         hyprland.enable = true;
