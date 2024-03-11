@@ -70,7 +70,7 @@
 
         bemenu = {
           enable = true;
-          fontSize = 15;
+          fontSize = 13;
           fontName = "Iosevka NF";
         };
 

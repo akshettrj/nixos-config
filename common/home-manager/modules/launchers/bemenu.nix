@@ -38,6 +38,7 @@
         tf = "#268bd2";
         hf = "#268bd2";
         hb = "#444444";
+        tb = "#444444";
         fn = "${config.bemenu.fontName} ${toString(config.bemenu.fontSize)}";
         no-cursor = true;
       };
