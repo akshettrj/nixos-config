@@ -34,9 +34,7 @@
           "JetBrainsMono NF",
           "Lohit Hindi",
         })
-        if HOSTNAME == "alienrj" then
-          config.font_size = ${toString(config.wezterm.fontSize)}
-        end
+        config.font_size = ${toString(config.wezterm.fontSize)}
 
         config.color_scheme = 'Gruvbox Dark (Gogh)'
         config.hide_tab_bar_if_only_one_tab = true
