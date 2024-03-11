@@ -9,8 +9,8 @@
     ../modules/shells/zoxide.nix
     ../modules/file_explorers/lf.nix
     ../modules/terminals/wezterm.nix
-    ../modules/gtk.nix
-    ../modules/qt.nix
+    ../modules/theming/gtk.nix
+    ../modules/theming/qt.nix
   ];
 
   options = let
@@ -45,6 +45,7 @@
     theming = {
       gtk = mkOption { type = types.bool; example = true; };
       qt = mkOption { type = types.bool; example = true; };
+      fontconfig = mkOption { type = types.bool; example = true; };
       cursorSize = mkOption { type = types.number; example = 16; };
       font = mkOption { type = types.str; example = "Iosevka NF"; };
       fontSize = mkOption { type = types.number; example = 15; };
@@ -100,6 +101,10 @@
       [
 
         (pkgs.nerdfonts.override { fonts = [ "Iosevka" "JetBrainsMono" ]; })
+        pkgs.noto-fonts
+        pkgs.noto-fonts-cjk-sans
+        pkgs.noto-fonts-cjk-serif
+        pkgs.noto-fonts-color-emoji
 
         terminals.main.package
         terminals.backup.package

@@ -1,7 +1,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [];
+  imports = [
+    ../modules/fontconfig.nix
+  ];
 
   options = let
     inherit (lib) mkOption mkEnableOption types;

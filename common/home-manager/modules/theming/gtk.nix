@@ -1,10 +1,6 @@
 { config, pkgs, inputs, lib, ... }:
 
 {
-  options = let
-    inherit (lib) mkOption types;
-  in { };
-
   config = lib.mkIf config.theming.gtk {
     gtk = {
       enable = true;

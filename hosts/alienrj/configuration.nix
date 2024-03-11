@@ -43,6 +43,7 @@
     x11Forwarding = true;
   };
 
+  fontconfig.enable = true;
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; inherit pkgs; };
