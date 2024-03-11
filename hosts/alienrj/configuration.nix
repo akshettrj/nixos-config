@@ -79,7 +79,10 @@
           backups = ["firefox" "chromium"];
         };
 
-        wezterm.enable = true;
+        wezterm = {
+          enable = true;
+          fontSize = 15;
+        };
 
         theming = {
           gtk = true;

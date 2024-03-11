@@ -4,9 +4,9 @@
   options = let
     inherit (lib) mkOption mkEnableOption types;
   in {
-    wezterm.enable = mkOption {
-      type = types.bool;
-      example = true;
+    wezterm = {
+      enable = mkOption { type = types.bool; example = true; };
+      fontSize = mkOption { type = types.number; example = 15; };
     };
   };
 
@@ -35,7 +35,7 @@
           "Lohit Hindi",
         })
         if HOSTNAME == "alienrj" then
-          config.font_size = 17
+          config.font_size = ${toString(config.wezterm.fontSize)}
         end
 
         config.color_scheme = 'Gruvbox Dark (Gogh)'
