@@ -12,6 +12,7 @@
   bluetooth.enable = false;
   pipewire.enable = false;
   printing.enable = false;
+  fonts.enable = false;
   firewall = {
     enable = true;
     tcpPorts = [22 993];

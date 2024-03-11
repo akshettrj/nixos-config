@@ -92,45 +92,19 @@
 
     home.stateVersion = "23.11"; # Please read the comment before changing.
 
-    home.packages = [
+    home.packages = with pkgs; [
 
-      pkgs.btop
-      pkgs.ripgrep
+      btop
+      ripgrep
 
     ] ++ lib.optionals config.hasDisplay(
       [
-
-        (pkgs.nerdfonts.override { fonts = [ "Iosevka" "JetBrainsMono" ]; })
-        pkgs.noto-fonts
-        pkgs.noto-fonts-cjk-sans
-        pkgs.noto-fonts-cjk-serif
-        pkgs.noto-fonts-color-emoji
-
         terminals.main.package
         terminals.backup.package
 
         browsers.main.package
 
-        pkgs.telegram-desktop
-
-        pkgs.lohit-fonts.assamese
-        pkgs.lohit-fonts.kannada
-        pkgs.lohit-fonts.marathi
-        pkgs.lohit-fonts.tamil
-        pkgs.lohit-fonts.bengali
-        pkgs.lohit-fonts.kashmiri
-        pkgs.lohit-fonts.nepali
-        pkgs.lohit-fonts.tamil-classical
-        pkgs.lohit-fonts.devanagari
-        pkgs.lohit-fonts.konkani
-        pkgs.lohit-fonts.odia
-        pkgs.lohit-fonts.telugu
-        pkgs.lohit-fonts.gujarati
-        pkgs.lohit-fonts.maithili
-        pkgs.lohit-fonts.gurmukhi
-        pkgs.lohit-fonts.malayalam
-        pkgs.lohit-fonts.sindhi
-
+        telegram-desktop
       ] ++ map(b: b.package)(browsers.backups)
     );
 

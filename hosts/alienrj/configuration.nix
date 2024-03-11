@@ -26,6 +26,7 @@
   bluetooth.enable = true;
   pipewire.enable = true;
   printing.enable = true;
+  fonts.enable = true;
   firewall = {
     enable = true;
     tcpPorts = [22];

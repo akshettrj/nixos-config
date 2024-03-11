@@ -21,6 +21,8 @@
 
     printing.enable = mkOption { type = types.bool; description = "Enable CUPS printing"; };
 
+    fonts.enable = mkOption { type = types.bool; description = "Enable fonts"; };
+
     firewall = {
       enable = mkOption { type = types.bool; description = "Enable firewall"; };
       tcpPorts = mkOption { type = types.listOf(types.port); example = [22]; };
@@ -174,6 +176,32 @@
     ] ++ lib.optionals config.pipewire.enable [
       pulsemixer
     ];
+
+    fonts.packages = lib.mkIf config.fonts.enable (with pkgs; [
+      (nerdfonts.override { fonts = [ "Iosevka" "JetBrainsMono" ]; })
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-color-emoji
+
+      lohit-fonts.assamese
+      lohit-fonts.kannada
+      lohit-fonts.marathi
+      lohit-fonts.tamil
+      lohit-fonts.bengali
+      lohit-fonts.kashmiri
+      lohit-fonts.nepali
+      lohit-fonts.tamil-classical
+      lohit-fonts.devanagari
+      lohit-fonts.konkani
+      lohit-fonts.odia
+      lohit-fonts.telugu
+      lohit-fonts.gujarati
+      lohit-fonts.maithili
+      lohit-fonts.gurmukhi
+      lohit-fonts.malayalam
+      lohit-fonts.sindhi
+    ]);
 
     programs.zsh.enable = true;
 
