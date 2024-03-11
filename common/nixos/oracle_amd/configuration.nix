@@ -32,6 +32,8 @@
     x11Forwarding = false;
   };
 
+  fontconfig.enable = false;
+
   home-manager = {
     extraSpecialArgs = { inherit inputs; inherit pkgs; };
     users = {
@@ -51,6 +53,11 @@
         bemenu.enable = false;
         wezterm.enable = false;
         wayland_packages.enable = false;
+
+        theming = {
+          gtk = false;
+          qt = false;
+        };
       };
     };
   };

@@ -39,13 +39,13 @@
         ];
       };
 
-      oracle_amd_2 = nixpkgs.lib.nixosSystem {
+      oracleamd2 = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
           pkgs = x86_64-linux-pkgs;
         };
         modules = [
-          ./hosts/oracle_amd_2/configuration.nix
+          ./hosts/oracleamd2/configuration.nix
         ];
       };
 
