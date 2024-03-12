@@ -168,6 +168,10 @@
       enable = true;
       userName = "Akshett Rai Jindal";
       userEmail = "jindalakshett@gmail.com";
+      delta.enable = true;
+      extraConfig = {
+        init.defaultBranch = "main";
+      };
     };
 
     hyprland = lib.mkIf config.hyprland.enable {
