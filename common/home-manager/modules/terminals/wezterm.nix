@@ -30,7 +30,7 @@
 
         -- Appearance
         config.font = wezterm.font_with_fallback({
-          "Iosevka NF",
+          "${config.theming.font}",
           "JetBrainsMono NF",
           "Lohit Hindi",
         })
@@ -38,7 +38,7 @@
 
         config.window_frame = {
           font = wezterm.font_with_fallback({
-            { family = "Iosevka NF", weight = "ExtraBold" },
+            { family = "${config.theming.font}", weight = "ExtraBold" },
             { family = "JetBrainsMono NF", weight = "ExtraBold" },
             "Lohit Hindi",
           }),

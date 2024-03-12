@@ -7,14 +7,6 @@
     bemenu = {
       enable = mkOption { type = types.bool; description = "Whether to enable bemenu"; };
 
-      fontName = mkOption {
-        type = types.str;
-        example = "Iosevka NF";
-        description = ''
-          The font name to be used by bemenu
-        '';
-      };
-
       fontSize = mkOption {
         type = types.int;
         example = 14;
@@ -39,7 +31,7 @@
         hf = "#268bd2";
         hb = "#444444";
         tb = "#444444";
-        fn = "${config.bemenu.fontName} ${toString(config.bemenu.fontSize)}";
+        fn = "${config.theming.font} ${toString(config.bemenu.fontSize)}";
         no-cursor = true;
       };
     };

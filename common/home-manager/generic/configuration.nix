@@ -168,6 +168,7 @@
       };
       portal = lib.mkIf config.hasDisplay {
         enable = true;
+        config.common.default = "";
         extraPortals = with pkgs; [
           xdg-desktop-portal
         ] ++ lib.optionals config.hyprland.enable [
