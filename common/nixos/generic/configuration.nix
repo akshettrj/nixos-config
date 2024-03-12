@@ -167,7 +167,6 @@
       clang
       cmake
       curl
-      dconf
       helix
       htop
       home-manager
@@ -215,6 +214,8 @@
       enable = true;
       defaultEditor = true;
     };
+
+    programs.dconf.enable = true;
 
     services.openssh = lib.mkIf config.openssh.enable {
       enable = true;
