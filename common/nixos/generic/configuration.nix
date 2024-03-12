@@ -238,7 +238,10 @@
       allowedUDPPorts = config.firewall.udpPorts;
     };
 
-    environment.pathsToLink = [ "/share/zsh" ];
+    environment.pathsToLink = [
+      "/share/zsh"
+      "/share/bash-completion"
+    ];
 
     # DO NOT DELETE
     system.stateVersion = "23.11"; # Did you read the comment?

@@ -5,6 +5,8 @@
     ../modules/display-managers/hyprland.nix
     ../modules/launchers/bemenu.nix
     ../modules/shells/zsh.nix
+    ../modules/shells/bash.nix
+    ../modules/shells/eza.nix
     ../modules/shells/starship.nix
     ../modules/shells/zoxide.nix
     ../modules/file_explorers/lf.nix
@@ -50,6 +52,8 @@
       font = mkOption { type = types.str; example = "Iosevka NF"; };
       fontSize = mkOption { type = types.number; example = 15; };
     };
+
+    shell.aliases = mkOption { type = types.attrsOf (types.str); };
   };
 
   config = let
@@ -181,12 +185,15 @@
       backupTerminalCommandExecutor = "${terminals.backup.binary} -e";
     };
 
-    programs.bash = {
-      enable = true;
+    shell.aliases = {
+      cp = "cp -rvi";
+      rm = "rm -vi";
+      rsycn = "rsync -urvP";
     };
 
     starship.enable = true;
     zoxide.enable = true;
+    eza.enable = true;
 
     programs.home-manager.enable = true;
   };

@@ -6,10 +6,11 @@
 
     dotDir = ".config/zsh";
 
+    enableVteIntegration = true;
     enableAutosuggestions = true;
     enableCompletion = true;
 
-    # defaultKeymap = "viins";
+    shellAliases = config.shell.aliases;
 
     history = {
       path = "$HOME/.cache/zsh_history";
