@@ -166,6 +166,14 @@
         videos = "${config.home.homeDirectory}/media/videos";
         pictures = "${config.home.homeDirectory}/media/pictures";
       };
+      portal = lib.mkIf config.hasDisplay {
+        enable = true;
+        extraPortals = with pkgs; [
+          xdg-desktop-portal
+        ] ++ lib.optionals config.hyprland.enable [
+          xdg-desktop-portal-hyprland
+        ];
+      };
     };
 
     programs.git = {
