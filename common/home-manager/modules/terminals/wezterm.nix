@@ -39,10 +39,10 @@
         config.window_frame = {
           font = wezterm.font_with_fallback({
             { family = "Iosevka NF", weight = "ExtraBold" },
-            "JetBrainsMono NF", weight = "ExtraBold" },
+            { family = "JetBrainsMono NF", weight = "ExtraBold" },
             "Lohit Hindi",
           }),
-          font_size = ${toString(config.wezterm.fontSize - 1)}
+          font_size = ${toString(config.wezterm.fontSize - 1)},
         }
 
         config.color_scheme = 'Gruvbox Dark (Gogh)'
