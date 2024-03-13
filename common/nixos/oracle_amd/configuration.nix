@@ -20,7 +20,7 @@
   };
   swapDevices = [{
     device = "/var/lib/swapfile";
-    size = 4 * 1024;
+    size = 6 * 1024;
   }];
 
   garbageCollection.enable = false;
