@@ -32,7 +32,7 @@
         config.font = wezterm.font_with_fallback({
           "${config.theming.font}",
           "JetBrainsMono NF",
-          "Lohit Hindi",
+          "Lohit Devanagari",
         })
         config.font_size = ${toString(config.wezterm.fontSize)}
 
@@ -40,7 +40,7 @@
           font = wezterm.font_with_fallback({
             { family = "${config.theming.font}", weight = "ExtraBold" },
             { family = "JetBrainsMono NF", weight = "ExtraBold" },
-            "Lohit Hindi",
+            "Lohit Devanagari",
           }),
           font_size = ${toString(config.wezterm.fontSize - 1)},
         }
