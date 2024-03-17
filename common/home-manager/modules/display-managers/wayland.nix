@@ -10,6 +10,7 @@
   config = lib.mkIf config.wayland_packages.enable {
     home.packages = [
       pkgs.wl-clipboard
+      pkgs.wev
     ];
   };
 }

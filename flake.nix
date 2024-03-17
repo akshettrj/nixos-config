@@ -8,6 +8,8 @@
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
+    telegram-desktop-userfonts.url = "github:Propheci/nix-telegram-desktop-userfonts";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,35 +20,21 @@
   let
     x86_64-linux-pkgs = import nixpkgs {
       system = "x86_64-linux";
-      config = {
-        allowUnfree = true;
-      };
-      overlays = [
-        inputs.neovim-nightly-overlay.overlay
-      ];
+      config = { allowUnfree = true; };
+      overlays = [ inputs.neovim-nightly-overlay.overlay ];
     };
   in
   {
     nixosConfigurations = {
 
       alienrj = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-          pkgs = x86_64-linux-pkgs;
-        };
-        modules = [
-          ./hosts/alienrj/configuration.nix
-        ];
+        specialArgs = { inherit inputs; pkgs = x86_64-linux-pkgs; };
+        modules = [ ./hosts/alienrj/configuration.nix ];
       };
 
       oracleamd2 = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-          pkgs = x86_64-linux-pkgs;
-        };
-        modules = [
-          ./hosts/oracleamd2/configuration.nix
-        ];
+        specialArgs = { inherit inputs; pkgs = x86_64-linux-pkgs; };
+        modules = [ ./hosts/oracleamd2/configuration.nix ];
       };
 
     };

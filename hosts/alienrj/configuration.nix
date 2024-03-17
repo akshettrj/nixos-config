@@ -91,6 +91,17 @@
           font = "Iosevka NF";
           fontSize = 15;
         };
+
+        minBrightness = 40;
+
+        mpd.enable = true;
+
+        brave = {
+          enable = true;
+          scaleFactor = 1.3;
+        };
+
+        unison.enable = true;
       };
     };
   };

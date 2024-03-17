@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../modules/display-managers/hyprland.nix
+    ../modules/display-managers/hyprland/hyprland.nix
     ../modules/launchers/bemenu.nix
     ../modules/shells/zsh.nix
     ../modules/shells/bash.nix
@@ -13,6 +13,9 @@
     ../modules/terminals/wezterm.nix
     ../modules/theming/gtk.nix
     ../modules/theming/qt.nix
+    ../modules/browsers/brave.nix
+    ../modules/unison.nix
+    ../modules/mpd.nix
   ];
 
   options = let
@@ -54,6 +57,8 @@
     };
 
     shell.aliases = mkOption { type = types.attrsOf (types.str); };
+
+    minBrightness = mkOption { type = types.number; };
   };
 
   config = let
@@ -108,7 +113,7 @@
 
         browsers.main.package
 
-        telegram-desktop
+        inputs.telegram-desktop-userfonts.telegram-desktop-userfonts
         pcmanfm
       ] ++ map(b: b.package)(browsers.backups)
     );
@@ -152,29 +157,29 @@
       BROWSER = "${browsers.main.binary}";
     };
 
-    xdg = {
+    xdg.enable = true;
+
+    xdg.userDirs = {
       enable = true;
-      userDirs = {
-        enable = true;
-        createDirectories = true;
-        desktop = "${config.home.homeDirectory}/media/desktop";
-        documents = "${config.home.homeDirectory}/media/documents";
-        download = "${config.home.homeDirectory}/media/downloads";
-        music = "${config.home.homeDirectory}/media/music";
-        publicShare = "${config.home.homeDirectory}/media/public";
-        templates = "${config.home.homeDirectory}/media/templates";
-        videos = "${config.home.homeDirectory}/media/videos";
-        pictures = "${config.home.homeDirectory}/media/pictures";
-      };
-      portal = lib.mkIf config.hasDisplay {
-        enable = true;
-        config.common.default = "";
-        extraPortals = with pkgs; [
-          xdg-desktop-portal
-        ] ++ lib.optionals config.hyprland.enable [
-          xdg-desktop-portal-hyprland
-        ];
-      };
+      createDirectories = true;
+      desktop = "${config.home.homeDirectory}/media/desktop";
+      documents = "${config.home.homeDirectory}/media/documents";
+      download = "${config.home.homeDirectory}/media/downloads";
+      music = "${config.home.homeDirectory}/media/music";
+      publicShare = "${config.home.homeDirectory}/media/public";
+      templates = "${config.home.homeDirectory}/media/templates";
+      videos = "${config.home.homeDirectory}/media/videos";
+      pictures = "${config.home.homeDirectory}/media/pictures";
+    };
+
+    xdg.portal = lib.mkIf config.hasDisplay {
+      enable = true;
+      config.common.default = "";
+      extraPortals = with pkgs; [
+        xdg-desktop-portal
+      ] ++ lib.optionals config.hyprland.enable [
+        xdg-desktop-portal-hyprland
+      ];
     };
 
     programs.git = {

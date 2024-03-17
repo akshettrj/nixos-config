@@ -7,7 +7,7 @@
     dotDir = ".config/zsh";
 
     enableVteIntegration = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable  = true;
     enableCompletion = true;
 
     shellAliases = config.shell.aliases;

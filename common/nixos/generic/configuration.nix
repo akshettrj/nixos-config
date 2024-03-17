@@ -75,6 +75,7 @@
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
+      audio.enable = true;
       pulse.enable = true;
     };
 
@@ -106,15 +107,19 @@
     ];
     security.polkit.enable = true;
 
+    security.pam.services.swaylock = {};
+
     nix = {
       settings = {
         experimental-features = "nix-command flakes";
         auto-optimise-store = true;
         substituters = [
           "https://nix-community.cachix.org"
+          "https://telegram-desktop-userfonts.cachix.org"
         ];
         trusted-public-keys = [
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "telegram-desktop-userfonts.cachix.org-1:11CbAe/GzfdjjUXjQcBPvBmIwdBCkKGcB9n8vvdaalk="
         ];
       };
       gc = lib.mkIf config.garbageCollection.enable {
@@ -169,10 +174,10 @@
       curl
       helix
       htop
-      home-manager
       lf
       lshw
       neovim
+      nix-index
       tailscale
       vim
       wget

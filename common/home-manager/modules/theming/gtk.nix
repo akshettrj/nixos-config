@@ -22,7 +22,10 @@
         name = "Materia-dark-compact";
       };
       gtk3 = {
-        bookmarks = [];
+        bookmarks = [
+          "file:///tmp"
+          "file:///home/akshettrj/media"
+        ];
       };
     };
   };
