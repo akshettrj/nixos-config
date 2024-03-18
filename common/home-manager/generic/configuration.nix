@@ -113,7 +113,7 @@
 
         browsers.main.package
 
-        inputs.telegram-desktop-userfonts.telegram-desktop-userfonts
+        inputs.telegram-desktop-userfonts.packages.telegram-desktop-userfonts
         pcmanfm
       ] ++ map(b: b.package)(browsers.backups)
     );

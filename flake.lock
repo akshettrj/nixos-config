@@ -240,11 +240,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1710687635,
-        "narHash": "sha256-wTyv0MtJuBkZXmBiT9pZDtybYH04FDCf/Zt/Q+y8VG4=",
+        "lastModified": 1710762548,
+        "narHash": "sha256-d9CzkBNbfpLQtuD/np/h5yRdckoiMVtPTXP8V/FPg6M=",
         "owner": "Propheci",
         "repo": "nix-telegram-desktop-userfonts",
-        "rev": "a0f86ea22e45646fb7b3fb98245bc1c2164b09f3",
+        "rev": "a317593f464cdff780b62f9d90c3aad428e42b25",
         "type": "github"
       },
       "original": {
