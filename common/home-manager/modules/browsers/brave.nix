@@ -1,0 +1,16 @@
+{ config, lib, pkgs, ... }:
+
+{
+    config = let
+
+        pro_browsers = config.propheci.softwares.browsers;
+
+    in lib.mkIf pro_browsers.brave.enable {
+
+        programs.brave = {
+            enable = true;
+            commandLineArgs = pro_browsers.brave.cmd_args;
+        };
+
+    };
+}
