@@ -52,6 +52,10 @@
 
         config.check_for_updates = false
 
+        config.hide_mouse_cursor_when_typing = false
+
+        config.enable_wayland = false
+
         return config
 
       '';

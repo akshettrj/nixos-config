@@ -81,7 +81,7 @@
 
         wezterm = {
           enable = true;
-          fontSize = 11;
+          fontSize = 17;
         };
 
         theming = {

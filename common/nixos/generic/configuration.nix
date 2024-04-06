@@ -169,6 +169,7 @@
       which
       xz
 
+      acpi
       clang
       cmake
       curl

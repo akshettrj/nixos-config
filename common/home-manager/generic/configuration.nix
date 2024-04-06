@@ -106,6 +106,8 @@
       btop
       ripgrep
 
+      nil
+
     ] ++ lib.optionals config.hasDisplay(
       [
         terminals.main.package
@@ -114,6 +116,7 @@
         browsers.main.package
 
         inputs.telegram-desktop-userfonts.packages.telegram-desktop-userfonts
+        discord
         pcmanfm
       ] ++ map(b: b.package)(browsers.backups)
     );
@@ -178,7 +181,7 @@
       extraPortals = with pkgs; [
         xdg-desktop-portal
       ] ++ lib.optionals config.hyprland.enable [
-        xdg-desktop-portal-hyprland
+        inputs.hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland
       ];
     };
 

@@ -21,7 +21,7 @@
     programs.bemenu = lib.mkIf config.bemenu.enable {
       enable = true;
       settings = {
-        prompt = "Run: ";
+        prompt = "Run:";
         ignorecase = true;
         hp = config.bemenu.fontSize - 4;
         line-height = config.bemenu.fontSize + 20;
