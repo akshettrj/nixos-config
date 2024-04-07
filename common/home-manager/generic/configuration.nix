@@ -205,7 +205,7 @@
     shell.aliases = {
       cp = "cp -rvi";
       rm = "rm -vi";
-      rsycn = "rsync -urvP";
+      rsync = "rsync -urvP";
     };
 
     starship.enable = true;
