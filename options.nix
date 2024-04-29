@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
     options = let
@@ -17,7 +17,7 @@
         font_type = lib.types.submodule {
             options = {
                 name = mkOption { type = types.str; };
-                size = mkOption { type = types.unsigned; };
+                size = mkOption { type = types.ints.unsigned; };
             };
         };
 
@@ -42,6 +42,13 @@
 
             hardware = {
                 bluetooth.enable = mkOption { type = types.bool; };
+                nvidia = {
+                    enable = mkOption { type = types.bool; };
+                    package = mkOption {
+                        type = types.anything;
+                        example = config.boot.kernelPackages.nvidiaPackages.stable;
+                    };
+                };
             };
 
             # Various Services
@@ -70,6 +77,7 @@
             nix = {
                 garbage_collection.enable = mkOption { type = types.bool; };
                 nix_community_cache = mkOption { type = types.bool; };
+                hyprland_cache = mkOption { type = types.bool; };
             };
 
             # Appearance
@@ -82,8 +90,8 @@
                 };
                 gtk = mkOption { type = types.bool; };
                 qt = mkOption { type = types.bool; };
-                cursor_size = mkOption { type = types.unsigned; };
-                minimum_brightness = mkOption { type = types.unsigned; };
+                cursor_size = mkOption { type = types.ints.unsigned; };
+                minimum_brightness = mkOption { type = types.ints.unsigned; };
                 wallpaper = mkOption { type = types.path; };
             };
 
@@ -107,6 +115,15 @@
                             ncmpcpp.enable = mkOption { type = types.bool; };
                         };
                     };
+                    video = {
+                        mpv.enable = mkOption { type = types.bool; };
+                    };
+                };
+                social_media = {
+                    telegram.enable = mkOption { type = types.bool; };
+                    discord.enable = mkOption { type = types.bool; };
+                    beeper.enable = mkOption { type = types.bool; };
+                    slack.enable = mkOption { type = types.bool; };
                 };
                 editors = {
                     main = mkOption { type = types.enum(known_editors); example = "neovim"; };
@@ -164,7 +181,7 @@
                     main = mkOption { type = types.enum(known_launchers); };
                     bemenu = {
                         enable = mkOption { type = types.bool; };
-                        font_size = mkOption { type = types.unsigned; };
+                        font_size = mkOption { type = types.ints.unsigned; };
                     };
                 };
                 zoxide.enable = mkOption { type = types.bool; };
@@ -189,7 +206,7 @@
                 wayland.enable = mkOption { type = types.bool; };
                 hyprland = {
                     enable = mkOption { type = types.bool; };
-                    use_oficial_flake = mkOption { type = types.bool; };
+                    use_official_flake = mkOption { type = types.bool; };
                     scroll_factor = mkOption { type = types.number; };
                     screenlock = mkOption { type = types.enum(known_screenlocks); };
                 };

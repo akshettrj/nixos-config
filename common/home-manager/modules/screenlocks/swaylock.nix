@@ -15,7 +15,7 @@
                 ignore-empty-password = true;
 
                 color = "000000";
-                font = pro_theming.fonts.main;
+                font = pro_theming.fonts.main.name;
                 inside-color = "1F202A";
                 line-color = "1F202A";
                 ring-color = "bd93f9";

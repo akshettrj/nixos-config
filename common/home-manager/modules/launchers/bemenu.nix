@@ -22,7 +22,7 @@
                 hf = "#268bd2";
                 hb = "#444444";
                 tb = "#444444";
-                fn = "${pro_theming.fonts.main} ${toString(pro_launchers.bemenu.font_size)}";
+                fn = "${pro_theming.fonts.main.name} ${toString(pro_launchers.bemenu.font_size)}";
                 no-cursor = true;
             };
         };

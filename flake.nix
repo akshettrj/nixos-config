@@ -6,7 +6,6 @@
         hyprland.url = "github:hyprwm/Hyprland";
         neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
         helix-nightly.url = "github:helix-editor/helix";
-        telegram-desktop-userfonts.url = "github:Propheci/nix-telegram-desktop-userfonts";
         home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -17,7 +16,7 @@
     let
         x86_64-linux-pkgs = import nixpkgs {
             system = "x86_64-linux";
-            config = { allowUnfree = false; allowUnsafe = false; };
+            config = { allowUnfree = true; allowUnsafe = false; };
             overlays = [];
         };
     in

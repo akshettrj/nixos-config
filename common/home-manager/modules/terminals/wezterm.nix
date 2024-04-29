@@ -26,7 +26,7 @@
 
                 config.font = wezterm.font_with_fallback({
                     "${pro_theming.fonts.main.name}",
-                    ${lib.strings.concatStringsSep ",\n" map(font: ''"${font.name}"'')(pro_theming.fonts.backups)}
+                    ${lib.strings.concatStringsSep ",\n" (map(font: ''"${font.name}"'')(pro_theming.fonts.backups))}
                 })
                 config.font_size = ${toString(pro_terminals.wezterm.font_size)}
 

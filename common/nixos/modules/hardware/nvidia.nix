@@ -1,0 +1,34 @@
+{ config, lib, pkgs, ... }:
+
+{
+    config = let
+
+        pro_hw = config.propheci.hardware;
+
+    in lib.mkIf pro_hw.nvidia.enable {
+
+        hardware.opengl = {
+            enable = true;
+            driSupport = true;
+            driSupport32Bit = true;
+            extraPackages = [ pkgs.mesa.drivers ];
+        };
+
+        services.xserver.videoDrivers = [ "nvidia" ];
+
+        hardware.nvidia = {
+            package = pro_hw.nvidia.package;
+
+            modesetting.enable = true;
+
+            powerManagement = {
+                enable = false;
+            };
+
+            open = false;
+
+            nvidiaSettings = true;
+        };
+
+    };
+}

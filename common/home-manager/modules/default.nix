@@ -13,6 +13,7 @@
         ./screenlocks
         ./scripts
         ./shells
+        ./social_media
         ./terminals
     ];
 }

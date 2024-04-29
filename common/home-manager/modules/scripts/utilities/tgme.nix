@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-    config = rec {
+    config = let
 
         tgme = pkgs.writeShellScriptBin "tgme" ''
             if [[ "''${#}" -eq 0 ]]
@@ -121,6 +121,8 @@
 
             exit 0
         '';
+
+    in {
 
         home.packages = [ tgme ];
 

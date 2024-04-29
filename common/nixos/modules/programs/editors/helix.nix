@@ -7,8 +7,6 @@
 
     in lib.mkIf pro_editors.helix.enable {
 
-        pkgs.overlays = pkgs.overlays ++ lib.optionals pro_editors.helix.nightly [ inputs.helix-nightly.overlays.default ];
-
         environment.systemPackages = [ pkgs.helix ];
 
     };

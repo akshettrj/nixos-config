@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
     imports = [ ./wayland.nix ];
@@ -19,10 +19,6 @@
         screenlocks_meta = import ../../../../metadata/programs/screenlocks/metadata.nix { inherit pkgs; };
         terminals_meta = import ../../../../metadata/programs/terminals/metadata.nix { inherit pkgs; };
 
-        brightness_scripts = import ../../scripts/utilities/brightness.nix { inherit config; inherit pkgs; };
-        brightnessdown = "${brightness_scripts.brightnessdown}/bin/brightnessdown";
-        brightnessup = "${brightness_scripts.brightnessup}/bin/brightnessup";
-
         normal_desktops = lib.listToAttrs(builtins.map (ws: { name = toString(ws); value = toString(ws); }) (lib.range 1 9)) // { "0" = "10"; };
         alt_desktops = lib.listToAttrs(builtins.map (ws: { name = toString(ws); value = toString(ws); }) (lib.range 11 19)) // { "0" = "20"; };
 
@@ -33,8 +29,6 @@
     in lib.mkIf pro_deskenvs.hyprland.enable {
 
         propheci.desktop_environments.wayland.enable = lib.mkForce true;
-
-        pkgs.overlays = pkgs.overlays ++ lib.optionals pro_deskenvs.hyprland.use_official_flake [ inputs.hyprland.overlays.default ];
 
         wayland.windowManager.hyprland = {
             enable = true;
@@ -149,13 +143,13 @@
                     "$mainMod SHIFT, K, swapwindow, u"
                     "$mainMod SHIFT, J, swapwindow, d"
                 ] ++ (
-                    builtins.mapAttrs (key: desk: "$mainMod, ${key}, workspace, ${desk}") normal_desktops
+                    builtins.attrValues (builtins.mapAttrs (key: desk: "$mainMod, ${key}, workspace, ${desk}") normal_desktops)
                 ) ++ (
-                    builtins.mapAttrs (key: desk: "$mainMod ALT, ${key}, workspace, ${desk}") alt_desktops
+                    builtins.attrValues (builtins.mapAttrs (key: desk: "$mainMod ALT, ${key}, workspace, ${desk}") alt_desktops)
                 ) ++ (
-                    builtins.mapAttrs (key: desk: "$mainMod SHIFT, ${key}, movetoworkspace, ${desk}") normal_desktops
+                    builtins.attrValues (builtins.mapAttrs (key: desk: "$mainMod SHIFT, ${key}, movetoworkspace, ${desk}") normal_desktops)
                 ) ++ (
-                    builtins.mapAttrs (key: desk: "$mainMod ALT SHIFT, ${key}, movetoworkspace, ${desk}") alt_desktops
+                    builtins.attrValues (builtins.mapAttrs (key: desk: "$mainMod ALT SHIFT, ${key}, movetoworkspace, ${desk}") alt_desktops)
                 ) ++ [
                     "$mainMod, BracketRight, workspace, m+1"
                     "$mainMod, BracketLeft, workspace, m-1"
@@ -216,10 +210,10 @@
                     "$mainMod, Up, moveactive, 0 -10"
                     "$mainMod, Down, moveactive, 0 10"
 
-                    ",XF86MonBrightnessDown, exec, ${brightnessdown}"
-                    ",XF86MonBrightnessUp, exec, ${brightnessup}"
-                    "$mainMod, F2, exec, ${brightnessdown}"
-                    "$mainMod, F3, exec, ${brightnessup}"
+                    ",XF86MonBrightnessDown, exec, brightnessdown"
+                    ",XF86MonBrightnessUp, exec, brightnessup"
+                    "$mainMod, F2, exec, brightnessdown"
+                    "$mainMod, F3, exec, brightnessup"
 
                 ] ++ lib.optionals pro_services.pipewire.enable [
 

@@ -12,7 +12,7 @@
         programs.lf = {
             enable = true;
             settings = {
-                shell = shells_meta."${pro_shells.main}";
+                shell = shells_meta."${pro_shells.main}".bin;
                 shellopts = "-euy";
                 hidden = true;
                 ifs = "\\n";

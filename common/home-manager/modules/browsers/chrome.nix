@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 {
     config = let
@@ -7,7 +7,7 @@
 
     in lib.mkIf pro_browsers.chrome.enable {
 
-        programs.chrome = {
+        programs.google-chrome = {
             enable = true;
             commandLineArgs = pro_browsers.chrome.cmd_args;
         };

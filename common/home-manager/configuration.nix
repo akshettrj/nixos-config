@@ -35,9 +35,15 @@
         } // lib.optionalAttrs pro_terminals.enable {
 
             TERMINAL = terminals_meta."${pro_terminals.main}".cmd;
-            BROWSER = browsers_meta."${pro_browsers.main}".cmd;
+            BROWSER = browsers_meta."${pro_browsers.main}".bin;
         };
 
+        home.packages = with pkgs; [
+            btop
+            dust
+            nh
+            ripgrep
+        ];
 
         xdg = {
             enable = true;
