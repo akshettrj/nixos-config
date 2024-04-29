@@ -1,10 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 {
     config = let
 
         pro_shells = config.propheci.shells;
-        pro_terminals = config.propheci.softwares.terminals;
+        pro_terminals = config.propheci.programs.terminals;
         pro_theming = config.propheci.theming;
 
     in lib.mkIf pro_terminals.wezterm.enable {

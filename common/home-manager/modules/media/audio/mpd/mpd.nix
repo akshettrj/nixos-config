@@ -3,7 +3,7 @@
 {
     config = let
 
-        pro_mpd = config.propheci.softwares.media.audio.mpd;
+        pro_mpd = config.propheci.programs.media.audio.mpd;
 
     in lib.mkIf pro_mpd.enable {
 

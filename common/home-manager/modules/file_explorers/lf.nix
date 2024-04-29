@@ -5,9 +5,9 @@
 
         pro_shells = config.propheci.shells;
 
-        shells_meta = import ../shells/metadata.nix { inherit pkgs };
+        shells_meta = import ../../../metadata/programs/shells/metadata.nix { inherit pkgs; };
 
-    in lib.mkIf config.propheci.softwares.file_explorers.lf.enable {
+    in lib.mkIf config.propheci.programs.file_explorers.lf.enable {
 
         programs.lf = {
             enable = true;
@@ -35,7 +35,7 @@
                 mkdir = ''%mkdir "$@"'';
                 touch = ''%touch "$@"'';
 
-            } // lib.optionalAttrs config.propheci.softwares.zoxide.enable {
+            } // lib.optionalAttrs config.propheci.programs.zoxide.enable {
 
                 # Zoxide
                 z = ''

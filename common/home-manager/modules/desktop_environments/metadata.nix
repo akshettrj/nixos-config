@@ -1,5 +1,0 @@
-{ ... }:
-
-{
-    hyprland = { cmd = "Hyprland"; };
-}

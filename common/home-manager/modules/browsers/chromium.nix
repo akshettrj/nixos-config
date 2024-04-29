@@ -3,7 +3,7 @@
 {
     config = let
 
-        pro_browsers = config.propheci.softwares.browsers;
+        pro_browsers = config.propheci.programs.browsers;
 
     in lib.mkIf pro_browsers.chromium.enable {
 

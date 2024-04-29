@@ -4,9 +4,10 @@
     config = let
 
         pro_shells = config.propheci.shells;
-        pro_file_explorers = config.propheci.softwares.file_explorers;
+        pro_file_explorers = config.propheci.programs.file_explorers;
 
     in lib.mkIf pro_shells.zsh.enable {
+
         programs.zsh = {
             enable = true;
 
@@ -15,8 +16,6 @@
             enableVteIntegration = true;
             autosuggestion.enable = true;
             enableCompletion = true;
-
-            shellAliases = pro_shells.aliases;
 
             history = {
                 path = "$HOME/.cache/zsh_history";
@@ -158,7 +157,7 @@
                     fi
                 }
             '';
-
         };
+
     };
 }

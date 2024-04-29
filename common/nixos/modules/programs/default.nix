@@ -1,0 +1,9 @@
+{ ... }:
+
+{
+    imports = [
+        ./editors
+        ./screenlocks
+        ./shells
+    ];
+}

@@ -5,7 +5,7 @@
 
         pro_shells = config.propheci.shells;
 
-    in lib.mkIf config.propheci.softwares.file_explorers.yazi.enable {
+    in lib.mkIf config.propheci.programs.file_explorers.yazi.enable {
         programs.yazi = {
             enable = true;
 

@@ -3,7 +3,8 @@
 {
     imports = [
         ./hardware
-        ./nix
+        ./misc
+        ./programs
         ./services
     ];
 }

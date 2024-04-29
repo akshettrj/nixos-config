@@ -5,14 +5,14 @@
 
         inherit (lib) mkOption types;
 
-        known_browsers = lib.attrNames(import ./common/home-manager/modules/browsers/metadata.nix { inherit pkgs; });
+        known_browsers = lib.attrNames (import ./common/metadata/programs/browsers/metadata.nix { inherit pkgs; });
         known_desktop_environments = ["hyprland" "cosmic" "gnome"];
-        known_editors = ["neovim" "helix"];
-        known_file_explorers = lib.attrNames(import ./common/home-manager/modules/file_explorers/metadata.nix { inherit pkgs; });
-        known_launchers = lib.attrNames(import ./common/home-manager/modules/launchers/metadata.nix { inherit pkgs; });
-        known_shells = lib.attrNames(import ./common/home-manager/modules/shells/metadata.nix { inherit pkgs; });
-        known_terminals = lib.attrNames(import ./common/home-manager/modules/terminals/metadata.nix { inherit pkgs; });
-        known_screenlocks = lib.attrNames(import ./common/home-manager/modules/screenlocks/metadata.nix { inherit pkgs; });
+        known_editors = lib.attrNames (import ./common/metadata/programs/editors/metadata.nix { inherit pkgs; });
+        known_file_explorers = lib.attrNames (import ./common/metadata/programs/file_explorers/metadata.nix { inherit pkgs; });
+        known_launchers = lib.attrNames (import ./common/metadata/programs/launchers/metadata.nix { inherit pkgs; });
+        known_shells = lib.attrNames (import ./common/metadata/programs/shells/metadata.nix { inherit pkgs; });
+        known_terminals = lib.attrNames (import ./common/metadata/programs/terminals/metadata.nix { inherit pkgs; });
+        known_screenlocks = lib.attrNames (import ./common/metadata/programs/screenlocks/metadata.nix { inherit pkgs; });
 
         font_type = lib.types.submodule {
             options = {
@@ -26,14 +26,18 @@
             # System Meta
             system = {
                 hostname = mkOption { type = types.str; example = "alienrj"; };
-                timezone = mkOption { type = types.str; example = "Asia/Kolkata"; };
+                time_zone = mkOption { type = types.str; example = "Asia/Kolkata"; };
             };
 
             # User Meta
             user = {
                 username = mkOption { type = types.str; example = "akshettrj"; };
                 homedir = mkOption { type = types.str; example = "/home/akshettrj"; };
+            };
+
+            security = {
                 sudo_without_password = mkOption { type = types.bool; };
+                polkit.enable = mkOption { type = types.bool; };
             };
 
             hardware = {
@@ -58,6 +62,8 @@
                         x11_forwarding = mkOption { type = types.bool; };
                     };
                 };
+                tailscale.enable = mkOption { type = types.bool; };
+                xdg_portal.enable = mkOption { type = types.bool; };
             };
 
             # Nix/NixOS specific
@@ -78,10 +84,22 @@
                 qt = mkOption { type = types.bool; };
                 cursor_size = mkOption { type = types.unsigned; };
                 minimum_brightness = mkOption { type = types.unsigned; };
+                wallpaper = mkOption { type = types.path; };
             };
 
-            # Softwares
-            softwares = {
+            dev = {
+                git = {
+                    enable = mkOption { type = types.bool; };
+                    user = {
+                        name = mkOption { type = types.str; };
+                        email = mkOption { type = types.str; };
+                    };
+                    delta.enable = mkOption { type = types.bool; };
+                    default_branch = mkOption { type = types.str; };
+                };
+            };
+
+            programs = {
                 media = {
                     audio = {
                         mpd = {
@@ -93,6 +111,14 @@
                 editors = {
                     main = mkOption { type = types.enum(known_editors); example = "neovim"; };
                     backup = mkOption { type = types.enum(known_editors); example = "helix"; };
+                    neovim = {
+                        enable = mkOption { type = types.bool; };
+                        nightly = mkOption { type = types.bool; };
+                    };
+                    helix = {
+                        enable = mkOption { type = types.bool; };
+                        nightly = mkOption { type = types.bool; };
+                    };
                 };
                 terminals = {
                     enable = mkOption { type = types.bool; };

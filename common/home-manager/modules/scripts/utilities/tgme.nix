@@ -2,6 +2,7 @@
 
 {
     config = rec {
+
         tgme = pkgs.writeShellScriptBin "tgme" ''
             if [[ "''${#}" -eq 0 ]]
             then
@@ -120,6 +121,8 @@
 
             exit 0
         '';
+
         home.packages = [ tgme ];
+
     };
 }

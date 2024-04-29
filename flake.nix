@@ -4,7 +4,8 @@
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
         hyprland.url = "github:hyprwm/Hyprland";
-        neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+        neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+        helix-nightly.url = "github:helix-editor/helix";
         telegram-desktop-userfonts.url = "github:Propheci/nix-telegram-desktop-userfonts";
         home-manager = {
             url = "github:nix-community/home-manager";
@@ -17,7 +18,7 @@
         x86_64-linux-pkgs = import nixpkgs {
             system = "x86_64-linux";
             config = { allowUnfree = false; allowUnsafe = false; };
-            overlays = [ inputs.neovim-nightly-overlay.overlay ];
+            overlays = [];
         };
     in
     {

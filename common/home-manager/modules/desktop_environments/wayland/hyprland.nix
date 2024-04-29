@@ -5,19 +5,19 @@
 
     config = let
 
-        pro_browsers = config.propheci.softwares.browsers;
+        pro_browsers = config.propheci.programs.browsers;
         pro_deskenvs = config.propheci.desktop_environments;
-        pro_file_explorers = config.propheci.softwares.file_explorers;
-        pro_launchers = config.propheci.softwares.launchers;
-        pro_mpd = config.propheci.softwares.media.audio.mpd;
+        pro_file_explorers = config.propheci.programs.file_explorers;
+        pro_launchers = config.propheci.programs.launchers;
+        pro_mpd = config.propheci.programs.media.audio.mpd;
         pro_services = config.propheci.services;
-        pro_terminals = config.propheci.softwares.terminals;
+        pro_terminals = config.propheci.programs.terminals;
 
-        browsers_meta = import ../../browsers/metadata.nix { inherit pkgs; };
-        file_explorers_meta = import ../../file_explorers/metadata.nix { inherit pkgs; };
-        launchers_meta = import ../../launchers/metadata.nix { inherit pkgs; };
-        screenlocks_meta = import ../../screenlocks/metadata.nix { inherit pkgs; };
-        terminals_meta = import ../../terminals/metadata.nix { inherit pkgs; };
+        browsers_meta = import ../../../../metadata/programs/browsers/metadata.nix { inherit pkgs; };
+        file_explorers_meta = import ../../../../metadata/programs/file_explorers/metadata.nix { inherit pkgs; };
+        launchers_meta = import ../../../../metadata/programs/launchers/metadata.nix { inherit pkgs; };
+        screenlocks_meta = import ../../../../metadata/programs/screenlocks/metadata.nix { inherit pkgs; };
+        terminals_meta = import ../../../../metadata/programs/terminals/metadata.nix { inherit pkgs; };
 
         brightness_scripts = import ../../scripts/utilities/brightness.nix { inherit config; inherit pkgs; };
         brightnessdown = "${brightness_scripts.brightnessdown}/bin/brightnessdown";
@@ -26,21 +26,21 @@
         normal_desktops = lib.listToAttrs(builtins.map (ws: { name = toString(ws); value = toString(ws); }) (lib.range 1 9)) // { "0" = "10"; };
         alt_desktops = lib.listToAttrs(builtins.map (ws: { name = toString(ws); value = toString(ws); }) (lib.range 11 19)) // { "0" = "20"; };
 
+        startup_script = pkgs.writeShellScriptBin "start" ''
+
+        '';
+
     in lib.mkIf pro_deskenvs.hyprland.enable {
 
         propheci.desktop_environments.wayland.enable = lib.mkForce true;
+
+        pkgs.overlays = pkgs.overlays ++ lib.optionals pro_deskenvs.hyprland.use_official_flake [ inputs.hyprland.overlays.default ];
 
         wayland.windowManager.hyprland = {
             enable = true;
 
             systemd.enable = true;
             xwayland.enable = true;
-
-        } // lib.optionalAttrs pro_deskenvs.hyprland.use_official_flake {
-
-            package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-
-        } // {
 
             settings = {
                 env = [
@@ -232,6 +232,14 @@
                 bindm = [
                     "$mainMod, mouse:272, movewindow"
                     "$mainMod, mouse:273, resizewindow"
+                ];
+
+                windowrulev2 = [
+                    "workspace 9,class:org.telegram.desktop"
+                    "workspace unset,class:org.telegram.desktop,title:^(Media viewer)$"
+                    "float,title:Bitwarden"
+                    "workspace 10,class:Beeper"
+                    "pin,class:dragon-drop"
                 ];
             };
         };
