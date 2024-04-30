@@ -42,6 +42,7 @@
             btop
             dust
             nh
+            nil
             ripgrep
         ];
 
