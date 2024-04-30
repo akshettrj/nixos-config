@@ -78,6 +78,7 @@
                 garbage_collection.enable = mkOption { type = types.bool; };
                 nix_community_cache = mkOption { type = types.bool; };
                 hyprland_cache = mkOption { type = types.bool; };
+                helix_cache = mkOption { type = types.bool; };
             };
 
             # Appearance
@@ -206,7 +207,7 @@
                 wayland.enable = mkOption { type = types.bool; };
                 hyprland = {
                     enable = mkOption { type = types.bool; };
-                    use_official_flake = mkOption { type = types.bool; };
+                    use_official_packages = mkOption { type = types.bool; };
                     scroll_factor = mkOption { type = types.number; };
                     screenlock = mkOption { type = types.enum(known_screenlocks); };
                 };

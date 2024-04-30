@@ -2,6 +2,7 @@
     description = "Akshett's NixOS configuration flake";
 
     inputs = {
+        telegram-desktop-userfonts.url = "github:Propheci/nix-telegram-desktop-userfonts";
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
         hyprland.url = "github:hyprwm/Hyprland";
         neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";

@@ -7,7 +7,12 @@
 
     in lib.mkIf pro_editors.helix.enable {
 
-        home.packages = [ pkgs.helix ];
+        home.packages = [ (
+            if pro_editors.helix.nightly then
+                inputs.helix-nightly.packages."${pkgs.system}".helix
+            else
+                pkgs.helix
+        ) ];
 
     };
 }

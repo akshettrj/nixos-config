@@ -35,7 +35,7 @@
         } // lib.optionalAttrs pro_terminals.enable {
 
             TERMINAL = terminals_meta."${pro_terminals.main}".cmd;
-            BROWSER = browsers_meta."${pro_browsers.main}".bin;
+            BROWSER = browsers_meta."${pro_browsers.main}".cmd;
         };
 
         home.packages = with pkgs; [
@@ -62,8 +62,15 @@
             portal = lib.mkIf pro_services.xdg_portal.enable {
                 enable = true;
                 config.common.default = "";
-                extraPortals = [] ++ lib.optionals pro_deskenvs.hyprland.enable [
-                    (if pro_deskenvs.hyprland.use_official_flake then inputs.hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland else pkgs.xdg-desktop-portal-hyprland)
+                extraPortals = [
+                    pkgs.xdg-desktop-portal-gnome
+                ] ++ lib.optionals pro_deskenvs.hyprland.enable [
+                    (
+                        if pro_deskenvs.hyprland.use_official_packages then
+                            inputs.hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland
+                        else
+                            pkgs.xdg-desktop-portal-hyprland
+                    )
                 ];
             };
         };

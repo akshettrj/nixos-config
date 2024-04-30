@@ -68,21 +68,28 @@
             settings = {
                 experimental-features = "nix-command flakes";
                 auto-optimise-store = true;
-                substituters = [
-                    "https://cache.nixos.org"
-                    "https://propheci.cachix.org"
-                ] ++ lib.optionals pro_nix.nix_community_cache [
-                    "https://nix-community.cachix.org"
-                ] ++ lib.optionals pro_nix.hyprland_cache [
-                    "https://hyprland.cachix.org"
-                ];
-                trusted-public-keys = [
-                    "propheci.cachix.org-1:CwV87KMySX+rhW88NhTx2hRzdNltV497nhXvWswFGDc="
-                ] ++ lib.optionals pro_nix.nix_community_cache [
-                    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-                ] ++ lib.optionals pro_nix.hyprland_cache [
-                    "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-                ];
+                substituters =
+                    [
+                        "https://cache.nixos.org"
+                        "https://propheci.cachix.org"
+                    ]
+                    ++ lib.optionals pro_nix.nix_community_cache [ "https://nix-community.cachix.org" ]
+                    ++ lib.optionals pro_nix.hyprland_cache [ "https://hyprland.cachix.org" ]
+                    ++ lib.optionals pro_nix.helix_cache [ "https://helix.cachix.org" ];
+                trusted-public-keys =
+                    [
+                        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+                        "propheci.cachix.org-1:CwV87KMySX+rhW88NhTx2hRzdNltV497nhXvWswFGDc="
+                    ]
+                    ++ lib.optionals pro_nix.nix_community_cache [
+                        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+                    ]
+                    ++ lib.optionals pro_nix.hyprland_cache [
+                        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+                    ]
+                    ++ lib.optionals pro_nix.helix_cache [
+                        "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
+                    ];
                 trusted-users = [
                     "root"
                     "${pro_user.username}"

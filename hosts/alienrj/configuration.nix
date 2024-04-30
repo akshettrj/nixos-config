@@ -57,6 +57,7 @@
             garbage_collection.enable = true;
             nix_community_cache = true;
             hyprland_cache = true;
+            helix_cache = true;
         };
 
         # Appearance
@@ -180,7 +181,7 @@
             wayland.enable = true;
             hyprland = {
                 enable = true;
-                use_official_flake = true;
+                use_official_packages = true;
                 scroll_factor = 0.2;
                 screenlock = "swaylock";
             };
@@ -191,19 +192,7 @@
     };
 
     home-manager = {
-        extraSpecialArgs = {
-            inherit inputs;
-            propheci = config.propheci;
-            pkgs = {
-                overlays = [] ++ lib.optionals config.propheci.programs.editors.helix.nightly [
-                    inputs.helix-nightly.overlays.default
-                ] ++ lib.optionals config.propheci.programs.editors.neovim.nightly [
-                    inputs.neovim-nightly.overlays.default
-                ] ++ lib.optionals config.propheci.desktop_environments.hyprland.use_official_flake [
-                    inputs.hyprland.overlays.default
-                ];
-            } // pkgs;
-        };
+        extraSpecialArgs = { inherit inputs; inherit pkgs; propheci = config.propheci; };
         users = {
             "akshettrj" = { propheci, ... }: {
                 imports = [

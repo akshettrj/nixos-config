@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 {
     imports = [ ./wayland.nix ];
@@ -32,6 +32,13 @@
 
         wayland.windowManager.hyprland = {
             enable = true;
+
+            package = (
+                if pro_deskenvs.hyprland.use_official_packages then
+                    inputs.hyprland.packages."${pkgs.system}".hyprland
+                else
+                    pkgs.hyprland
+            );
 
             systemd.enable = true;
             xwayland.enable = true;
@@ -190,7 +197,7 @@
 
                 ] ++ lib.optionals pro_browsers.enable [
 
-                    "$mainMod, F1, exec, ${browsers_meta."${pro_browsers.main}".bin}"
+                    "$mainMod, F1, exec, ${browsers_meta."${pro_browsers.main}".cmd}"
 
                 ] ++ lib.optionals pro_services.pipewire.enable [
 

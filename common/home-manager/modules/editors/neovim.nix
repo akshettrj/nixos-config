@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 {
     config = let
@@ -7,7 +7,12 @@
 
     in lib.mkIf pro_editors.neovim.enable {
 
-        home.packages = [ pkgs.neovim ];
+        home.packages = [ (
+            if pro_editors.neovim.nightly then
+                inputs.neovim-nightly.packages."${pkgs.system}".neovim
+            else
+                pkgs.neovim
+        ) ];
 
     };
 }

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 {
     config = let
@@ -7,7 +7,7 @@
 
     in lib.mkIf pro_social_media.telegram.enable {
 
-        home.packages = [ pkgs.telegram-desktop ];
+        home.packages = [ inputs.telegram-desktop-userfonts.packages."${pkgs.system}".default ];
 
     };
 }
