@@ -1,10 +1,10 @@
 { ... }:
 
 {
-    imports = [
-        ./beeper.nix
-        ./discord.nix
-        ./slack.nix
-        ./telegram.nix
-    ];
+  imports = [
+    ./beeper.nix
+    ./discord.nix
+    ./slack.nix
+    ./telegram.nix
+  ];
 }

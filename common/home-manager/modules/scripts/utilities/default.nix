@@ -1,8 +1,8 @@
 { ... }:
 
 {
-    imports = [
-        ./brightness.nix
-        ./tgme.nix
-    ];
+  imports = [
+    ./brightness.nix
+    ./tgme.nix
+  ];
 }

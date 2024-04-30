@@ -1,7 +1,5 @@
 { ... }:
 
 {
-    imports = [
-        ./fonts.nix
-    ];
+  imports = [ ./fonts.nix ];
 }

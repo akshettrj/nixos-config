@@ -1,8 +1,8 @@
 { ... }:
 
 {
-    imports = [
-        ./helix.nix
-        ./neovim.nix
-    ];
+  imports = [
+    ./helix.nix
+    ./neovim.nix
+  ];
 }

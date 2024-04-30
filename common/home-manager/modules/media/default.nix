@@ -1,8 +1,8 @@
 { ... }:
 
 {
-    imports = [
-        ./audio
-        ./video
-    ];
+  imports = [
+    ./audio
+    ./video
+  ];
 }

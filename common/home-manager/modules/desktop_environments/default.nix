@@ -1,9 +1,9 @@
 { ... }:
 
 {
-    imports = [
-        ./both
-        ./wayland
-        ./x11
-    ];
+  imports = [
+    ./both
+    ./wayland
+    ./x11
+  ];
 }

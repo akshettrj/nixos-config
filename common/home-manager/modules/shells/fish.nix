@@ -1,15 +1,15 @@
 { config, lib, ... }:
 
 {
-    config = let
+  config =
+    let
 
-        pro_shells = config.propheci.shells;
+      pro_shells = config.propheci.shells;
+    in
+    lib.mkIf pro_shells.fish.enable {
 
-    in lib.mkIf pro_shells.fish.enable {
-
-        programs.fish = {
-            enable = true;
-        };
-
+      programs.fish = {
+        enable = true;
+      };
     };
 }

@@ -1,8 +1,8 @@
 { ... }:
 
 {
-    imports = [
-        ./hardware-configuration.nix
-        ../../common/nixos/configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../common/nixos/configuration.nix
+  ];
 }

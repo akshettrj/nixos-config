@@ -1,7 +1,5 @@
 { ... }:
 
 {
-    imports = [
-        ./mpd
-    ];
+  imports = [ ./mpd ];
 }

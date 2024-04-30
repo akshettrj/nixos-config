@@ -1,19 +1,24 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_hw = config.propheci.hardware;
+      pro_hw = config.propheci.hardware;
+    in
+    lib.mkIf pro_hw.bluetooth.enable {
 
-    in lib.mkIf pro_hw.bluetooth.enable {
+      hardware.bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+        settings.General.Experimental = true;
+      };
 
-        hardware.bluetooth = {
-            enable = true;
-            powerOnBoot = true;
-            settings.General.Experimental = true;
-        };
-
-        environment.systemPackages = [ pkgs.bluetuith ];
-
+      environment.systemPackages = [ pkgs.bluetuith ];
     };
 }

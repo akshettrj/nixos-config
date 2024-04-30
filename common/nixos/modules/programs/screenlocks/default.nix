@@ -1,7 +1,5 @@
 { ... }:
 
 {
-    imports = [
-        ./swaylock.nix
-    ];
+  imports = [ ./swaylock.nix ];
 }

@@ -1,9 +1,9 @@
 { ... }:
 
 {
-    imports = [
-        ./eza.nix
-        ./starship.nix
-        ./zoxide.nix
-    ];
+  imports = [
+    ./eza.nix
+    ./starship.nix
+    ./zoxide.nix
+  ];
 }
