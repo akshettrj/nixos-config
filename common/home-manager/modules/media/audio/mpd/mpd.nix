@@ -1,38 +1,33 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 
 {
-  config =
-    let
+    config = let
 
-      pro_mpd = config.propheci.programs.media.audio.mpd;
-    in
-    lib.mkIf pro_mpd.enable {
+        pro_mpd = config.propheci.programs.media.audio.mpd;
 
-      services.mpd = {
-        enable = true;
-        extraConfig = ''
-          auto_update "yes"
-          restore_paused "yes"
+    in lib.mkIf pro_mpd.enable {
 
-          audio_output {
-              type "pulse"
-              name "Music"
-          }
+        services.mpd = {
+            enable = true;
+            extraConfig = ''
+                auto_update "yes"
+                restore_paused "yes"
 
-          audio_output {
-              type "fifo"
-              name "ncmpcpp visualizer"
-              path "/tmp/mpd.fifo"
-              format "44100:16:2"
-          }
-        '';
-      };
+                audio_output {
+                    type "pulse"
+                    name "Music"
+                }
 
-      home.packages = [ pkgs.mpc-cli ];
+                audio_output {
+                    type "fifo"
+                    name "ncmpcpp visualizer"
+                    path "/tmp/mpd.fifo"
+                    format "44100:16:2"
+                }
+            '';
+        };
+
+        home.packages = [ pkgs.mpc-cli ];
+
     };
 }

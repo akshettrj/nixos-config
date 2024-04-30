@@ -1,39 +1,34 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 
 {
-  config =
-    let
+    config = let
 
-      pro_hw = config.propheci.hardware;
-    in
-    lib.mkIf pro_hw.nvidia.enable {
+        pro_hw = config.propheci.hardware;
 
-      hardware.opengl = {
-        enable = true;
-        driSupport = true;
-        driSupport32Bit = true;
-        extraPackages = [ pkgs.mesa.drivers ];
-      };
+    in lib.mkIf pro_hw.nvidia.enable {
 
-      services.xserver.videoDrivers = [ "nvidia" ];
-
-      hardware.nvidia = {
-        package = pro_hw.nvidia.package;
-
-        modesetting.enable = true;
-
-        powerManagement = {
-          enable = false;
+        hardware.opengl = {
+            enable = true;
+            driSupport = true;
+            driSupport32Bit = true;
+            extraPackages = [ pkgs.mesa.drivers ];
         };
 
-        open = false;
+        services.xserver.videoDrivers = [ "nvidia" ];
 
-        nvidiaSettings = true;
-      };
+        hardware.nvidia = {
+            package = pro_hw.nvidia.package;
+
+            modesetting.enable = true;
+
+            powerManagement = {
+                enable = false;
+            };
+
+            open = false;
+
+            nvidiaSettings = true;
+        };
+
     };
 }

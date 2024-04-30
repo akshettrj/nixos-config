@@ -1,27 +1,22 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
+{ pkgs, lib, config, ... }:
 
 {
-  config =
-    let
+    config = let
 
-      pro_services = config.propheci.services;
-    in
-    lib.mkIf pro_services.printing.enable {
+        pro_services = config.propheci.services;
 
-      # More at https://nixos.wiki/wiki/Printing
+    in lib.mkIf pro_services.printing.enable {
 
-      services.printing.enable = true;
+        # More at https://nixos.wiki/wiki/Printing
 
-      environment.systemPackages = [
-        pkgs.gutenprint
-        pkgs.gutenprintBin
-        pkgs.hplip
-        pkgs.hplipWithPlugin
-      ];
+        services.printing.enable = true;
+
+        environment.systemPackages = [
+            pkgs.gutenprint
+            pkgs.gutenprintBin
+            pkgs.hplip
+            pkgs.hplipWithPlugin
+        ];
+
     };
 }

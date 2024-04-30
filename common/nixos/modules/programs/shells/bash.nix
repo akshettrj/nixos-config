@@ -1,13 +1,14 @@
 { config, lib, ... }:
 
 {
-  config =
-    let
+    config = let
 
-      pro_shells = config.propheci.shells;
-    in
-    lib.mkIf pro_shells.bash.enable {
+        pro_shells = config.propheci.shells;
 
-      environment.pathsToLink = [ "/share/bash-completion" ];
+    in lib.mkIf pro_shells.bash.enable {
+
+        environment.pathsToLink = [ "/share/bash-completion" ];
+
     };
+
 }

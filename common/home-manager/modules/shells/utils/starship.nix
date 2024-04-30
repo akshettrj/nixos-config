@@ -1,232 +1,220 @@
 { config, lib, ... }:
 
 {
-  config =
-    let
+    config = let
 
-      pro_shells = config.propheci.shells;
-    in
-    lib.mkIf pro_shells.starship.enable {
+        pro_shells = config.propheci.shells;
 
-      programs.starship = {
-        enable = true;
-        enableBashIntegration = lib.mkIf pro_shells.bash.enable true;
-        enableFishIntegration = lib.mkIf pro_shells.fish.enable true;
-        enableNushellIntegration = lib.mkIf pro_shells.nushell.enable true;
-        enableZshIntegration = lib.mkIf pro_shells.zsh.enable true;
-        settings = {
-          add_newline = true;
-          command_timeout = 1000;
+    in lib.mkIf pro_shells.starship.enable {
 
-          character = {
-            success_symbol = "[󰁕](bold green)";
-            error_symbol = "[󰁕](bold red)";
-          };
+        programs.starship = {
+            enable = true;
+            enableBashIntegration = lib.mkIf pro_shells.bash.enable true;
+            enableFishIntegration = lib.mkIf pro_shells.fish.enable true;
+            enableNushellIntegration = lib.mkIf pro_shells.nushell.enable true;
+            enableZshIntegration = lib.mkIf pro_shells.zsh.enable true;
+            settings = {
+                add_newline = true;
+                command_timeout = 1000;
 
-          aws.disabled = true;
-          azure.disabled = true;
-          battery.disabled = true;
-          buf.disabled = true;
-          c.disabled = true;
-          cmake.disabled = true;
-          cobol.disabled = true;
-          crystal.disabled = true;
-          daml.disabled = true;
-          dart.disabled = true;
-          deno.disabled = true;
-          docker_context.disabled = true;
-          dotnet.disabled = true;
-          elixir.disabled = true;
-          elm.disabled = true;
-          erlang.disabled = true;
-          gcloud.disabled = true;
-          haskell.disabled = true;
-          helm.disabled = true;
-          java.disabled = true;
-          julia.disabled = true;
-          kotlin.disabled = true;
-          kubernetes.disabled = true;
-          line_break.disabled = true;
-          localip.disabled = true;
-          lua.disabled = true;
-          memory_usage.disabled = true;
-          hg_branch.disabled = true;
-          nim.disabled = true;
-          nodejs.disabled = true;
-          ocaml.disabled = true;
-          openstack.disabled = true;
-          package.disabled = true;
-          perl.disabled = true;
-          php.disabled = true;
-          pulumi.disabled = true;
-          purescript.disabled = true;
-          rlang.disabled = true;
-          raku.disabled = true;
-          red.disabled = true;
-          ruby.disabled = true;
-          scala.disabled = true;
-          shell.disabled = true;
-          shlvl.disabled = true;
-          singularity.disabled = true;
-          spack.disabled = true;
-          sudo.disabled = true;
-          swift.disabled = true;
-          terraform.disabled = true;
-          vagrant.disabled = true;
-          vlang.disabled = true;
-          vcsh.disabled = true;
-          zig.disabled = true;
+                character = {
+                    success_symbol = "[󰁕](bold green)";
+                    error_symbol = "[󰁕](bold red)";
+                };
 
-          cmd_duration = {
-            disabled = false;
-            min_time = 1500;
-            show_milliseconds = true;
-            show_notifications = true;
-            min_time_to_notify = 45000;
-            notification_timeout = 3000;
-          };
+                aws.disabled = true;
+                azure.disabled = true;
+                battery.disabled = true;
+                buf.disabled = true;
+                c.disabled = true;
+                cmake.disabled = true;
+                cobol.disabled = true;
+                crystal.disabled = true;
+                daml.disabled = true;
+                dart.disabled = true;
+                deno.disabled = true;
+                docker_context.disabled = true;
+                dotnet.disabled = true;
+                elixir.disabled = true;
+                elm.disabled = true;
+                erlang.disabled = true;
+                gcloud.disabled = true;
+                haskell.disabled = true;
+                helm.disabled = true;
+                java.disabled = true;
+                julia.disabled = true;
+                kotlin.disabled = true;
+                kubernetes.disabled = true;
+                line_break.disabled = true;
+                localip.disabled = true;
+                lua.disabled = true;
+                memory_usage.disabled = true;
+                hg_branch.disabled = true;
+                nim.disabled = true;
+                nodejs.disabled = true;
+                ocaml.disabled = true;
+                openstack.disabled = true;
+                package.disabled = true;
+                perl.disabled = true;
+                php.disabled = true;
+                pulumi.disabled = true;
+                purescript.disabled = true;
+                rlang.disabled = true;
+                raku.disabled = true;
+                red.disabled = true;
+                ruby.disabled = true;
+                scala.disabled = true;
+                shell.disabled = true;
+                shlvl.disabled = true;
+                singularity.disabled = true;
+                spack.disabled = true;
+                sudo.disabled = true;
+                swift.disabled = true;
+                terraform.disabled = true;
+                vagrant.disabled = true;
+                vlang.disabled = true;
+                vcsh.disabled = true;
+                zig.disabled = true;
 
-          conda = {
-            disabled = false;
-            truncation_length = 1;
-            symbol = "🅒 ";
-            style = "bold green";
-            ignore_base = false;
-          };
+                cmd_duration = {
+                    disabled = false;
+                    min_time = 1500;
+                    show_milliseconds = true;
+                    show_notifications = true;
+                    min_time_to_notify = 45000;
+                    notification_timeout = 3000;
+                };
 
-          container = {
-            disabled = false;
-            symbol = "⬢";
-            style = "bold red dimmed";
-          };
+                conda = {
+                    disabled = false;
+                    truncation_length = 1;
+                    symbol = "🅒 ";
+                    style = "bold green";
+                    ignore_base = false;
+                };
 
-          directory = {
-            disabled = false;
-            truncation_length = 3;
-            truncate_to_repo = false;
-            read_only = "🔒";
-            truncation_symbol = "";
-          };
+                container = {
+                    disabled = false;
+                    symbol = "⬢";
+                    style = "bold red dimmed";
+                };
 
-          git_branch = {
-            disabled = false;
-            always_show_remote = false;
-            symbol = " ";
-            style = "bold purple";
-            only_attached = false;
-          };
+                directory = {
+                    disabled = false;
+                    truncation_length = 3;
+                    truncate_to_repo = false;
+                    read_only = "🔒";
+                    truncation_symbol = "";
+                };
 
-          git_commit = {
-            disabled = false;
-            commit_hash_length = 7;
-            only_detached = false;
-            tag_disabled = false;
-          };
+                git_branch = {
+                    disabled = false;
+                    always_show_remote = false;
+                    symbol = " ";
+                    style = "bold purple";
+                    only_attached = false;
+                };
 
-          git_state.disabled = false;
-          git_metrics.disabled = false;
+                git_commit = {
+                    disabled = false;
+                    commit_hash_length = 7;
+                    only_detached = false;
+                    tag_disabled = false;
+                };
 
-          git_status = {
-            disabled = false;
-            conflicted = "=";
-            ahead = "⇡";
-            behind = "⇣";
-            diverged = "⇕";
-            up_to_date = "";
-            untracked = "?";
-            stashed = "\\\$";
-            modified = "!";
-            staged = "+";
-            renamed = "»";
-            deleted = "✘ ";
-            style = "red bold";
-            ignore_submodules = false;
-          };
+                git_state.disabled = false;
+                git_metrics.disabled = false;
 
-          golang = {
-            disabled = false;
-            symbol = " ";
-          };
+                git_status = {
+                    disabled = false;
+                    conflicted = "=";
+                    ahead = "⇡";
+                    behind = "⇣";
+                    diverged = "⇕";
+                    up_to_date = "";
+                    untracked = "?";
+                    stashed = "\\\$";
+                    modified = "!";
+                    staged = "+";
+                    renamed = "»";
+                    deleted = "✘ ";
+                    style = "red bold";
+                    ignore_submodules = false;
+                };
 
-          hostname = {
-            disabled = false;
-            ssh_only = true;
-            ssh_symbol = "";
-            trim_at = "";
-          };
+                golang = {
+                    disabled = false;
+                    symbol = " ";
+                };
 
-          nix_shell = {
-            disabled = true;
-          };
+                hostname = {
+                    disabled = false;
+                    ssh_only = true;
+                    ssh_symbol = "";
+                    trim_at = "";
+                };
 
-          python = {
-            disabled = false;
-            format = "via [\${symbol}\${pyenv_prefix}(\${version} )(\\(\$virtualenv\\) )](\$style)";
-            version_format = "v\${raw}";
-            symbol = " ";
-            style = "yellow bold";
-            pyenv_version_name = false;
-            pyenv_prefix = "pyenv ";
-            python_binary = [
-              "python"
-              "python3"
-              "python2"
-            ];
-            detect_extensions = [ ];
-            detect_files = [
-              "requirements.txt"
-              ".python-version"
-              "pyproject.toml"
-              "Pipfile"
-              "tox.ini"
-              "setup.py"
-              "__init__.py"
-            ];
-            detect_folders = [ ];
-          };
+                nix_shell = {
+                    disabled = true;
+                };
 
-          rust = {
-            disabled = false;
-          };
+                python = {
+                    disabled = false;
+                    format = "via [\${symbol}\${pyenv_prefix}(\${version} )(\\(\$virtualenv\\) )](\$style)";
+                    version_format = "v\${raw}";
+                    symbol = " ";
+                    style = "yellow bold";
+                    pyenv_version_name = false;
+                    pyenv_prefix = "pyenv ";
+                    python_binary = ["python" "python3" "python2"];
+                    detect_extensions = [];
+                    detect_files = [
+                        "requirements.txt"
+                            ".python-version"
+                            "pyproject.toml"
+                            "Pipfile"
+                            "tox.ini"
+                            "setup.py"
+                            "__init__.py"
+                    ];
+                    detect_folders = [];
+                };
 
-          time = {
-            disabled = false;
-            use_12hr = false;
-            style = "bold yellow";
-            utc_time_offset = "local";
-            time_range = "-";
-          };
+                rust = {
+                    disabled = false;
+                };
 
-          username = {
-            disabled = false;
-            show_always = false;
-            format = "[\$user](\$style) in ";
-          };
+                time = {
+                    disabled = false;
+                    use_12hr = false;
+                    style = "bold yellow";
+                    utc_time_offset = "local";
+                    time_range = "-";
+                };
 
-          custom = {
-            lf_instance = {
-              command = ''echo $LF_LEVEL'';
-              when = ''test "$LF_LEVEL" -gt 0'';
-              format = ''\(lf_level:[$output]($style)\) '';
-              shell = [
-                "bash"
-                "--noprofile"
-                "--norc"
-              ];
+                username = {
+                    disabled = false;
+                    show_always = false;
+                    format = "[\$user](\$style) in ";
+                };
+
+                custom = {
+                    lf_instance = {
+                        command = ''echo $LF_LEVEL'';
+                        when = ''test "$LF_LEVEL" -gt 0'';
+                        format = ''\(lf_level:[$output]($style)\) '';
+                        shell = ["bash" "--noprofile" "--norc"];
+                    };
+
+                    shell = {
+                        command = ''echo $STARSHIP_SHELL'';
+                        when = ''test "$STARSHIP_SHELL" != "zsh"'';
+                        format = ''\([$output]($style)\) '';
+                        shell = ["bash" "--noprofile" "--norc"];
+                    };
+                };
             };
-
-            shell = {
-              command = ''echo $STARSHIP_SHELL'';
-              when = ''test "$STARSHIP_SHELL" != "zsh"'';
-              format = ''\([$output]($style)\) '';
-              shell = [
-                "bash"
-                "--noprofile"
-                "--norc"
-              ];
-            };
-          };
         };
-      };
+
     };
 }

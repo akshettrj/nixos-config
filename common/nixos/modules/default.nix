@@ -1,10 +1,10 @@
 { ... }:
 
 {
-  imports = [
-    ./hardware
-    ./misc
-    ./programs
-    ./services
-  ];
+    imports = [
+        ./hardware
+        ./misc
+        ./programs
+        ./services
+    ];
 }

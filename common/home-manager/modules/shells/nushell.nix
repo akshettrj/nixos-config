@@ -1,15 +1,15 @@
 { config, lib, ... }:
 
 {
-  config =
-    let
+    config = let
 
-      pro_shells = config.propheci.shells;
-    in
-    lib.mkIf pro_shells.nushell.enable {
+        pro_shells = config.propheci.shells;
 
-      programs.nushell = {
-        enable = true;
-      };
+    in lib.mkIf pro_shells.nushell.enable {
+
+        programs.nushell = {
+            enable = true;
+        };
+
     };
 }

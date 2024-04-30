@@ -1,22 +1,22 @@
 { config, ... }:
 
 {
-  imports = [
-    ./bash.nix
-    ./fish.nix
-    ./nushell.nix
-    ./zsh.nix
+    imports = [
+        ./bash.nix
+        ./fish.nix
+        ./nushell.nix
+        ./zsh.nix
 
-    ./utils
-  ];
+        ./utils
+    ];
 
-  config =
-    let
+    config = let
 
-      pro_shells = config.propheci.shells;
-    in
-    {
+        pro_shells = config.propheci.shells;
 
-      home.shellAliases = pro_shells.aliases;
+    in {
+
+        home.shellAliases = pro_shells.aliases;
+
     };
 }

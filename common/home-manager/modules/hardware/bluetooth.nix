@@ -1,14 +1,13 @@
 { config, lib, ... }:
 
 {
-  config =
-    let
+    config = let
 
-      pro_hw = config.propheci.hardware;
-    in
-    lib.mkIf pro_hw.bluetooth.enable {
+        pro_hw = config.propheci.hardware;
 
-      xdg.configFile."bluetuith/bluetuith.conf".text = ''
+    in lib.mkIf pro_hw.bluetooth.enable {
+
+        xdg.configFile."bluetuith/bluetuith.conf".text = ''
 
         {
             "keybindings": {
@@ -20,6 +19,7 @@
             }
         }
 
-      '';
+        '';
+
     };
 }

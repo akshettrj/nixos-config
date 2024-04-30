@@ -1,8 +1,8 @@
 { ... }:
 
 {
-  imports = [
-    ./lf.nix
-    ./yazi.nix
-  ];
+    imports = [
+        ./lf.nix
+        ./yazi.nix
+    ];
 }

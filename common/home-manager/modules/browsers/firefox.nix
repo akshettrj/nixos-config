@@ -1,13 +1,13 @@
 { config, lib, ... }:
 
 {
-  config =
-    let
+    config = let
 
-      pro_browsers = config.propheci.programs.browsers;
-    in
-    lib.mkIf pro_browsers.firefox.enable {
+        pro_browsers = config.propheci.programs.browsers;
 
-      programs.firefox.enable = true;
+    in lib.mkIf pro_browsers.firefox.enable {
+
+        programs.firefox.enable = true;
+
     };
 }

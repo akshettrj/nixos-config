@@ -1,8 +1,8 @@
 { ... }:
 
 {
-  imports = [
-    ./alacritty.nix
-    ./wezterm.nix
-  ];
+    imports = [
+        ./alacritty.nix
+        ./wezterm.nix
+    ];
 }

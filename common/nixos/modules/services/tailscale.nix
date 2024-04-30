@@ -1,16 +1,16 @@
 { config, lib, ... }:
 
 {
-  config =
-    let
+    config = let
 
-      pro_services = config.propheci.services;
-    in
-    lib.mkIf pro_services.tailscale.enable {
+        pro_services = config.propheci.services;
 
-      services.tailscale = {
-        enable = true;
-        useRoutingFeatures = "both";
-      };
+    in lib.mkIf pro_services.tailscale.enable {
+
+        services.tailscale = {
+            enable = true;
+            useRoutingFeatures = "both";
+        };
+
     };
 }

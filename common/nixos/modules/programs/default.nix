@@ -1,9 +1,9 @@
 { ... }:
 
 {
-  imports = [
-    ./editors
-    ./screenlocks
-    ./shells
-  ];
+    imports = [
+        ./editors
+        ./screenlocks
+        ./shells
+    ];
 }

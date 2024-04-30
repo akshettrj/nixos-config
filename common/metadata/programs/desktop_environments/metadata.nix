@@ -1,8 +1,5 @@
 { pkgs }:
 
 {
-  hyprland = rec {
-    pkg = pkgs.hyprland;
-    cmd = "${pkg}/bin/Hyprland";
-  };
+    hyprland = rec { pkg = pkgs.hyprland; cmd = "${pkg}/bin/Hyprland"; };
 }

@@ -1,27 +1,13 @@
-{
-  config,
-  inputs,
-  lib,
-  nixpkgs,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 
 {
-  config =
-    let
+    config = let
 
-      pro_editors = config.propheci.programs.editors;
-    in
-    lib.mkIf pro_editors.neovim.enable {
+        pro_editors = config.propheci.programs.editors;
 
-      home.packages = [
-        (
-          if pro_editors.neovim.nightly then
-            inputs.neovim-nightly.packages."${pkgs.system}".neovim
-          else
-            pkgs.neovim
-        )
-      ];
+    in lib.mkIf pro_editors.neovim.enable {
+
+        home.packages = [ pkgs.neovim ];
+
     };
 }

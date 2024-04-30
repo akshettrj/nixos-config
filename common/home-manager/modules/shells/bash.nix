@@ -1,18 +1,14 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 
 {
-  config =
-    let
+    config = let
 
-      pro_shells = config.propheci.shells;
-    in
-    lib.mkIf pro_shells.bash.enable {
+        pro_shells = config.propheci.shells;
 
-      programs.bash.enable = true;
+    in lib.mkIf pro_shells.bash.enable {
+
+        programs.bash.enable = true;
+
     };
+
 }
