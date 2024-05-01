@@ -132,7 +132,7 @@
                 };
                 alacritty = {
                     enable = true;
-                    font_size = 17;
+                    font_size = 11;
                 };
             };
             browsers = {
