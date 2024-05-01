@@ -1,9 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 {
     config = let
 
-        pro_shells = config.propheci.shells;
         pro_terminals = config.propheci.programs.terminals;
         pro_theming = config.propheci.theming;
 

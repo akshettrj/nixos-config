@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
     config = lib.mkIf config.propheci.desktop_environments.wayland.enable {
