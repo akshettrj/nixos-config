@@ -73,7 +73,7 @@
                     };
                 };
                 hints = {
-                    enable = [{
+                    enabled = [{
                         command = "xdg-open";
                         post_processing = true;
                         regex = ''(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:|git@github.com:)[^\u0000-\u001F\u007F-<>"\\s{-}\\^⟨⟩`]+'';
