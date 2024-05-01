@@ -16,7 +16,7 @@
         pro_user = config.propheci.user;
 
         browsers_meta = import ../metadata/programs/browsers/metadata.nix { inherit pkgs; };
-        editors_meta = import ../metadata/programs/editors/metadata.nix { inherit pkgs; };
+        editors_meta = import ../metadata/programs/editors/metadata.nix { inherit config; inherit inputs; inherit pkgs; };
         terminals_meta = import ../metadata/programs/terminals/metadata.nix { inherit pkgs; };
 
     in {
