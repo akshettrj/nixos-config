@@ -7,6 +7,8 @@
 
     in lib.mkIf pro_theming.enable {
 
+        xsession.enable = true;
+
         xsession.pointerCursor = {
             package = pro_theming.cursor.package;
             name = pro_theming.cursor.name;
