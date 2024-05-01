@@ -87,6 +87,7 @@
                 delta.enable = true;
                 default_branch = "main";
             };
+            rust.enable = true;
         };
 
         programs = {

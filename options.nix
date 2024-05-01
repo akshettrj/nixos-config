@@ -106,6 +106,7 @@
                     delta.enable = mkOption { type = types.bool; };
                     default_branch = mkOption { type = types.str; };
                 };
+                rust.enable = mkOption { type = types.bool; };
             };
 
             programs = {
