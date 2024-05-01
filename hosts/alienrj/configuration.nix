@@ -65,9 +65,9 @@
             enable = true;
             fonts = {
                 nerdfonts = [ "JetBrainsMono" "Iosevka" ];
-                main = { name = "Iosevka NF"; size = 15; };
+                main = { name = "Iosevka NF"; size = 13; };
                 backups = [
-                    { name = "JetBrainsMono NF"; size = 15; }
+                    { name = "JetBrainsMono NF"; size = 13; }
                 ];
             };
             gtk = true;
