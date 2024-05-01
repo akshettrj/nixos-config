@@ -15,5 +15,6 @@
         ./shells
         ./social_media
         ./terminals
+        ./theming
     ];
 }

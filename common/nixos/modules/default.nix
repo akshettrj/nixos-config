@@ -6,5 +6,6 @@
         ./misc
         ./programs
         ./services
+        ./theming
     ];
 }

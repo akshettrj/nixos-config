@@ -72,7 +72,11 @@
             };
             gtk = true;
             qt = true;
-            cursor_size = 16;
+            cursor = {
+                package = pkgs.whitesur-cursors;
+                name = "WhiteSur Cursors";
+                size = 16;
+            };
             minimum_brightness = 40;
             wallpaper = "~/media/wallpapers/panda-2-1920×1080.png";
         };

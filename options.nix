@@ -91,7 +91,11 @@
                 };
                 gtk = mkOption { type = types.bool; };
                 qt = mkOption { type = types.bool; };
-                cursor_size = mkOption { type = types.ints.unsigned; };
+                cursor = {
+                    package = mkOption { type = types.package; };
+                    name = mkOption { type = types.str; };
+                    size = mkOption { type = types.ints.unsigned; };
+                };
                 minimum_brightness = mkOption { type = types.ints.unsigned; };
                 wallpaper = mkOption { type = types.path; };
             };
