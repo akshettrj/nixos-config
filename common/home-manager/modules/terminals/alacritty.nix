@@ -110,6 +110,7 @@
                         x = 2;
                         y = 2;
                     };
+                    opacity = 0.9;
                 };
                 keyboard.bindings = [
                     {
