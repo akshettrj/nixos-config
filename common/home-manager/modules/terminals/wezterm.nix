@@ -7,7 +7,7 @@
         pro_terminals = config.propheci.programs.terminals;
         pro_theming = config.propheci.theming;
 
-    in lib.mkIf pro_terminals.wezterm.enable {
+    in lib.mkIf (pro_terminals.enable && pro_terminals.wezterm.enable) {
 
         programs.wezterm = {
             enable = true;

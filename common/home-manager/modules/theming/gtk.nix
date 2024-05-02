@@ -6,7 +6,7 @@
         pro_theming = config.propheci.theming;
         pro_user = config.propheci.user;
 
-    in lib.mkIf pro_theming.gtk {
+    in lib.mkIf (pro_theming.enable && pro_theming.gtk) {
 
         gtk = {
             enable = true;

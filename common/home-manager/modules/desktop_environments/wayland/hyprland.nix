@@ -32,7 +32,7 @@
 
         '';
 
-    in lib.mkIf pro_deskenvs.hyprland.enable {
+    in lib.mkIf (pro_deskenvs.enable && pro_deskenvs.hyprland.enable) {
 
         propheci.desktop_environments.wayland.enable = lib.mkForce true;
 

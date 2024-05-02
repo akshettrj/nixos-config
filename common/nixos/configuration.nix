@@ -37,6 +37,8 @@
 
         time.timeZone = pro_system.time_zone;
 
+        swapDevices = pro_system.swap_devices;
+
         users.users."${pro_user.username}" = {
             isNormalUser = true;
             extraGroups = [ "networkmanager" "wheel" ];

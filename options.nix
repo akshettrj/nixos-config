@@ -27,6 +27,7 @@
             system = {
                 hostname = mkOption { type = types.str; example = "alienrj"; };
                 time_zone = mkOption { type = types.str; example = "Asia/Kolkata"; };
+                swap_devices = mkOption { type = types.anything; };
             };
 
             # User Meta
@@ -168,12 +169,12 @@
                     chromium = {
                         enable = mkOption { type = types.bool; };
                         cmd_args = mkOption { type = types.listOf(types.str); };
-                        extensions = mkOption { type = types.any; };
+                        extensions = mkOption { type = types.anything; };
                     };
                     chrome = {
                         enable = mkOption { type = types.bool; };
                         cmd_args = mkOption { type = types.listOf(types.str); };
-                        extensions = mkOption { type = types.any; };
+                        extensions = mkOption { type = types.anything; };
                     };
                 };
                 file_explorers = {
