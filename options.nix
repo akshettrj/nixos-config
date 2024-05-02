@@ -190,7 +190,6 @@
                         font_size = mkOption { type = types.ints.unsigned; };
                     };
                 };
-                zoxide.enable = mkOption { type = types.bool; };
             };
 
             shells = {

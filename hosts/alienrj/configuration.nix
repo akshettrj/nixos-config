@@ -160,7 +160,6 @@
                     font_size = 13;
                 };
             };
-            zoxide.enable = true;
         };
 
         shells = {

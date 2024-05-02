@@ -35,7 +35,7 @@
                 mkdir = ''%mkdir "$@"'';
                 touch = ''%touch "$@"'';
 
-            } // lib.optionalAttrs config.propheci.programs.zoxide.enable {
+            } // lib.optionalAttrs pro_shells.zoxide.enable {
 
                 # Zoxide
                 z = ''
