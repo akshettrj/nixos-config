@@ -12,6 +12,7 @@
         pro_mpd = config.propheci.programs.media.audio.mpd;
         pro_services = config.propheci.services;
         pro_terminals = config.propheci.programs.terminals;
+        pro_theming = config.propheci.theming;
 
         browsers_meta = import ../../../../metadata/programs/browsers/metadata.nix { inherit pkgs; };
         file_explorers_meta = import ../../../../metadata/programs/file_explorers/metadata.nix { inherit pkgs; };
@@ -23,6 +24,11 @@
         alt_desktops = lib.listToAttrs(builtins.map (ws: { name = toString(ws); value = toString(ws); }) (lib.range 11 19)) // { "0" = "20"; };
 
         startup_script = pkgs.writeShellScriptBin "start" ''
+
+            pidof hyprpaper && killall -9 hyprpaper
+
+
+            hyprpaper &
 
         '';
 
@@ -44,6 +50,8 @@
             xwayland.enable = true;
 
             settings = {
+                exec = "${startup_script}/bin/start";
+
                 env = [
                     "XDG_CURRENT_DESKTOP,Hyprland"
                     "XDG_SESSION_TYPE,wayland"
@@ -244,6 +252,23 @@
                 ];
             };
         };
+
+        xdg.configFile."hypr/hyprpaper.conf".text = ''
+
+            preload = ${pro_theming.wallpaper}
+            ipc = off
+            splash = false
+            wallpaper = ,${pro_theming.wallpaper}
+
+        '';
+
+        home.packages = [(
+            if pro_deskenvs.hyprland.use_official_packages then
+                inputs.hyprpaper.packages."${pkgs.system}".hyprpaper
+            else
+                pkgs.hyprpaper
+        )];
+
 
     };
 }

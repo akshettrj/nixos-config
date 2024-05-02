@@ -1,15 +1,25 @@
 {
     description = "Akshett's NixOS configuration flake";
 
+    nixConfig = {
+        extra-substituters = [ "https://propheci.cachix.org" ];
+        extra-trusted-public-keys = [ "propheci.cachix.org-1:CwV87KMySX+rhW88NhTx2hRzdNltV497nhXvWswFGDc=" ];
+    };
+
     inputs = {
         telegram-desktop-userfonts.url = "github:Propheci/nix-telegram-desktop-userfonts";
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
         hyprland.url = "github:hyprwm/Hyprland";
+        hyprpaper.url = "github:hyprwm/hyprpaper";
         neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
         helix-nightly.url = "github:helix-editor/helix";
         home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
+        };
+        wallpapers = {
+            url = "gitlab:akshettrj/wallpapers";
+            flake = false;
         };
     };
 

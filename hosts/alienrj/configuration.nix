@@ -78,7 +78,7 @@
                 size = 16;
             };
             minimum_brightness = 40;
-            wallpaper = "~/media/wallpapers/panda-2-1920×1080.png";
+            wallpaper = "${inputs.wallpapers}/panda-2-1920×1080.png";
         };
 
         dev = {
