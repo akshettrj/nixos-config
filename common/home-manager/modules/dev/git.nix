@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
     config = let
@@ -16,6 +16,8 @@
                 init.defaultBranch = pro_dev.git.default_branch;
             };
         };
+
+        home.packages = [ pkgs.gitu ];
 
     };
 }
