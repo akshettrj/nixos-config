@@ -4,6 +4,7 @@
     config = let
 
         pro_services = config.propheci.services;
+        pro_user = config.propheci.user;
 
     in lib.mkIf pro_services.openssh.server.enable {
 
@@ -16,6 +17,9 @@
                 X11Forwarding = pro_services.openssh.server.x11_forwarding;
             };
         };
+
+        users.users.root.openssh.authorizedKeys.keys = pro_services.openssh.server.public_keys;
+        users.users."${pro_user.username}".openssh.authorizedKeys.keys = pro_services.openssh.server.public_keys;
 
     };
 }

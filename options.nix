@@ -68,6 +68,7 @@
                         password_authentication = mkOption { type = types.bool; };
                         root_login = mkOption { type = types.enum(["yes" "without-password" "prohibit-password" "forced-comands-only" "no"]); };
                         x11_forwarding = mkOption { type = types.bool; };
+                        public_keys = mkOption { type = types.listOf(types.str); };
                     };
                 };
                 tailscale.enable = mkOption { type = types.bool; };
