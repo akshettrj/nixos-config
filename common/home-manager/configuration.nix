@@ -41,6 +41,7 @@
         home.packages = with pkgs; [
             btop
             dust
+            fd
             nh
             nil
             ripgrep
