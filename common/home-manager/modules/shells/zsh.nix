@@ -23,7 +23,14 @@
                 extended = true;
                 ignoreDups = true;
                 ignoreAllDups = true;
-                ignorePatterns = ["reboot*" "shutdown*"];
+                ignorePatterns = [
+                    "reboot*"
+                    "shutdown*"
+                    ". *"
+                ] ++ lib.optionals pro_shells.zoxide.enable [
+                    "z *"
+                    "zi *"
+                ];
                 ignoreSpace = true;
                 save = 10000;
                 share = true;
