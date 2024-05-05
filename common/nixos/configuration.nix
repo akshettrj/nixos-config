@@ -70,19 +70,13 @@
             settings = {
                 experimental-features = "nix-command flakes";
                 auto-optimise-store = true;
-                substituters =
-                    [
-                        "https://cache.nixos.org"
-                        "https://propheci.cachix.org"
-                    ]
+                extra-substituters =
+                    [ "https://propheci.cachix.org" ]
                     ++ lib.optionals pro_nix.nix_community_cache [ "https://nix-community.cachix.org" ]
                     ++ lib.optionals pro_nix.hyprland_cache [ "https://hyprland.cachix.org" ]
                     ++ lib.optionals pro_nix.helix_cache [ "https://helix.cachix.org" ];
-                trusted-public-keys =
-                    [
-                        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-                        "propheci.cachix.org-1:CwV87KMySX+rhW88NhTx2hRzdNltV497nhXvWswFGDc="
-                    ]
+                extra-trusted-public-keys =
+                    [ "propheci.cachix.org-1:CwV87KMySX+rhW88NhTx2hRzdNltV497nhXvWswFGDc=" ]
                     ++ lib.optionals pro_nix.nix_community_cache [
                         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
                     ]
