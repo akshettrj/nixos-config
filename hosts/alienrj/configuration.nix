@@ -197,7 +197,7 @@
     home-manager = {
         extraSpecialArgs = { inherit inputs; inherit pkgs; propheci = config.propheci; };
         users = {
-            "akshettrj" = { propheci, ... }: {
+            "${config.propheci.user.username}" = { propheci, ... }: {
                 imports = [
                     ../../common/home-manager/configuration.nix
                 ];
