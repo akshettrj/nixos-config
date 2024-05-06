@@ -44,13 +44,39 @@
     {
         nixosConfigurations = {
             alienrj = nixpkgs.lib.nixosSystem {
-                specialArgs = { inherit inputs; pkgs = x86_64-linux-pkgs; };
+                specialArgs = {
+                    inherit inputs;
+                    pkgs = import nixpkgs {
+                        system = "x86_64-linux";
+                        config = { allowUnfree = true; allowUnsafe = false; };
+                        overlays = [];
+                    };
+                };
                 modules = [ ./hosts/alienrj/configuration.nix ];
             };
 
             oracleamd2 = nixpkgs.lib.nixosSystem {
-                specialArgs = { inherit inputs; pkgs = x86_64-linux-pkgs; };
+                specialArgs = {
+                    inherit inputs;
+                    pkgs = import nixpkgs {
+                        system = "x86_64-linux";
+                        config = { allowUnfree = false; allowUnsafe = false; };
+                        overlays = [];
+                    };
+                };
                 modules = [ ./hosts/oracleamd2/configuration.nix ];
+            };
+
+            raspi = nixpkgs.lib.nixosSystem {
+                specialArgs = {
+                    inherit inputs;
+                    pkgs = import nixpkgs {
+                        system = "aarch64-linux";
+                        config = { allowUnfree = false; allowUnsafe = false; };
+                        overlays = [];
+                    };
+                };
+                modules = [ ./hosts/raspi/configuration.nix ];
             };
         };
     };
