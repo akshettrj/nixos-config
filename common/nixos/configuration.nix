@@ -144,8 +144,10 @@
             htop
             lf
             lshw
+            tmux
             vim
             wget
+            zellij
         ];
 
     };
