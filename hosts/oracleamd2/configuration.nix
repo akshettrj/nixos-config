@@ -119,11 +119,7 @@
 
         shells = {
             main = "zsh";
-            aliases = {
-                cp = "cp -rvi";
-                rm = "rm -vi";
-                rsync = "rsync -urvP";
-            };
+            aliases = import (../../common/home-manager/modules/shells/aliases.nix);
             bash.enable = true;
             fish.enable = false;
             nushell.enable = false;
