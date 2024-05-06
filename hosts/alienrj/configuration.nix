@@ -190,6 +190,9 @@
         };
     };
 
+    # DO NOT DELETE
+    system.stateVersion = "23.11";
+
     home-manager = {
         extraSpecialArgs = { inherit inputs; inherit pkgs; propheci = config.propheci; };
         users = {

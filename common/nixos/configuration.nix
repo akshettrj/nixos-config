@@ -148,8 +148,5 @@
             wget
         ];
 
-        # DO NOT DELETE
-        system.stateVersion = "23.11";
-
     };
 }
