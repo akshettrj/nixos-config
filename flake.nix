@@ -34,13 +34,6 @@
     };
 
     outputs = { self, nixpkgs, ... }@inputs:
-    let
-        x86_64-linux-pkgs = import nixpkgs {
-            system = "x86_64-linux";
-            config = { allowUnfree = true; allowUnsafe = false; };
-            overlays = [];
-        };
-    in
     {
         nixosConfigurations = {
             alienrj = nixpkgs.lib.nixosSystem {
