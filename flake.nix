@@ -19,7 +19,7 @@
     inputs = {
         telegram-desktop-userfonts.url = "github:Propheci/nix-telegram-desktop-userfonts";
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-        hyprland.url = "github:hyprwm/Hyprland";
+        hyprland.url = "github:hyprwm/Hyprland?submodules=1";
         hyprpaper.url = "github:hyprwm/hyprpaper";
         neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
         helix-nightly.url = "github:helix-editor/helix";
