@@ -107,10 +107,10 @@
                         instance = "alacritty";
                     };
                     padding = {
-                        x = 2;
-                        y = 2;
+                        x = 10;
+                        y = 4;
                     };
-                    opacity = 0.9;
+                    opacity = 0.95;
                 };
                 keyboard.bindings = [
                     {
