@@ -48,6 +48,18 @@
                 modules = [ ./hosts/alienrj/configuration.nix ];
             };
 
+            oracleamd1 = nixpkgs.lib.nixosSystem {
+                specialArgs = {
+                    inherit inputs;
+                    pkgs = import nixpkgs {
+                        system = "x86_64-linux";
+                        config = { allowUnfree = false; allowUnsafe = false; };
+                        overlays = [];
+                    };
+                };
+                modules = [ ./hosts/oracleamd1/configuration.nix ];
+            };
+
             oracleamd2 = nixpkgs.lib.nixosSystem {
                 specialArgs = {
                     inherit inputs;
