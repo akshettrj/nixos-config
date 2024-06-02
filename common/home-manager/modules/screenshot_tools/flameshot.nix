@@ -5,7 +5,7 @@
 
         pro_ss_tools = config.propheci.programs.screenshot_tools;
 
-    in lib.mkIf pro_ss_tools.flameshot.enable {
+    in lib.mkIf (pro_ss_tools.enable && pro_ss_tools.flameshot.enable) {
 
         services.flameshot = {
             enable = true;

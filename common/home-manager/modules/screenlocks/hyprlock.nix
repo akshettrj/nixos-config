@@ -8,7 +8,7 @@
 
         screenlocks_meta = import ../../../metadata/programs/screenlocks/metadata.nix { inherit config; inherit inputs; inherit pkgs; };
 
-    in lib.mkIf pro_deskenvs.screenlocks.hyprlock.enable {
+    in lib.mkIf (pro_deskenvs.enable && pro_deskenvs.screenlocks.hyprlock.enable) {
 
         xdg.configFile."hypr/hyprlock.conf".text = ''
 
