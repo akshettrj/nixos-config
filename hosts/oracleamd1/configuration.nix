@@ -103,7 +103,7 @@
                 };
                 helix = {
                     enable = true;
-                    nightly = true;
+                    nightly = false;
                 };
             };
             terminals.enable = false;
@@ -115,6 +115,7 @@
                 yazi.enable = true;
             };
             launchers.enable = false;
+            screenshot_tools.enable = false;
         };
 
         shells = {
