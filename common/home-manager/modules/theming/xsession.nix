@@ -9,7 +9,9 @@
 
         xsession.enable = true;
 
-        xsession.pointerCursor = {
+        home.pointerCursor = {
+            gtk.enable = true;
+            x11.enable = true;
             package = pro_theming.cursor.package;
             name = pro_theming.cursor.name;
             size = pro_theming.cursor.size;

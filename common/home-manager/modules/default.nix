@@ -11,6 +11,7 @@
         ./launchers
         ./media
         ./screenlocks
+        ./screenshot_tools
         ./scripts
         ./shells
         ./social_media

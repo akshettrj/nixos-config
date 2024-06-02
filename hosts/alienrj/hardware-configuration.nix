@@ -14,14 +14,14 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/5d0afe95-f74c-40b8-b0ba-3e9155ba364d";
+    { device = "/dev/disk/by-uuid/9c494d09-d044-4251-940b-13fbf8761c63";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/14255907-a84d-4f02-bf29-183b84b44bb9";
+  boot.initrd.luks.devices."p_root".device = "/dev/disk/by-uuid/1e3d0ffa-6652-441c-8bf6-78b23b4b1d99";
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/5E2A-1F2F";
+    { device = "/dev/disk/by-uuid/AB46-27F3";
       fsType = "vfat";
     };
 
@@ -32,7 +32,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp109s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp110s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

@@ -7,7 +7,7 @@
 
     in lib.mkIf pro_social_media.telegram.enable {
 
-        home.packages = [ inputs.telegram-desktop-userfonts.packages."${pkgs.system}".default ];
+        home.packages = [ pkgs.telegram-desktop ];
 
     };
 }

@@ -19,8 +19,15 @@
     inputs = {
         telegram-desktop-userfonts.url = "github:Propheci/nix-telegram-desktop-userfonts";
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-        hyprland.url = "github:hyprwm/Hyprland?submodules=1";
-        hyprpaper.url = "github:hyprwm/hyprpaper";
+        hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+        hyprpaper = {
+            url = "github:hyprwm/hyprpaper";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+        hyprlock = {
+            url = "github:hyprwm/hyprlock";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
         neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
         helix-nightly.url = "github:helix-editor/helix";
         home-manager = {

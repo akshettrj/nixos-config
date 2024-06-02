@@ -11,8 +11,9 @@
         known_file_explorers = lib.attrNames (import ./common/metadata/programs/file_explorers/metadata.nix { inherit pkgs; });
         known_launchers = lib.attrNames (import ./common/metadata/programs/launchers/metadata.nix { inherit pkgs; });
         known_shells = lib.attrNames (import ./common/metadata/programs/shells/metadata.nix { inherit pkgs; });
+        known_screenlocks = lib.attrNames (import ./common/metadata/programs/screenlocks/metadata.nix { inherit config; inherit inputs; inherit pkgs; });
+        known_screenshot_tools = lib.attrNames (import ./common/metadata/programs/screenshot_tools/metadata.nix { inherit pkgs; });
         known_terminals = lib.attrNames (import ./common/metadata/programs/terminals/metadata.nix { inherit pkgs; });
-        known_screenlocks = lib.attrNames (import ./common/metadata/programs/screenlocks/metadata.nix { inherit pkgs; });
 
         font_type = lib.types.submodule {
             options = {
@@ -191,6 +192,13 @@
                         font_size = mkOption { type = types.ints.unsigned; };
                     };
                 };
+                screenshot_tools = {
+                    enable = mkOption { type = types.bool; };
+                    main = mkOption { type = types.enum(known_screenshot_tools); };
+                    flameshot = {
+                        enable = mkOption { type = types.bool; };
+                    };
+                };
             };
 
             shells = {
@@ -218,6 +226,10 @@
                 };
                 screenlocks = {
                     swaylock.enable = mkOption { type = types.bool; };
+                    hyprlock = {
+                        enable = mkOption { type = types.bool; };
+                        background_image = mkOption { type = types.path; };
+                    };
                 };
             };
         };

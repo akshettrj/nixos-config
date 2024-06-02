@@ -12,6 +12,7 @@
         system = {
             hostname = "alienrj";
             time_zone = "Asia/Kolkata";
+            swap_devices = [];
         };
         user = {
             username = "akshettrj";
@@ -76,7 +77,7 @@
             cursor = {
                 package = pkgs.whitesur-cursors;
                 name = "WhiteSur Cursors";
-                size = 16;
+                size = 18;
             };
             minimum_brightness = 40;
             wallpaper = "${inputs.wallpapers}/panda-2-1920×1080.png";
@@ -160,6 +161,11 @@
                     font_size = 13;
                 };
             };
+            screenshot_tools = {
+                enable = true;
+                main = "flameshot";
+                flameshot.enable = true;
+            };
         };
 
         shells = {
@@ -181,12 +187,16 @@
             wayland.enable = true;
             hyprland = {
                 enable = true;
-                use_official_packages = true;
+                use_official_packages = false;
                 scroll_factor = 0.2;
                 screenlock = "swaylock";
             };
             screenlocks = {
                 swaylock.enable = true;
+                hyprlock = {
+                    enable = false;
+                    background_image = "${inputs.wallpapers}/gta-5-wallpaper-1920×1080.jpg";
+                };
             };
         };
     };

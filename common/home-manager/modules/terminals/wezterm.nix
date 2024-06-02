@@ -32,9 +32,10 @@
 
                 config.window_frame = {
                     font = wezterm.font_with_fallback({
-
+                        "${pro_theming.fonts.main.name}",
+                        ${lib.strings.concatStringsSep ",\n" (map(font: ''"${font.name}"'')(pro_theming.fonts.backups))}
                     }),
-                    font_size = ${toString(pro_terminals.wezterm.font_size - 1)},
+                    font_size = ${toString(pro_terminals.wezterm.font_size - 5)},
                 }
 
                 config.color_scheme = "Gruvbox Dark (Gogh)"

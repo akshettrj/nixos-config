@@ -11,13 +11,15 @@
         pro_launchers = config.propheci.programs.launchers;
         pro_mpd = config.propheci.programs.media.audio.mpd;
         pro_services = config.propheci.services;
+        pro_ss_tools = config.propheci.programs.screenshot_tools;
         pro_terminals = config.propheci.programs.terminals;
         pro_theming = config.propheci.theming;
 
         browsers_meta = import ../../../../metadata/programs/browsers/metadata.nix { inherit pkgs; };
         file_explorers_meta = import ../../../../metadata/programs/file_explorers/metadata.nix { inherit pkgs; };
         launchers_meta = import ../../../../metadata/programs/launchers/metadata.nix { inherit pkgs; };
-        screenlocks_meta = import ../../../../metadata/programs/screenlocks/metadata.nix { inherit pkgs; };
+        screenlocks_meta = import ../../../../metadata/programs/screenlocks/metadata.nix { inherit config; inherit inputs; inherit pkgs; };
+        ss_tools_meta = import ../../../../metadata/programs/screenshot_tools/metadata.nix { inherit pkgs; };
         terminals_meta = import ../../../../metadata/programs/terminals/metadata.nix { inherit pkgs; };
 
         normal_desktops = lib.listToAttrs(builtins.map (ws: { name = toString(ws); value = toString(ws); }) (lib.range 1 9)) // { "0" = "10"; };
@@ -27,12 +29,18 @@
 
             pidof hyprpaper && killall -9 hyprpaper
 
-
             hyprpaper &
 
         '';
 
     in lib.mkIf (pro_deskenvs.enable && pro_deskenvs.hyprland.enable) {
+
+        assertions = [
+            {
+                assertion = screenlocks_meta."${pro_deskenvs.hyprland.screenlock}".wayland;
+                message = "${pro_deskenvs.hyprland.screenlock} doesn't support Hyprland (Wayland)";
+            }
+        ];
 
         propheci.desktop_environments.wayland.enable = lib.mkForce true;
 

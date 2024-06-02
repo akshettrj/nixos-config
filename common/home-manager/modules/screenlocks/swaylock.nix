@@ -6,7 +6,7 @@
         pro_deskenvs = config.propheci.desktop_environments;
         pro_theming = config.propheci.theming;
 
-    in lib.mkIf (pro_deskenvs.enable && pro_deskenvs.screenlocks.enable && pro_deskenvs.screenlocks.swaylock.enable) {
+    in lib.mkIf (pro_deskenvs.enable && pro_deskenvs.screenlocks.swaylock.enable) {
 
         programs.swaylock = {
             enable = true;

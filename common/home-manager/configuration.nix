@@ -63,9 +63,9 @@
             };
             portal = lib.mkIf pro_services.xdg_portal.enable {
                 enable = true;
-                config.common.default = "";
+                config.common.default = [ "gtk" ];
                 extraPortals = [
-                    pkgs.xdg-desktop-portal-gnome
+                    pkgs.xdg-desktop-portal-gtk
                 ] ++ lib.optionals pro_deskenvs.hyprland.enable [
                     (
                         if pro_deskenvs.hyprland.use_official_packages then

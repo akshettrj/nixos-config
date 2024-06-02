@@ -9,7 +9,7 @@
 
         qt = {
             enable = true;
-            platformTheme = "gtk3";
+            platformTheme.name = "gtk3";
         };
 
     };
