@@ -195,9 +195,8 @@
                 screenshot_tools = {
                     enable = mkOption { type = types.bool; };
                     main = mkOption { type = types.enum(known_screenshot_tools); };
-                    flameshot = {
-                        enable = mkOption { type = types.bool; };
-                    };
+                    flameshot.enable = mkOption { type = types.bool; };
+                    wayshot.enable = mkOption { type = types.bool; };
                 };
             };
 
