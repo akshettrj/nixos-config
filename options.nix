@@ -186,7 +186,6 @@
                 };
                 launchers = {
                     enable = mkOption { type = types.bool; };
-                    main = mkOption { type = types.enum(known_launchers); };
                     bemenu = {
                         enable = mkOption { type = types.bool; };
                         font_size = mkOption { type = types.ints.unsigned; };
@@ -194,9 +193,16 @@
                 };
                 screenshot_tools = {
                     enable = mkOption { type = types.bool; };
-                    main = mkOption { type = types.enum(known_screenshot_tools); };
                     flameshot.enable = mkOption { type = types.bool; };
                     wayshot.enable = mkOption { type = types.bool; };
+                };
+                screenlocks = {
+                    enable = mkOption { type = types.bool; };
+                    swaylock.enable = mkOption { type = types.bool; };
+                    hyprlock = {
+                        enable = mkOption { type = types.bool; };
+                        background_image = mkOption { type = types.path; };
+                    };
                 };
             };
 
@@ -222,13 +228,8 @@
                     use_official_packages = mkOption { type = types.bool; };
                     scroll_factor = mkOption { type = types.number; };
                     screenlock = mkOption { type = types.enum(known_screenlocks); };
-                };
-                screenlocks = {
-                    swaylock.enable = mkOption { type = types.bool; };
-                    hyprlock = {
-                        enable = mkOption { type = types.bool; };
-                        background_image = mkOption { type = types.path; };
-                    };
+                    launcher = mkOption { type = types.enum(known_launchers); };
+                    screenshot_tool = mkOption { type = types.enum(known_screenshot_tools); };
                 };
             };
         };

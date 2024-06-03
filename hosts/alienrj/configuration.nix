@@ -158,7 +158,6 @@
             };
             launchers = {
                 enable = true;
-                main = "bemenu";
                 bemenu = {
                     enable = true;
                     font_size = 13;
@@ -166,8 +165,15 @@
             };
             screenshot_tools = {
                 enable = true;
-                main = "flameshot";
                 flameshot.enable = true;
+            };
+            screenlocks = {
+                enable = true;
+                swaylock.enable = true;
+                hyprlock = {
+                    enable = false;
+                    background_image = "${inputs.wallpapers}/gta-5-wallpaper-1920×1080.jpg";
+                };
             };
         };
 
@@ -192,14 +198,8 @@
                 enable = true;
                 use_official_packages = false;
                 scroll_factor = 0.2;
+                launcher = "bemenu";
                 screenlock = "swaylock";
-            };
-            screenlocks = {
-                swaylock.enable = true;
-                hyprlock = {
-                    enable = false;
-                    background_image = "${inputs.wallpapers}/gta-5-wallpaper-1920×1080.jpg";
-                };
             };
         };
     };

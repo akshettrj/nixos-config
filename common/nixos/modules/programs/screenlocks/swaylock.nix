@@ -3,9 +3,9 @@
 {
     config = let
 
-        pro_deskenvs = config.propheci.desktop_environments;
+        pro_screenlocks = config.propheci.programs.screenlocks;
 
-    in lib.mkIf (pro_deskenvs.enable && pro_deskenvs.screenlocks.swaylock.enable) {
+    in lib.mkIf (pro_screenlocks.enable && pro_screenlocks.swaylock.enable) {
 
         security.pam.services.swaylock = {};
 

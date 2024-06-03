@@ -3,12 +3,12 @@
 {
     config = let
 
-        pro_deskenvs = config.propheci.desktop_environments;
+        pro_screenlocks = config.propheci.programs.screenlocks;
         pro_theming = config.propheci.theming;
 
         screenlocks_meta = import ../../../metadata/programs/screenlocks/metadata.nix { inherit config; inherit inputs; inherit pkgs; };
 
-    in lib.mkIf (pro_deskenvs.enable && pro_deskenvs.screenlocks.hyprlock.enable) {
+    in lib.mkIf (pro_screenlocks.enable && pro_screenlocks.hyprlock.enable) {
 
         xdg.configFile."hypr/hyprlock.conf".text = ''
 
@@ -23,7 +23,7 @@
         }
 
         background {
-            path = ${pro_deskenvs.screenlocks.hyprlock.background_image}
+            path = ${pro_screenlocks.screenlocks.hyprlock.background_image}
             blur_passes = 3
             blur_size = 7
         }

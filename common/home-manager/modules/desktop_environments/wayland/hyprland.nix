@@ -209,7 +209,7 @@
 
                 ] ++ lib.optionals pro_launchers.enable [
 
-                    "$mainMod, Space, exec, ${launchers_meta."${pro_launchers.main}".bin}"
+                    "$mainMod, Space, exec, ${launchers_meta."${pro_deskenvs.hyprland.launcher}".bin}"
 
                 ] ++ lib.optionals pro_browsers.enable [
 
