@@ -103,6 +103,9 @@
                         ncmpcpp.enable = true;
                     };
                 };
+                video = {
+                    mpv.enable = true;
+                };
             };
             social_media = {
                 telegram.enable = true;
