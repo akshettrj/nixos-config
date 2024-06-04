@@ -33,6 +33,16 @@
 
         '';
 
+        kill_window_script = pkgs.writeShellScriptBin "kill_window" ''
+
+            if ["$(hyprctl activewindow -j | ${pkgs.jq}/bin/jq -r ".class")" = "Steam"]; then
+                ${pkgs.xdotool}/bin/xdotool getactivewindow windowunmap
+            else
+                hyprctl dispatch killactive ""
+            fi
+
+        '';
+
     in lib.mkIf (pro_deskenvs.enable && pro_deskenvs.hyprland.enable) {
 
         assertions = [
@@ -180,6 +190,7 @@
                     "$mainMod SHIFT, BracketLeft, workspace, r-1"
 
                     # SUPER
+                    "$mainMod, C, exec, ${kill_window_script}/bin/kill_window"
                     "$mainMod, S, togglefloating"
                     "$mainMod, F, fullscreen, 0"
                     "$mainMod, MINUS, movetoworkspace, special"
