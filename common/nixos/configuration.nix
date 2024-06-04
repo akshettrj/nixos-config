@@ -144,6 +144,7 @@
             acpi
             curl
             htop
+            jq
             lf
             lshw
             tmux

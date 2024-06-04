@@ -9,6 +9,7 @@
         home.packages = with pkgs; [
             wl-clipboard
             wev
+            xdotool
         ];
     };
 }

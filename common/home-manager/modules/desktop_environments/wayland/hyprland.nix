@@ -33,22 +33,60 @@
 
         '';
 
-        kill_window_script = pkgs.writeShellScriptBin "kill_window" ''
+        kill_window_script = let
 
-            if ["$(hyprctl activewindow -j | ${pkgs.jq}/bin/jq -r ".class")" = "Steam"]; then
-                ${pkgs.xdotool}/bin/xdotool getactivewindow windowunmap
+            jq = "${pkgs.jq}/bin/jq";
+            xdotool = "${pkgs.xdotool}/bin/xdotool";
+
+        in pkgs.writeShellScriptBin "kill_window" ''
+
+            if [ "$1" = "-f" ]; then
+                current_pid="$(hyprctl activewindow -j | ${jq} -r ".pid")"
+                kill -9 $current_pid
             else
-                hyprctl dispatch killactive ""
+                if [ "$(hyprctl activewindow -j | ${jq} -r ".class")" = "Steam" ]; then
+                    ${xdotool} getactivewindow windowunmap
+                else
+                    hyprctl dispatch killactive ""
+                fi
             fi
 
         '';
+
+        launcher = pro_deskenvs.hyprland.launcher;
+        ss_tool = pro_deskenvs.hyprland.screenshot_tool;
+        screenlock = pro_deskenvs.hyprland.screenlock;
 
     in lib.mkIf (pro_deskenvs.enable && pro_deskenvs.hyprland.enable) {
 
         assertions = [
             {
-                assertion = screenlocks_meta."${pro_deskenvs.hyprland.screenlock}".wayland;
-                message = "${pro_deskenvs.hyprland.screenlock} doesn't support Hyprland (Wayland)";
+                assertion = screenlocks_meta."${screenlock}".wayland;
+                message = "${screenlock} doesn't support Hyprland (Wayland)";
+            }
+            {
+                assertion = pro_terminals.enable;
+                message = "Hyprland is enabled but terminals are disabled";
+            }
+            {
+                assertion = pro_launchers.enable;
+                message = "Hyprland is enabled but app launchers are disabled";
+            }
+            {
+                assertion =  pro_launchers."${launcher}".enable;
+                message = "Hyprland's launcher is set to ${launcher} but its configuration is disabled";
+            }
+            {
+                assertion = pro_browsers.enable;
+                message = "Hyprland is enabled but browsers are disabled";
+            }
+            {
+                assertion = pro_ss_tools.enable;
+                message = "Hyprland is enabled but screenshot tools are disabled";
+            }
+            {
+                assertion = pro_ss_tools."${ss_tool}".enable;
+                message = "Hyprland's ss tool is set to ${ss_tool} but its configuration is disabled";
             }
         ];
 
@@ -201,30 +239,32 @@
                     "$mainMod, Tab, focusmonitor, +1"
                     "$mainMod, O, movewindow, mon:+1"
                     "$mainMod, R, togglesplit"
-                    "$mainMod, Escape, exec, ${screenlocks_meta."${pro_deskenvs.hyprland.screenlock}".cmd}"
+                    "$mainMod, Escape, exec, ${screenlocks_meta."${screenlock}".cmd}"
 
                     # SUPER + CTRL
                     "$mainMod CONTROL, Q, exit"
                     "$mainMod CONTROL, S, pin, active"
 
                     # SUPER + SHIFT
+                    "$mainMod SHIFT, C, exec, ${kill_window_script}/bin/kill_window -f"
                     "$mainMod SHIFT, MINUS, togglespecialworkspace"
                     "$mainMod SHIFT, F, fakefullscreen"
 
-                ] ++ lib.optionals pro_terminals.enable [
-
+                    # TERMINALS AND FILE EXPLORERS
                     "$mainMod, Return, exec, ${terminals_meta."${pro_terminals.main}".cmd}"
                     "$mainMod SHIFT, Return, exec, ${terminals_meta."${pro_terminals.backup}".cmd}"
                     "$mainMod, E, exec, ${terminals_meta."${pro_terminals.main}".exec} ${file_explorers_meta."${pro_file_explorers.main}".bin}"
                     "$mainMod SHIFT, E, exec, ${terminals_meta."${pro_terminals.main}".exec} ${file_explorers_meta."${pro_file_explorers.backup}".bin}"
 
-                ] ++ lib.optionals pro_launchers.enable [
+                    # LAUNCHER
+                    "$mainMod, Space, exec, ${launchers_meta."${launcher}".bin}"
 
-                    "$mainMod, Space, exec, ${launchers_meta."${pro_deskenvs.hyprland.launcher}".bin}"
-
-                ] ++ lib.optionals pro_browsers.enable [
-
+                    # BROWSER
                     "$mainMod, F1, exec, ${browsers_meta."${pro_browsers.main}".cmd}"
+
+                    # SCREENSHOTS
+                    "$mainMod SHIFT, S, exec, ${ss_tools_meta."${ss_tool}".cmd.region}"
+                    "$mainMod CONTROL, S, exec, ${ss_tools_meta."${ss_tool}".cmd.fullscreen}"
 
                 ] ++ lib.optionals pro_services.pipewire.enable [
 
