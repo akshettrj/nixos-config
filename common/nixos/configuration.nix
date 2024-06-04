@@ -1,9 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 {
     imports = [
         ../../options.nix
         ./modules
+
+        inputs.nix-index-database.nixosModules.nix-index # Cached database for nix-index
     ];
 
     config = let
@@ -149,6 +151,9 @@
             wget
             zellij
         ];
+
+        # Fights with nix-index
+        programs.command-not-found.enable = false;
 
     };
 }
