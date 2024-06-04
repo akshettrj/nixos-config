@@ -149,6 +149,7 @@
             tmux
             vim
             wget
+            xdg-utils
             zellij
         ];
 
