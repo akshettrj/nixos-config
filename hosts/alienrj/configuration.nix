@@ -109,7 +109,7 @@
             };
             social_media = {
                 telegram.enable = true;
-                discord.enable = false;
+                discord.enable = true;
                 slack.enable = false;
                 beeper.enable = false;
             };
@@ -166,6 +166,8 @@
             screenshot_tools = {
                 enable = true;
                 flameshot.enable = true;
+                wayshot.enable = true;
+                shotman.enable = true;
             };
             screenlocks = {
                 enable = true;
@@ -200,6 +202,7 @@
                 scroll_factor = 0.2;
                 launcher = "bemenu";
                 screenlock = "swaylock";
+                screenshot_tool = "wayshot";
             };
         };
     };
