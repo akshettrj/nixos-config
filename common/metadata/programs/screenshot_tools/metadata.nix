@@ -15,7 +15,7 @@
         bin = "${pkg}/bin/wayshot";
         cmd = {
             fullscreen = "${bin} --cursor";
-            region = ''${bin} --cursor --slurp "''$(${deps.slurp})"'';
+            region = ''${bin} --cursor --slurp "''$(${deps.slurp}/bin/slurp)"'';
         };
         deps = { slurp = pkgs.slurp; };
     };
@@ -23,8 +23,8 @@
         pkg = pkgs.shotman;
         bin = "${pkg}/bin/shotman";
         cmd = {
-            fullscreen = "";
-            region = "";
+            fullscreen = "shotman --capture output";
+            region = "shotman --capture region";
         };
         deps = { slurp = pkgs.slurp; };
     };
