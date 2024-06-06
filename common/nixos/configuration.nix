@@ -14,6 +14,7 @@
         pro_sec = config.propheci.security;
         pro_shells = config.propheci.shells;
         pro_system = config.propheci.system;
+        pro_services = config.propheci.services;
         pro_user = config.propheci.user;
 
         shells_meta = import ../metadata/programs/shells/metadata.nix { inherit pkgs; };
@@ -36,6 +37,12 @@
 
         networking.hostName = pro_system.hostname;
         networking.networkmanager.enable = true;
+        networking.firewall = lib.mkIf pro_services.firewall.enable {
+            enable = true;
+            trustedInterfaces = [ "tailscale0" ];
+            allowedUDPPorts = [ config.services.tailscale.port ] ++ pro_services.firewall.udp_ports;
+            allowedTCPPorts = [ config.services.tailscale.port ] ++ pro_services.firewall.tcp_ports;
+        };
 
         time.timeZone = pro_system.time_zone;
 
