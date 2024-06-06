@@ -17,7 +17,6 @@
     };
 
     inputs = {
-        telegram-desktop-userfonts.url = "github:Propheci/nix-telegram-desktop-userfonts";
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
         hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
         hyprpaper = {
