@@ -155,10 +155,12 @@
             lf
             lshw
             tmux
+            unzip
             vim
             wget
             xdg-utils
             zellij
+            zip
         ];
 
         # Fights with nix-index
