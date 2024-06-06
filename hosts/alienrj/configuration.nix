@@ -144,7 +144,7 @@
                 main = "brave";
                 brave = {
                     enable = true;
-                    cmd_args = [ "--force-device-scale-factor=1.3" ];
+                    cmd_args = [ "--force-device-scale-factor=1.5" ];
                 };
                 firefox.enable = true;
                 chromium.enable = false;
