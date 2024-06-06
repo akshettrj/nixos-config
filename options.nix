@@ -127,6 +127,9 @@
                         mpv.enable = mkOption { type = types.bool; };
                     };
                 };
+                extra_utilities = {
+                    drivedlgo.enable = mkOption { type = types.bool; };
+                };
                 social_media = {
                     telegram.enable = mkOption { type = types.bool; };
                     discord.enable = mkOption { type = types.bool; };

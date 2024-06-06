@@ -107,6 +107,9 @@
                     mpv.enable = true;
                 };
             };
+            extra_utilities = {
+                drivedlgo.enable = true;
+            };
             social_media = {
                 telegram.enable = true;
                 discord.enable = true;
