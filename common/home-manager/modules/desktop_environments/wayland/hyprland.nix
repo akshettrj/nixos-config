@@ -11,6 +11,7 @@
         pro_launchers = config.propheci.programs.launchers;
         pro_mpd = config.propheci.programs.media.audio.mpd;
         pro_services = config.propheci.services;
+        pro_hw = config.propheci.hardware;
         pro_ss_tools = config.propheci.programs.screenshot_tools;
         pro_terminals = config.propheci.programs.terminals;
         pro_theming = config.propheci.theming;
@@ -118,6 +119,9 @@
                     "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
                     "SDL_VIDEODRIVER,wayland"
                     "LIBSEAT_BACKEND,logind"
+
+                ] ++ lib.mkIf pro_hw.nvidia.enable [
+
                     "LIBVA_DRIVER_NAME,nvidia"
                     "WLR_NO_HARDWARE_CURSORS,1"
                 ];
