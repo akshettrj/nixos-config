@@ -120,7 +120,7 @@
                     "SDL_VIDEODRIVER,wayland"
                     "LIBSEAT_BACKEND,logind"
 
-                ] ++ lib.mkIf pro_hw.nvidia.enable [
+                ] ++ lib.optionals pro_hw.nvidia.enable [
 
                     "LIBVA_DRIVER_NAME,nvidia"
                     "WLR_NO_HARDWARE_CURSORS,1"
