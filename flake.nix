@@ -53,7 +53,9 @@
                     pkgs = import nixpkgs {
                         system = "x86_64-linux";
                         config = { allowUnfree = true; allowUnsafe = false; };
-                        overlays = [];
+                        overlays = [
+                            (import ./overlays/default.nix)
+                        ];
                     };
                 };
                 modules = [ ./hosts/alienrj/configuration.nix ];
@@ -65,7 +67,9 @@
                     pkgs = import nixpkgs {
                         system = "x86_64-linux";
                         config = { allowUnfree = false; allowUnsafe = false; };
-                        overlays = [];
+                        overlays = [
+                            (import ./overlays/default.nix)
+                        ];
                     };
                 };
                 modules = [ ./hosts/oracleamd1/configuration.nix ];
@@ -77,7 +81,9 @@
                     pkgs = import nixpkgs {
                         system = "x86_64-linux";
                         config = { allowUnfree = false; allowUnsafe = false; };
-                        overlays = [];
+                        overlays = [
+                            (import ./overlays/default.nix)
+                        ];
                     };
                 };
                 modules = [ ./hosts/oracleamd2/configuration.nix ];
@@ -89,7 +95,9 @@
                     pkgs = import nixpkgs {
                         system = "aarch64-linux";
                         config = { allowUnfree = false; allowUnsafe = false; };
-                        overlays = [];
+                        overlays = [
+                            (import ./overlays/default.nix)
+                        ];
                     };
                 };
                 modules = [ ./hosts/raspi/configuration.nix ];
