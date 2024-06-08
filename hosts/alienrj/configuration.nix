@@ -107,6 +107,9 @@
                     mpv.enable = true;
                     vlc.enable = false;
                 };
+                picture = {
+                    feh.enable = true;
+                };
             };
             extra_utilities = {
                 drivedlgo.enable = true;

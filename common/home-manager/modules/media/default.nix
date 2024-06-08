@@ -3,6 +3,7 @@
 {
     imports = [
         ./audio
+        ./picture
         ./video
     ];
 }

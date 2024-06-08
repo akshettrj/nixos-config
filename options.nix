@@ -128,6 +128,9 @@
                         mpv.enable = mkOption { type = types.bool; };
                         vlc.enable = mkOption { type = types.bool; };
                     };
+                    picture = {
+                        feh.enable = mkOption { type = types.bool; };
+                    };
                 };
                 extra_utilities = {
                     drivedlgo.enable = mkOption { type = types.bool; };
