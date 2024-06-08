@@ -182,6 +182,10 @@
                     background_image = "${inputs.wallpapers}/gta-5-wallpaper-1920×1080.jpg";
                 };
             };
+            clipboard_managers = {
+                enable = true;
+                copyq.enable = true;
+            };
         };
 
         shells = {
@@ -208,6 +212,7 @@
                 launcher = "bemenu";
                 screenlock = "swaylock";
                 screenshot_tool = "wayshot";
+                clipboard_manager = "copyq";
             };
         };
     };

@@ -6,6 +6,7 @@
     config = let
 
         pro_browsers = config.propheci.programs.browsers;
+        pro_clips = config.propheci.programs.clipboard_managers;
         pro_deskenvs = config.propheci.desktop_environments;
         pro_file_explorers = config.propheci.programs.file_explorers;
         pro_launchers = config.propheci.programs.launchers;
@@ -17,6 +18,7 @@
         pro_theming = config.propheci.theming;
 
         browsers_meta = import ../../../../metadata/programs/browsers/metadata.nix { inherit pkgs; };
+        clips_meta = import ../../../../metadata/programs/clipboard_managers/metadata.nix { inherit pkgs; };
         file_explorers_meta = import ../../../../metadata/programs/file_explorers/metadata.nix { inherit pkgs; };
         launchers_meta = import ../../../../metadata/programs/launchers/metadata.nix { inherit pkgs; };
         screenlocks_meta = import ../../../../metadata/programs/screenlocks/metadata.nix { inherit config; inherit inputs; inherit pkgs; };
@@ -26,11 +28,20 @@
         normal_desktops = lib.listToAttrs(builtins.map (ws: { name = toString(ws); value = toString(ws); }) (lib.range 1 9)) // { "0" = "10"; };
         alt_desktops = lib.listToAttrs(builtins.map (ws: { name = toString(ws); value = toString(ws); }) (lib.range 11 19)) // { "0" = "20"; };
 
-        startup_script = pkgs.writeShellScriptBin "start" ''
+        launcher = pro_deskenvs.hyprland.launcher;
+        ss_tool = pro_deskenvs.hyprland.screenshot_tool;
+        screenlock = pro_deskenvs.hyprland.screenlock;
+        clipboard_manager = pro_deskenvs.hyprland.clipboard_manager;
+
+        startup_script = let
+            clipboard_manager_meta = clips_meta."${clipboard_manager}";
+        in pkgs.writeShellScriptBin "start" ''
 
             pidof hyprpaper && killall -9 hyprpaper
+            pidof ${clipboard_manager_meta.bin} && killall -9 ${clipboard_manager_meta.bin}
 
             hyprpaper &
+            ${clipboard_manager_meta.cmd} &
 
         '';
 
@@ -53,10 +64,6 @@
             fi
 
         '';
-
-        launcher = pro_deskenvs.hyprland.launcher;
-        ss_tool = pro_deskenvs.hyprland.screenshot_tool;
-        screenlock = pro_deskenvs.hyprland.screenlock;
 
     in lib.mkIf (pro_deskenvs.enable && pro_deskenvs.hyprland.enable) {
 
@@ -88,6 +95,10 @@
             {
                 assertion = pro_ss_tools."${ss_tool}".enable;
                 message = "Hyprland's ss tool is set to ${ss_tool} but its configuration is disabled";
+            }
+            {
+                assertion = pro_clips."${clipboard_manager}".enable;
+                message = "Hyprland's clipboard manager is set to ${clipboard_manager} but its configuration is disabled";
             }
         ];
 

@@ -3,6 +3,7 @@
 {
     imports = [
         ./browsers
+        ./clipboard_managers
         ./desktop_environments
         ./dev
         ./editors

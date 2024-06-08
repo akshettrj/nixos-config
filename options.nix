@@ -6,6 +6,7 @@
         inherit (lib) mkOption types;
 
         known_browsers = lib.attrNames (import ./common/metadata/programs/browsers/metadata.nix { inherit pkgs; });
+        known_clipboard_managers = lib.attrNames (import ./common/metadata/programs/clipboard_managers/metadata.nix { inherit pkgs; });
         known_desktop_environments = (import ./common/metadata/programs/desktop_environments/metadata.nix { inherit config; inherit inputs; inherit pkgs; });
         known_editors = lib.attrNames (import ./common/metadata/programs/editors/metadata.nix { inherit config; inherit inputs; inherit pkgs; });
         known_file_explorers = lib.attrNames (import ./common/metadata/programs/file_explorers/metadata.nix { inherit pkgs; });
@@ -210,6 +211,10 @@
                         background_image = mkOption { type = types.path; };
                     };
                 };
+                clipboard_managers = {
+                    enable = mkOption { type = types.bool; };
+                    copyq.enable = mkOption { type = types.bool; };
+                };
             };
 
             shells = {
@@ -236,6 +241,7 @@
                     screenlock = mkOption { type = types.enum(known_screenlocks); };
                     launcher = mkOption { type = types.enum(known_launchers); };
                     screenshot_tool = mkOption { type = types.enum(known_screenshot_tools); };
+                    clipboard_manager = mkOption { type = types.enum(known_clipboard_managers); };
                 };
             };
         };
