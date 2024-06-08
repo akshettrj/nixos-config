@@ -44,7 +44,13 @@
     };
 
     outputs = { self, nixpkgs, ... }@inputs:
-    {
+    let
+
+        common_overlays = [
+            (import ./overlays/default.nix)
+        ];
+
+    in {
         nixosConfigurations = {
             alienrj = nixpkgs.lib.nixosSystem {
                 specialArgs = {
@@ -52,9 +58,7 @@
                     pkgs = import nixpkgs {
                         system = "x86_64-linux";
                         config = { allowUnfree = true; allowUnsafe = false; };
-                        overlays = [
-                            (import ./overlays/default.nix)
-                        ];
+                        overlays = common_overlays;
                     };
                 };
                 modules = [ ./hosts/alienrj/configuration.nix ];
@@ -66,9 +70,7 @@
                     pkgs = import nixpkgs {
                         system = "x86_64-linux";
                         config = { allowUnfree = false; allowUnsafe = false; };
-                        overlays = [
-                            (import ./overlays/default.nix)
-                        ];
+                        overlays = common_overlays;
                     };
                 };
                 modules = [ ./hosts/oracleamd1/configuration.nix ];
@@ -80,9 +82,7 @@
                     pkgs = import nixpkgs {
                         system = "x86_64-linux";
                         config = { allowUnfree = false; allowUnsafe = false; };
-                        overlays = [
-                            (import ./overlays/default.nix)
-                        ];
+                        overlays = common_overlays;
                     };
                 };
                 modules = [ ./hosts/oracleamd2/configuration.nix ];
@@ -94,9 +94,7 @@
                     pkgs = import nixpkgs {
                         system = "aarch64-linux";
                         config = { allowUnfree = false; allowUnsafe = false; };
-                        overlays = [
-                            (import ./overlays/default.nix)
-                        ];
+                        overlays = common_overlays;
                     };
                 };
                 modules = [ ./hosts/raspi/configuration.nix ];
