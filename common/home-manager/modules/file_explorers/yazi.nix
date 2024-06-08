@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
     config = let
@@ -6,6 +6,7 @@
         pro_shells = config.propheci.shells;
 
     in lib.mkIf config.propheci.programs.file_explorers.yazi.enable {
+
         programs.yazi = {
             enable = true;
 
@@ -14,5 +15,8 @@
             enableNushellIntegration = lib.mkIf pro_shells.nushell.enable true;
             enableZshIntegration = lib.mkIf pro_shells.zsh.enable true;
         };
+
+        home.packages = [ pkgs.ueberzugpp ];
+
     };
 }
