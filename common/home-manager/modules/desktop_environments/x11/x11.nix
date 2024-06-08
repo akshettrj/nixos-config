@@ -5,10 +5,13 @@
 
         pro_deskenvs = config.propheci.desktop_environments;
 
-    in lib.mkIf (pro_deskenvs.enable && pro_deskenvs.wayland.enable) {
+    in lib.mkIf pro_deskenvs.enable {
+
         home.packages = with pkgs; [
-            wl-clipboard
-            wev
+            xclip
+            xdotool
         ];
+
     };
+
 }

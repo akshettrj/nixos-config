@@ -1,5 +1,7 @@
 { ... }:
 
 {
-    imports = [];
+    imports = [
+        ./x11.nix
+    ];
 }
