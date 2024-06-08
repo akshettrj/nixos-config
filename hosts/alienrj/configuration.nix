@@ -105,10 +105,12 @@
                 };
                 video = {
                     mpv.enable = true;
+                    vlc.enable = false;
                 };
             };
             extra_utilities = {
                 drivedlgo.enable = true;
+                ffmpeg.enable = true;
             };
             social_media = {
                 telegram.enable = true;
