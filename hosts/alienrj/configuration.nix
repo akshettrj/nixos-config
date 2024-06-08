@@ -76,8 +76,8 @@
             qt = true;
             cursor = {
                 package = pkgs.whitesur-cursors;
-                name = "WhiteSur Cursors";
-                size = 18;
+                name = "WhiteSur-cursors";
+                size = 26;
             };
             minimum_brightness = 40;
             wallpaper = "${inputs.wallpapers}/panda-2-1920×1080.png";

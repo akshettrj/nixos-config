@@ -8,7 +8,7 @@
             fullscreen = "${bin} full";
             region = "${bin} gui";
         };
-        deps = {};
+        deps = { grim = pkgs.grim; };
     };
     wayshot = rec {
         pkg = pkgs.wayshot;

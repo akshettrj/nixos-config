@@ -114,7 +114,10 @@
                     pkgs.hyprland
             );
 
-            systemd.enable = true;
+            systemd = {
+                enable = true;
+                variables = [ "--all" ];
+            };
             xwayland.enable = true;
 
             settings = {
@@ -127,9 +130,11 @@
                     "QT_AUTO_SCREEN_SCALE_FACTOR,1"
                     "QT_QPA_PLATFORM,wayland;xcb"
                     "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
-                    "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
                     "SDL_VIDEODRIVER,wayland"
                     "LIBSEAT_BACKEND,logind"
+
+                    "XCURSOR_THEME,${pro_theming.cursor.name}"
+                    "XCURSOR_SIZE,${toString(pro_theming.cursor.size)}"
 
                 ] ++ lib.optionals pro_hw.nvidia.enable [
 
