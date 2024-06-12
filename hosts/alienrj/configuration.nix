@@ -119,7 +119,7 @@
                 telegram.enable = true;
                 discord.enable = true;
                 slack.enable = false;
-                beeper.enable = false;
+                beeper.enable = true;
             };
             editors = {
                 main = "neovim";
