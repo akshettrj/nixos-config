@@ -238,9 +238,9 @@
                 ) ++ (
                     builtins.attrValues (builtins.mapAttrs (key: desk: "$mainMod ALT, ${key}, workspace, ${desk}") alt_desktops)
                 ) ++ (
-                    builtins.attrValues (builtins.mapAttrs (key: desk: "$mainMod SHIFT, ${key}, movetoworkspace, ${desk}") normal_desktops)
+                    builtins.attrValues (builtins.mapAttrs (key: desk: "$mainMod SHIFT, ${key}, movetoworkspacesilent, ${desk}") normal_desktops)
                 ) ++ (
-                    builtins.attrValues (builtins.mapAttrs (key: desk: "$mainMod ALT SHIFT, ${key}, movetoworkspace, ${desk}") alt_desktops)
+                    builtins.attrValues (builtins.mapAttrs (key: desk: "$mainMod ALT SHIFT, ${key}, movetoworkspacesilent, ${desk}") alt_desktops)
                 ) ++ [
                     "$mainMod, BracketRight, workspace, m+1"
                     "$mainMod, BracketLeft, workspace, m-1"
@@ -251,7 +251,7 @@
                     "$mainMod, C, exec, ${kill_window_script}/bin/kill_window"
                     "$mainMod, S, togglefloating"
                     "$mainMod, F, fullscreen, 0"
-                    "$mainMod, MINUS, movetoworkspace, special"
+                    "$mainMod, MINUS, movetoworkspacesilent, special"
                     "$mainMod, M, fullscreen, 1"
                     "$mainMod, U, focusurgentorlast"
                     "$mainMod, N, cyclenext"
