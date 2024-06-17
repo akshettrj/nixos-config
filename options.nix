@@ -118,6 +118,9 @@
 
             programs = {
                 media = {
+                    services = {
+                        mpris.enable = mkOption { type = types.bool; };
+                    };
                     audio = {
                         mpd = {
                             enable = mkOption { type = types.bool; };
@@ -217,6 +220,27 @@
                 clipboard_managers = {
                     enable = mkOption { type = types.bool; };
                     copyq.enable = mkOption { type = types.bool; };
+                };
+                notification_daemons = {
+                    enable = mkOption { type = types.bool; };
+                    dunst = {
+                        enable = mkOption { type = types.bool; };
+                        font_size = mkOption { type = types.ints.unsigned; };
+                    };
+                };
+                bars = {
+                    enable = mkOption { type = types.bool; };
+                    waybar = {
+                        enable = mkOption { type = types.bool; };
+                        use_official_package = mkOption { type = types.bool; };
+                        heights = mkOption { type = types.ints.unsigned; };
+                        font_size = mkOption { type = types.ints.unsigned; };
+                        separator_size = mkOption { type = types.ints.unsigned; };
+                        icon_size = mkOption { type = types.ints.unsigned; };
+                        tray_spacing = mkOption { type = types.ints.unsigned; };
+                        is_laptop = mkOption { type = types.bool; };
+                        systemd_target = mkOption { type = types.str; };
+                    };
                 };
             };
 

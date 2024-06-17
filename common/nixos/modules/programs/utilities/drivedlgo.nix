@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 {
    config = let
@@ -7,7 +7,7 @@
 
    in lib.mkIf pro_programs.extra_utilities.drivedlgo.enable {
 
-      environment.systemPackages = [ pkgs.drivedlgo ];
+      environment.systemPackages = [ config.nur.repos.propheci.drivedlgo ];
 
    };
 }

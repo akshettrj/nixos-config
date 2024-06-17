@@ -18,6 +18,12 @@
 
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+        home-manager = {
+            url = "github:nix-community/home-manager";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        # Hyprland related
         hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
         hyprpaper = {
             url = "github:hyprwm/hyprpaper";
@@ -27,28 +33,33 @@
             url = "github:hyprwm/hyprlock";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
-        helix-nightly.url = "github:helix-editor/helix";
-        home-manager = {
-            url = "github:nix-community/home-manager";
+        waybar = {
+            url = "github:Alexays/Waybar";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        wallpapers = {
-            url = "gitlab:akshettrj/wallpapers";
-            flake = false;
-        };
+
+        # Text editors
+        neovim.url = "github:nix-community/neovim-nightly-overlay";
+        helix.url = "github:helix-editor/helix";
+
+        # Utilities
         nix-index-database = {
             url = "github:nix-community/nix-index-database";
             inputs.nixpkgs.follows = "nixpkgs";
+        };
+        nur.url = "github:nix-community/NUR";
+
+        # Misc
+        wallpapers = {
+            url = "gitlab:akshettrj/wallpapers";
+            flake = false;
         };
     };
 
     outputs = { self, nixpkgs, ... }@inputs:
     let
 
-        common_overlays = [
-            (import ./overlays/default.nix)
-        ];
+        common_overlays = [];
 
     in {
         nixosConfigurations = {

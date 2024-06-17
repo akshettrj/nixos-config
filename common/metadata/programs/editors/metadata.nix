@@ -4,8 +4,8 @@ let
 
     pro_editors = config.propheci.programs.editors;
 
-    neovim_package = (if pro_editors.neovim.nightly then inputs.neovim-nightly.packages."${pkgs.system}".neovim else pkgs.neovim);
-    helix_package = (if pro_editors.helix.nightly then inputs.helix-nightly.packages."${pkgs.system}".helix else pkgs.helix);
+    neovim_package = (if pro_editors.neovim.nightly then inputs.neovim.packages."${pkgs.system}".neovim else pkgs.neovim);
+    helix_package = (if pro_editors.helix.nightly then inputs.helix.packages."${pkgs.system}".helix else pkgs.helix);
 
 in {
 

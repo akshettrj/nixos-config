@@ -4,6 +4,8 @@
     imports = [
         ../../options.nix
         ./modules
+
+        inputs.nur.nixosModules.nur
     ];
 
     config = let

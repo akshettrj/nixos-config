@@ -9,7 +9,7 @@
 
         home.packages = [ (
             if pro_editors.neovim.nightly then
-                inputs.neovim-nightly.packages."${pkgs.system}".neovim
+                inputs.neovim.packages."${pkgs.system}".neovim
             else
                 pkgs.neovim
         ) ];

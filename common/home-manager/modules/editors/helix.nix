@@ -9,7 +9,7 @@
 
         home.packages = [ (
             if pro_editors.helix.nightly then
-                inputs.helix-nightly.packages."${pkgs.system}".helix
+                inputs.helix.packages."${pkgs.system}".helix
             else
                 pkgs.helix
         ) ];

@@ -29,6 +29,10 @@
                 J = '':updir; set dironly true; down; set dironly false; open'';
                 K = '':updir; set dironly true; up; set dironly false; open'';
                 DD = "delete";
+
+                gM = ''cd ${config.home.homeDirectory}/media'';
+                gm = ''cd "${config.xdg.userDirs.music}"'';
+                gv = ''cd "${config.xdg.userDirs.videos}"'';
             };
             commands = {
                 # Basics

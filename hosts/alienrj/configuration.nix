@@ -97,6 +97,7 @@
 
         programs = {
             media = {
+                services.mpris.enable = true;
                 audio = {
                     mpd = {
                         enable = true;
@@ -188,6 +189,27 @@
             clipboard_managers = {
                 enable = true;
                 copyq.enable = true;
+            };
+            notification_daemons = {
+                enable = true;
+                dunst = {
+                    enable = true;
+                    font_size = 10;
+                };
+            };
+            bars = {
+                enable = true;
+                waybar = {
+                    enable = true;
+                    use_official_package = true;
+                    heights = 28;
+                    font_size = 12;
+                    separator_size = 18;
+                    icon_size = 15;
+                    tray_spacing = 8;
+                    is_laptop = true;
+                    systemd_target = "hyprland-session.target";
+                };
             };
         };
 

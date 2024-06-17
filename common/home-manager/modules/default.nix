@@ -2,6 +2,7 @@
 
 {
     imports = [
+        ./bars
         ./browsers
         ./clipboard_managers
         ./desktop_environments
@@ -11,6 +12,7 @@
         ./hardware
         ./launchers
         ./media
+        ./notification_daemons
         ./screenlocks
         ./screenshot_tools
         ./scripts

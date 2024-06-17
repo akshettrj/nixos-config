@@ -13,7 +13,10 @@
 
         programs.mpv = {
             enable = true;
-            scripts = [ pkgs.mpvScripts.uosc ];
+            scripts = [
+                pkgs.mpvScripts.uosc # better UI
+                pkgs.mpvScripts.mpris # MPRIS support
+            ];
             config = {
                 fs = true;
                 fs-screen = 1;

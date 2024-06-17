@@ -6,6 +6,7 @@
         ./modules
 
         inputs.nix-index-database.nixosModules.nix-index # Cached database for nix-index
+        inputs.nur.nixosModules.nur
     ];
 
     config = let
