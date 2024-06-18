@@ -94,6 +94,16 @@
                         ncmpcpp.enable = false;
                     };
                 };
+                video = {
+                    mpv.enable = false;
+                    vlc.enable = false;
+                };
+                picture = {
+                    feh.enable = false;
+                };
+                services = {
+                    mpris.enable = false;
+                };
             };
             social_media = {
                 telegram.enable = false;
@@ -123,6 +133,14 @@
             };
             launchers.enable = false;
             screenshot_tools.enable = false;
+            notification_daemons.enable = false;
+            clipboard_managers.enable = false;
+            bars.enable = false;
+            screenlocks.enable = false;
+            extra_utilities = {
+                ffmpeg.enable = false;
+                drivedlgo.enable = true;
+            };
         };
 
         shells = {
