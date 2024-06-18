@@ -155,7 +155,8 @@
                 };
 
                 nix_shell = {
-                    disabled = true;
+                    disabled = false;
+                    symbol = "❄️ ";
                 };
 
                 python = {
