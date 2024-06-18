@@ -114,6 +114,7 @@
                     delta.enable = mkOption { type = types.bool; };
                     default_branch = mkOption { type = types.str; };
                 };
+                direnv.enable = mkOption { type = types.bool; };
             };
 
             programs = {

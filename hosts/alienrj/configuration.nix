@@ -93,6 +93,7 @@
                 delta.enable = true;
                 default_branch = "main";
             };
+            direnv.enable = true;
         };
 
         programs = {
