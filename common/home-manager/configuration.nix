@@ -5,7 +5,7 @@
         ../../options.nix
         ./modules
 
-        inputs.nur.nixosModules.nur
+        inputs.nur.hmModules.nur
     ];
 
     config = let
