@@ -163,6 +163,24 @@
                         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
                     fi
                 }
+
+            '' + lib.optionals pro_file_explorers.yazi.enable ''
+
+                ###################################################
+
+                # YaziCD
+                function yazicd() {
+                    tmp="$(mktemp)"
+                    ${pkgs.yazi}/bin/yazi --cwd-file="$tmp" "$@"
+                    if [ -f "$tmp" ]; then
+                        dir="$(cat "$tmp")"
+                        rm -f "$tmp" >/dev/null
+                        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+                    fi
+                }
+
+            '' + ''
+                bindkey -s '^o' "^u ${if pro_file_explorers.main == "lf" then "lfcd" else "yazicd"}\n"
             '';
         };
 
