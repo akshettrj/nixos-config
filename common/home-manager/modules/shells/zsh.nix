@@ -27,6 +27,8 @@
                     "reboot*"
                     "shutdown*"
                     ". *"
+                    "lfcd*"
+                    "yazicd*"
                 ] ++ lib.optionals pro_shells.zoxide.enable [
                     "z *"
                     "zi *"
@@ -180,7 +182,7 @@
                 }
 
             '' + ''
-                bindkey -s '^o' "^u ${if pro_file_explorers.main == "lf" then "lfcd" else "yazicd"}\n"
+                bindkey -s '^o' "${if pro_file_explorers.main == "lf" then "lfcd" else "yazicd"}\n"
             '';
         };
 
