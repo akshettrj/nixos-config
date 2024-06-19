@@ -23,16 +23,7 @@
                 extended = true;
                 ignoreDups = true;
                 ignoreAllDups = true;
-                ignorePatterns = [
-                    "reboot*"
-                    "shutdown*"
-                    ". *"
-                    "lfcd*"
-                    "yazicd*"
-                ] ++ lib.optionals pro_shells.zoxide.enable [
-                    "z *"
-                    "zi *"
-                ];
+                ignorePatterns = (import ./history_ignore_patterns.nix);
                 ignoreSpace = true;
                 save = 10000;
                 share = true;

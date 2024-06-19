@@ -16,16 +16,7 @@
 
             historyControl = ["erasedups" "ignorespace"];
             historyFile = "$HOME/.cache/bash_history";
-            historyIgnore = [
-                "reboot*"
-                "shutdown*"
-                ". *"
-            ] ++ lib.optionals pro_shells.zoxide.enable [
-                "z"
-                "z *"
-                "zi"
-                "zi *"
-            ];
+            historyIgnore = (import ./history_ignore_patterns.nix);
             historySize = 10000;
 
             initExtra = ''
