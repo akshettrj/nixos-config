@@ -84,6 +84,7 @@
                 delta.enable = true;
                 default_branch = "main";
             };
+            direnv.enable = false;
         };
 
         programs = {
