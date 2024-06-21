@@ -11,6 +11,7 @@
         pro_file_explorers = config.propheci.programs.file_explorers;
         pro_launchers = config.propheci.programs.launchers;
         pro_mpd = config.propheci.programs.media.audio.mpd;
+        pro_mpris = config.propheci.programs.media.services.mpris;
         pro_services = config.propheci.services;
         pro_hw = config.propheci.hardware;
         pro_ss_tools = config.propheci.programs.screenshot_tools;
@@ -296,6 +297,12 @@
                     "$mainMod, F9, exec, ${pkgs.mpc-cli}/bin/mpc -q prev"
                     "$mainMod, F10, exec, ${pkgs.mpc-cli}/bin/mpc -q toggle"
                     "$mainMod, F11, exec, ${pkgs.mpc-cli}/bin/mpc -q next"
+
+                ] ++ lib.optionals pro_mpris.enable [
+
+                    ",XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
+                    ",XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+                    ",XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
                 ];
 
                 binde = [
