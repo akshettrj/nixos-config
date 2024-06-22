@@ -34,15 +34,26 @@
         screenlock = pro_deskenvs.hyprland.screenlock;
         clipboard_manager = pro_deskenvs.hyprland.clipboard_manager;
 
+        hyprpaper_pkg = (
+            if pro_deskenvs.hyprland.use_official_packages then
+                inputs.hyprpaper.packages."${pkgs.system}".hyprpaper
+            else
+                pkgs.hyprpaper
+        );
+
         startup_script = let
             clipboard_manager_meta = clips_meta."${clipboard_manager}";
+            hyprpaper = "${hyprpaper_pkg}/bin/hyprpaper";
+            nm-applet = "${pkgs.networkmanagerapplet}/bin/nm-applet";
         in pkgs.writeShellScriptBin "start" ''
 
-            pidof hyprpaper && killall -9 hyprpaper
+            pidof ${hyprpaper} && killall -9 ${hyprpaper}
             pidof ${clipboard_manager_meta.bin} && killall -9 ${clipboard_manager_meta.bin}
+            pidof ${nm-applet} && killall -9 ${nm-applet}
 
-            hyprpaper &
+            ${hyprpaper} &
             ${clipboard_manager_meta.cmd} &
+            ${nm-applet} &
 
         '';
 
@@ -348,12 +359,10 @@
 
         '';
 
-        home.packages = [(
-            if pro_deskenvs.hyprland.use_official_packages then
-                inputs.hyprpaper.packages."${pkgs.system}".hyprpaper
-            else
-                pkgs.hyprpaper
-        )];
+        home.packages = [
+            hyprpaper_pkg
+            pkgs.networkmanagerapplet
+        ];
 
 
     };
