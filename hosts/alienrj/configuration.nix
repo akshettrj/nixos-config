@@ -116,12 +116,14 @@
             extra_utilities = {
                 drivedlgo.enable = true;
                 ffmpeg.enable = true;
+                rclone.enable = true;
             };
             social_media = {
                 telegram.enable = true;
                 discord.enable = true;
                 slack.enable = false;
                 beeper.enable = true;
+                teams.enable = true;
             };
             editors = {
                 main = "neovim";
