@@ -88,30 +88,8 @@
         };
 
         programs = {
-            media = {
-                audio = {
-                    mpd = {
-                        enable = false;
-                        ncmpcpp.enable = false;
-                    };
-                };
-                video = {
-                    mpv.enable = false;
-                    vlc.enable = false;
-                };
-                picture = {
-                    feh.enable = false;
-                };
-                services = {
-                    mpris.enable = false;
-                };
-            };
-            social_media = {
-                telegram.enable = false;
-                discord.enable = false;
-                slack.enable = false;
-                beeper.enable = false;
-            };
+            media.enable = false;
+            social_media.enable = false;
             editors = {
                 main = "neovim";
                 backup = "helix";
@@ -139,8 +117,10 @@
             bars.enable = false;
             screenlocks.enable = false;
             extra_utilities = {
+                enable = true;
                 ffmpeg.enable = false;
                 drivedlgo.enable = true;
+                rclone.enable = true;
             };
         };
 
