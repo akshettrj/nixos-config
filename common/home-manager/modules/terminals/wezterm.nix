@@ -15,7 +15,7 @@
             enableBashIntegration = lib.mkIf pro_shells.bash.enable true;
             enableZshIntegration = lib.mkIf pro_shells.zsh.enable true;
 
-            extraConfig = ''
+            extraConfig = /*lua*/ ''
                 local wezterm = require("wezterm");
 
                 local config = {};

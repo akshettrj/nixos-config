@@ -45,7 +45,7 @@
                 sansSerif = [ "${pro_theming.fonts.main.name}" ];
                 serif = [ "${pro_theming.fonts.main.name}" ];
             };
-            localConf = ''
+            localConf = /*xml*/ ''
                 <fontconfig>
                 <match target="pattern">
                 <test qual="any" name="family"><string>monospace</string></test>

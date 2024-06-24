@@ -50,7 +50,7 @@
 
             envExtra = "";
 
-            initExtraFirst = ''
+            initExtraFirst = /*sh*/ ''
                 setopt HIST_REDUCE_BLANKS
                 setopt COMPLETE_ALIASES
             '';
@@ -142,7 +142,7 @@
                     echo -ne '\e[5 q'
                 }
 
-            '' + lib.optionals pro_file_explorers.lf.enable ''
+            '' + lib.optionals pro_file_explorers.lf.enable /*sh*/ ''
 
                 ###################################################
 
@@ -157,7 +157,7 @@
                     fi
                 }
 
-            '' + lib.optionals pro_file_explorers.yazi.enable ''
+            '' + lib.optionals pro_file_explorers.yazi.enable /*sh*/ ''
 
                 ###################################################
 

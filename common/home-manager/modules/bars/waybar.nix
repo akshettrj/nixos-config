@@ -320,7 +320,7 @@
                 } // modules;
             };
 
-            style = ''
+            style = /*css*/ ''
 
                 * {
                     font-family: ${pro_theming.fonts.main.name}, ${lib.strings.concatStringsSep "," (map(font: font.name)(pro_theming.fonts.backups))};
