@@ -192,7 +192,7 @@
                         enabled = true;
                         size = 3;
                         passes = 1;
-                        xray = true;
+                        xray = false;
                     };
                     drop_shadow = true;
                     shadow_range = 4;
