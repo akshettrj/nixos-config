@@ -116,6 +116,7 @@
             file
             findutils
             gawk
+            gcc
             gitFull
             gnugrep
             gnused
