@@ -3,13 +3,14 @@
 {
     config = let
 
+        pro_media = config.propheci.programs.media;
         pro_theming = config.propheci.theming;
         pro_video = config.propheci.programs.media.video;
 
         ss_dir = "${config.xdg.userDirs.pictures}/screenshots/mpv";
         watch_later_dir = "${config.xdg.stateHome}/mpv/watch_later";
 
-    in lib.mkIf pro_video.mpv.enable {
+    in lib.mkIf (pro_media.enable && pro_video.mpv.enable) {
 
         programs.mpv = {
             enable = true;

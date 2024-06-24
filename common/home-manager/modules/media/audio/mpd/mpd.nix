@@ -3,9 +3,10 @@
 {
     config = let
 
+        pro_media = config.propheci.programs.media;
         pro_mpd = config.propheci.programs.media.audio.mpd;
 
-    in lib.mkIf pro_mpd.enable {
+    in lib.mkIf (pro_media.enable && pro_mpd.enable) {
 
         services.mpd = {
             enable = true;

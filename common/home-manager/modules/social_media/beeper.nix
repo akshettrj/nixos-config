@@ -5,7 +5,7 @@
 
         pro_social_media = config.propheci.programs.social_media;
 
-    in lib.mkIf pro_social_media.beeper.enable {
+    in lib.mkIf (pro_social_media.enable && pro_social_media.beeper.enable) {
 
         home.packages = [ pkgs.beeper ];
 

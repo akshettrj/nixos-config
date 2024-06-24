@@ -119,6 +119,7 @@
 
             programs = {
                 media = {
+                    enable = mkOption { type = types.bool; };
                     services = {
                         mpris.enable = mkOption { type = types.bool; };
                     };
@@ -137,11 +138,13 @@
                     };
                 };
                 extra_utilities = {
+                    enable = mkOption { type = types.bool; };
                     drivedlgo.enable = mkOption { type = types.bool; };
                     ffmpeg.enable = mkOption { type = types.bool; };
                     rclone.enable = mkOption { type = types.bool; };
                 };
                 social_media = {
+                    enable = mkOption { type = types.bool; };
                     telegram.enable = mkOption { type = types.bool; };
                     discord.enable = mkOption { type = types.bool; };
                     beeper.enable = mkOption { type = types.bool; };

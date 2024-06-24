@@ -98,6 +98,7 @@
 
         programs = {
             media = {
+                enable = true;
                 services.mpris.enable = true;
                 audio = {
                     mpd = {
@@ -114,11 +115,13 @@
                 };
             };
             extra_utilities = {
+                enable = true;
                 drivedlgo.enable = true;
                 ffmpeg.enable = true;
                 rclone.enable = true;
             };
             social_media = {
+                enable = true;
                 telegram.enable = true;
                 discord.enable = true;
                 slack.enable = false;
