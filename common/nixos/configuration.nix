@@ -145,6 +145,7 @@
             unzip
             vim
             wget
+            wormhole-rs
             xdg-utils
             zellij
             zip
