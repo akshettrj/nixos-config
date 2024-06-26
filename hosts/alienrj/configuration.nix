@@ -8,7 +8,7 @@
         inputs.home-manager.nixosModules.home-manager
     ];
 
-    propheci = {
+    propheci = rec {
         system = {
             hostname = "alienrj";
             time_zone = "Asia/Kolkata";
@@ -52,6 +52,11 @@
             };
             tailscale.enable = true;
             xdg_portal.enable = true;
+            telegram_bot_api = {
+                enable = true;
+                port = 8082;
+                data_dir = user.homedir + "/.local/share/telegram-bot-api";
+            };
         };
 
         # Nix/NixOS specific

@@ -75,6 +75,11 @@
                 };
                 tailscale.enable = mkOption { type = types.bool; };
                 xdg_portal.enable = mkOption { type = types.bool; };
+                telegram_bot_api = {
+                    enable = mkOption { type = types.bool; };
+                    port = mkOption { type = types.port; };
+                    data_dir = mkOption { type = types.oneOf [ types.str types.path ]; };
+                };
             };
 
             # Nix/NixOS specific
