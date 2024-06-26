@@ -28,7 +28,6 @@
 
             after = ["network.target"];
             requires = ["network.target"];
-            wantedBy = ["multi-user.target"];
 
             serviceConfig = {
                 User = pro_user.username;
