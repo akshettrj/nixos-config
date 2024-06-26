@@ -342,6 +342,7 @@
 
                 windowrulev2 = [
                     "workspace 9,class:org.telegram.desktop"
+                    "workspace 10,class:teams-for-linux"
                     "workspace unset,class:org.telegram.desktop,title:^(Media viewer)$"
                     "float,title:Bitwarden"
                     "workspace 10,class:Beeper"
