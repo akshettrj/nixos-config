@@ -132,6 +132,7 @@
                 slack.enable = false;
                 beeper.enable = true;
                 teams.enable = true;
+                zulip.enable = true;
             };
             editors = {
                 main = "neovim";

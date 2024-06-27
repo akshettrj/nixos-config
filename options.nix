@@ -155,6 +155,7 @@
                     beeper.enable = mkOption { type = types.bool; };
                     slack.enable = mkOption { type = types.bool; };
                     teams.enable = mkOption { type = types.bool; };
+                    zulip.enable = mkOption { type = types.bool; };
                 };
                 editors = {
                     main = mkOption { type = types.enum(known_editors); example = "neovim"; };

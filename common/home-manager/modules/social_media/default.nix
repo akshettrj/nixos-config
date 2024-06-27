@@ -7,5 +7,6 @@
         ./slack.nix
         ./teams.nix
         ./telegram.nix
+        ./zulip.nix
     ];
 }
