@@ -100,6 +100,8 @@
                     "root"
                     "${pro_user.username}"
                 ];
+                show-trace = true;
+                eval-cache = false;
             };
             gc = lib.mkIf pro_nix.garbage_collection.enable {
                 automatic = true;
