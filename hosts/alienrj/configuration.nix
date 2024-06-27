@@ -117,6 +117,7 @@
                 };
                 picture = {
                     feh.enable = true;
+                    sxiv.enable = true;
                 };
             };
             extra_utilities = {

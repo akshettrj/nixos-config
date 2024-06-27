@@ -140,6 +140,7 @@
                     };
                     picture = {
                         feh.enable = mkOption { type = types.bool; };
+                        sxiv.enable = mkOption { type = types.bool; };
                     };
                 };
                 extra_utilities = {
