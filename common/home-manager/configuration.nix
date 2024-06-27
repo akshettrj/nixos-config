@@ -77,6 +77,24 @@
                     )
                 ];
             };
+            mimeApps = {
+                enable = true;
+                associations = {
+                    added = {
+                        "x-scheme-handler/tg" = [ "org.telegram.desktop.desktop" ];
+                        "x-scheme-handler/msteams" = [ "teams-for-linux.desktop" ];
+                    };
+                };
+                defaultApplications = let
+                    image_desktop_entries = [ "sxiv.desktop" "feh.desktop" ];
+                in {
+                    "x-scheme-handler/tg" = [ "org.telegram.desktop.desktop" ];
+                    "x-scheme-handler/msteams" = [ "teams-for-linux.desktop" ];
+                    "image/png" = image_desktop_entries;
+                    "image/jpeg" = image_desktop_entries;
+                    "image/webp" = image_desktop_entries;
+                };
+            };
         };
 
     };
