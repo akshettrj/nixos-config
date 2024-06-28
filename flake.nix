@@ -111,5 +111,12 @@
                 modules = [ ./hosts/raspi/configuration.nix ];
             };
         };
+
+        templates = {
+            golang = {
+                path = ./templates/golang;
+                description = "Flake for Golang devShell and packaging";
+            };
+        };
     };
 }
