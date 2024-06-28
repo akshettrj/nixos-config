@@ -44,6 +44,7 @@
             allowedUDPPorts = [ config.services.tailscale.port ] ++ pro_services.firewall.udp_ports;
             allowedTCPPorts = [ config.services.tailscale.port ] ++ pro_services.firewall.tcp_ports;
         };
+        networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
         time.timeZone = pro_system.time_zone;
 
