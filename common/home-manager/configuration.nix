@@ -41,6 +41,7 @@
         };
 
         home.packages = with pkgs; [
+            bat
             btop
             dust
             fd

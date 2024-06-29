@@ -207,7 +207,7 @@
                     preserve_split = true;
                 };
 
-                master.new_is_master = false;
+                master.new_status = "master";
 
                 gestures = {
                     workspace_swipe = true;
