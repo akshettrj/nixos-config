@@ -82,12 +82,18 @@
                 experimental-features = "nix-command flakes";
                 auto-optimise-store = true;
                 extra-substituters =
-                    [ "https://propheci.cachix.org" ]
+                    [
+                        "https://propheci.cachix.org"
+                        "https://watgbridge.cachix.org"
+                    ]
                     ++ lib.optionals pro_nix.nix_community_cache [ "https://nix-community.cachix.org" ]
                     ++ lib.optionals pro_nix.hyprland_cache [ "https://hyprland.cachix.org" ]
                     ++ lib.optionals pro_nix.helix_cache [ "https://helix.cachix.org" ];
                 extra-trusted-public-keys =
-                    [ "propheci.cachix.org-1:CwV87KMySX+rhW88NhTx2hRzdNltV497nhXvWswFGDc=" ]
+                    [
+                        "propheci.cachix.org-1:CwV87KMySX+rhW88NhTx2hRzdNltV497nhXvWswFGDc="
+                        "watgbridge.cachix.org-1:KSfgmbSBvXQTpUnoCj21vST7zgwpy3SbNfk0/nesR1Y="
+                    ]
                     ++ lib.optionals pro_nix.nix_community_cache [
                         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
                     ]
