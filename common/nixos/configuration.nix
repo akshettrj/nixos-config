@@ -144,6 +144,7 @@
             jq
             lf
             lshw
+            nix-output-monitor
             tmux
             unzip
             vim
