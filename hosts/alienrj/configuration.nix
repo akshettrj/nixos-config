@@ -99,6 +99,7 @@
                 default_branch = "main";
             };
             direnv.enable = true;
+            cachix.enable = true;
         };
 
         programs = {

@@ -120,6 +120,7 @@
                     default_branch = mkOption { type = types.str; };
                 };
                 direnv.enable = mkOption { type = types.bool; };
+                cachix.enable = mkOption { type = types.bool; };
             };
 
             programs = {
