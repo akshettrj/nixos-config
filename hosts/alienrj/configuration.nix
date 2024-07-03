@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 {
     imports = [
@@ -252,6 +252,24 @@
                 screenlock = "swaylock";
                 screenshot_tool = "wayshot";
                 clipboard_manager = "copyq";
+                monitors = [
+                    {
+                        enabled = true;
+                        name = "eDP-1";
+                        width = 2560; height = 1600; refresh_rate = 60;
+                        x = 0; y = 0;
+                        additional_settings = "1.6";
+                        workspaces = (lib.range 1 10);
+                    }
+                    {
+                        enabled = true;
+                        name = "HDMI-A-1";
+                        width = 1920; height = 1080; refresh_rate = 60;
+                        x = 2560; y = 0;
+                        additional_settings = "1";
+                        workspaces = (lib.range 11 20);
+                    }
+                ];
             };
         };
     };

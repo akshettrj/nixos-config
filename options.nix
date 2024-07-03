@@ -23,6 +23,20 @@
             };
         };
 
+        monitor_type = lib.types.submodule {
+            options = {
+                enabled = mkOption { type = types.bool; };
+                name = mkOption { type = types.str; };
+                width = mkOption { type = types.int; };
+                height = mkOption { type = types.int; };
+                refresh_rate = mkOption { type = types.int; };
+                x = mkOption { type = types.int; };
+                y = mkOption { type = types.int; };
+                additional_settings = mkOption { type = types.str; };
+                workspaces = mkOption { type = types.listOf (types.int); };
+            };
+        };
+
     in {
         propheci = {
             # System Meta
@@ -283,6 +297,7 @@
                     launcher = mkOption { type = types.enum(known_launchers); };
                     screenshot_tool = mkOption { type = types.enum(known_screenshot_tools); };
                     clipboard_manager = mkOption { type = types.enum(known_clipboard_managers); };
+                    monitors = mkOption { type = types.listOf (monitor_type); };
                 };
             };
         };

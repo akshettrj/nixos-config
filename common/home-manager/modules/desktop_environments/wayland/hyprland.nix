@@ -27,7 +27,7 @@
         terminals_meta = import ../../../../metadata/programs/terminals/metadata.nix { inherit pkgs; };
 
         normal_desktops = lib.listToAttrs(builtins.map (ws: { name = toString(ws); value = toString(ws); }) (lib.range 1 9)) // { "0" = "10"; };
-        alt_desktops = lib.listToAttrs(builtins.map (ws: { name = toString(ws); value = toString(ws); }) (lib.range 11 19)) // { "0" = "20"; };
+        alt_desktops = lib.listToAttrs(builtins.map (ws: { name = toString(ws - 10); value = toString(ws); }) (lib.range 11 19)) // { "0" = "20"; };
 
         launcher = pro_deskenvs.hyprland.launcher;
         ss_tool = pro_deskenvs.hyprland.screenshot_tool;
@@ -40,12 +40,44 @@
             else
                 pkgs.hyprpaper
         );
+        hyprland_pkg = (
+            if pro_deskenvs.hyprland.use_official_packages then
+                inputs.hyprland.packages."${pkgs.system}".hyprland
+            else
+                pkgs.hyprland
+        );
 
         startup_script = let
             clipboard_manager_meta = clips_meta."${clipboard_manager}";
             hyprpaper = "${hyprpaper_pkg}/bin/hyprpaper";
+            hyprctl = "${hyprland_pkg}/bin/hyprctl";
             nm-applet = "${pkgs.networkmanagerapplet}/bin/nm-applet";
         in pkgs.writeShellScriptBin "start" ''
+
+            # Setting up monitors
+            ${
+                lib.strings.concatStringsSep
+                "\n"
+                (
+                    map
+                    (mon: let
+                        resolution = "${toString mon.width}x${toString mon.height}@${toString mon.refresh_rate}";
+                        position = "${toString mon.x}x${toString mon.y}";
+                        mon_config = if mon.enabled then "${resolution},${position},${mon.additional_settings}" else "disable";
+                    in
+                        /* sh */ ''
+                            ${hyprctl} keyword monitor "${mon.name},${mon_config}"
+
+                        '' + lib.optionals mon.enabled /* sh */ ''
+
+                            for wk in ${toString mon.workspaces}; do
+                                ${hyprctl} keyword workspace "$wk,monitor:${mon.name}" &
+                            done
+                        ''
+                    )
+                    (pro_deskenvs.hyprland.monitors)
+                )
+            }
 
             pidof ${hyprpaper} && killall -9 ${hyprpaper}
             pidof ${clipboard_manager_meta.bin} && killall -9 ${clipboard_manager_meta.bin}
@@ -119,12 +151,7 @@
         wayland.windowManager.hyprland = {
             enable = true;
 
-            package = (
-                if pro_deskenvs.hyprland.use_official_packages then
-                    inputs.hyprland.packages."${pkgs.system}".hyprland
-                else
-                    pkgs.hyprland
-            );
+            package = hyprland_pkg;
 
             systemd = {
                 enable = true;
