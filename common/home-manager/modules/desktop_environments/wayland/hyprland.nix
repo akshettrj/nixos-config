@@ -302,7 +302,7 @@
 
                     # SUPER + CTRL
                     "$mainMod CONTROL, Q, exit"
-                    "$mainMod CONTROL, S, pin, active"
+                    "$mainMod ALT, S, pin, active"
 
                     # SUPER + SHIFT
                     "$mainMod SHIFT, C, exec, ${kill_window_script}/bin/kill_window -f"
