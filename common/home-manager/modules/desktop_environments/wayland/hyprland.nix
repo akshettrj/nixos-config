@@ -22,7 +22,7 @@
         clips_meta = import ../../../../metadata/programs/clipboard_managers/metadata.nix { inherit pkgs; };
         file_explorers_meta = import ../../../../metadata/programs/file_explorers/metadata.nix { inherit pkgs; };
         launchers_meta = import ../../../../metadata/programs/launchers/metadata.nix { inherit pkgs; };
-        screenlocks_meta = import ../../../../metadata/programs/screenlocks/metadata.nix { inherit config; inherit inputs; inherit pkgs; };
+        screenlocks_meta = import ../../../../metadata/programs/screenlocks/metadata.nix { inherit config inputs pkgs; };
         ss_tools_meta = import ../../../../metadata/programs/screenshot_tools/metadata.nix { inherit pkgs; };
         terminals_meta = import ../../../../metadata/programs/terminals/metadata.nix { inherit pkgs; };
 

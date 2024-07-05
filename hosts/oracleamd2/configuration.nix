@@ -137,7 +137,10 @@
     system.stateVersion = "23.11";
 
     home-manager = {
-        extraSpecialArgs = { inherit inputs; inherit pkgs; propheci = config.propheci; };
+        extraSpecialArgs = {
+            inherit inputs pkgs;
+            propheci = config.propheci;
+        };
         users = {
             "${config.propheci.user.username}" = { propheci, ... }: {
                 imports = [

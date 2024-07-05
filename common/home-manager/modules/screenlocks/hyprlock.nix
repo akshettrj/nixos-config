@@ -6,7 +6,7 @@
         pro_screenlocks = config.propheci.programs.screenlocks;
         pro_theming = config.propheci.theming;
 
-        screenlocks_meta = import ../../../metadata/programs/screenlocks/metadata.nix { inherit config; inherit inputs; inherit pkgs; };
+        screenlocks_meta = import ../../../metadata/programs/screenlocks/metadata.nix { inherit config inputs pkgs; };
 
     in lib.mkIf (pro_screenlocks.enable && pro_screenlocks.hyprlock.enable) {
 

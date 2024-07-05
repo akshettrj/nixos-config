@@ -1,10 +1,13 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 {
     config = let
 
         pro_shells = config.propheci.shells;
+        pro_deskenvs = config.propheci.desktop_environments;
         pro_file_explorers = config.propheci.programs.file_explorers;
+
+        deskenvs_meta = import ../../../metadata/programs/desktop_environments/metadata.nix { inherit config inputs pkgs; };
 
     in lib.mkIf pro_shells.zsh.enable {
 
@@ -157,23 +160,31 @@
                     fi
                 }
 
-            '' + lib.optionals pro_file_explorers.yazi.enable /*sh*/ ''
+            '' + /*sh*/ ''
 
-                ###################################################
+                bindkey -s '^o' "${if pro_file_explorers.main == "lf" then "lfcd" else "yy"}\n"
 
-                # YaziCD
-                function yazicd() {
-                    tmp="$(mktemp)"
-                    ${pkgs.yazi}/bin/yazi --cwd-file="$tmp" "$@"
-                    if [ -f "$tmp" ]; then
-                        dir="$(cat "$tmp")"
-                        rm -f "$tmp" >/dev/null
-                        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-                    fi
+            '' + lib.optionals (pro_deskenvs.enable && builtins.length(lib.attrNames pro_deskenvs.defaults) > 0) /*sh*/ ''
+
+                current_tty="$(tty)"
+                ${
+                    (lib.strings.concatStrings
+                        (lib.attrsets.mapAttrsToList
+                            (tty: deskenv:
+                                let cmd = deskenvs_meta."${deskenv}".cmd; in
+                                (
+                                    lib.strings.concatStringsSep "\n" [
+                                        ''if [[ "$current_tty" == "${tty}" ]]; then''
+                                        "    pgrep ${cmd} || ${cmd} &"
+                                        ''el''
+                                    ]
+                                )
+                            )
+                            (pro_deskenvs.defaults)
+                        )
+                    ) + "if false; then\n    echo bye\nfi"
                 }
 
-            '' + ''
-                bindkey -s '^o' "${if pro_file_explorers.main == "lf" then "lfcd" else "yazicd"}\n"
             '';
         };
 

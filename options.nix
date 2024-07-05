@@ -7,12 +7,12 @@
 
         known_browsers = lib.attrNames (import ./common/metadata/programs/browsers/metadata.nix { inherit pkgs; });
         known_clipboard_managers = lib.attrNames (import ./common/metadata/programs/clipboard_managers/metadata.nix { inherit pkgs; });
-        known_desktop_environments = (import ./common/metadata/programs/desktop_environments/metadata.nix { inherit config; inherit inputs; inherit pkgs; });
-        known_editors = lib.attrNames (import ./common/metadata/programs/editors/metadata.nix { inherit config; inherit inputs; inherit pkgs; });
+        known_desktop_environments = lib.attrNames (import ./common/metadata/programs/desktop_environments/metadata.nix { inherit config inputs pkgs; });
+        known_editors = lib.attrNames (import ./common/metadata/programs/editors/metadata.nix { inherit config inputs pkgs; });
         known_file_explorers = lib.attrNames (import ./common/metadata/programs/file_explorers/metadata.nix { inherit pkgs; });
         known_launchers = lib.attrNames (import ./common/metadata/programs/launchers/metadata.nix { inherit pkgs; });
         known_shells = lib.attrNames (import ./common/metadata/programs/shells/metadata.nix { inherit pkgs; });
-        known_screenlocks = lib.attrNames (import ./common/metadata/programs/screenlocks/metadata.nix { inherit config; inherit inputs; inherit pkgs; });
+        known_screenlocks = lib.attrNames (import ./common/metadata/programs/screenlocks/metadata.nix { inherit config inputs pkgs; });
         known_screenshot_tools = lib.attrNames (import ./common/metadata/programs/screenshot_tools/metadata.nix { inherit pkgs; });
         known_terminals = lib.attrNames (import ./common/metadata/programs/terminals/metadata.nix { inherit pkgs; });
 
