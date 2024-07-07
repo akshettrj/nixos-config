@@ -1,20 +1,45 @@
 { lib
 , buildGoApplication
+, nix-filter
+, self
 }:
 
-buildGoApplication rec {
-  pname = builtins.throw "please enter package name in nix/ and rename the file";
-  version = "1.0.0";
+let
 
-  src = ../../.;
-  pwd = src;
+  localSrc = nix-filter {
+    name = "neobutlergo";
+    root = ../../.;
+    include = [
+      ../../gomod2nix.toml
+      ../../go.mod
+      ../../go.sum
+    ];
+  };
+
+  lastReleaseVersion = "0.0.0";
+
+  devVersion = (
+    if (builtins.hasAttr "shortRev" self) then
+      self.shortRev
+    else if (builtins.hasAttr "dirtyShortRev" self) then
+      self.dirtyShortRev
+    else
+      "dev"
+  );
+
+in buildGoApplication {
+  pname = builtins.throw "please enter package name in nix/ and rename the file";
+  version = devVersion;
+
+  src = localSrc;
+  pwd = localSrc;
 
   ldflags = [ "-s" "-w" ];
 
   meta = with lib; rec {
     description = "Add description here";
     homepage = "Add link here";
-    changelog = "${homepage}/releases/tag/v${version}";
+    changelog = "${homepage}/compare/v${lastReleaseVersion}...main";
     license = licenses.mit;
     mainProgram = "<name>";
   };
