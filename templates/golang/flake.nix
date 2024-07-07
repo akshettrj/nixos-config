@@ -24,7 +24,7 @@
         in {
 
             devShell = pkgs.mkShell {
-                name = "<name>-dev";
+                name = builtins.throw "please enter dev-shell name in flake.nix";
                 nativeBuildInputs = with pkgs; [
                     go
                     gopls

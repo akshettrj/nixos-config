@@ -3,7 +3,7 @@
 }:
 
 buildGoApplication rec {
-  pname = "<name>";
+  pname = builtins.throw "please enter package name in nix/ and rename the file";
   version = "1.0.0";
 
   src = ../../.;
