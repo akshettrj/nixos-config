@@ -7,7 +7,7 @@
         pro_deskenvs = config.propheci.desktop_environments;
         pro_file_explorers = config.propheci.programs.file_explorers;
 
-        deskenvs_meta = import ../../../metadata/programs/desktop_environments/metadata.nix { inherit config inputs pkgs; };
+        deskenvs_meta = import ../../../../metadata/programs/desktop_environments/metadata.nix { inherit config inputs pkgs; };
 
     in lib.mkIf pro_shells.zsh.enable {
 
@@ -26,7 +26,7 @@
                 extended = true;
                 ignoreDups = true;
                 ignoreAllDups = true;
-                ignorePatterns = (import ./history_ignore_patterns.nix);
+                ignorePatterns = (import ../history_ignore_patterns.nix);
                 ignoreSpace = true;
                 save = 10000;
                 share = true;
@@ -41,13 +41,13 @@
             plugins = [
                 {
                     name = "git";
-                    file = "plugins/git/git.plugin.zsh";
-                    src = pkgs.fetchFromGitHub {
-                        owner = "ohmyzsh";
-                        repo = "ohmyzsh";
-                        rev = "40ff950fcd081078a8cd3de0eaab784f85c681d5";
-                        sha256 = "sha256-EJ/QGmfgav0DVQFSwT+1FjOwl0S28wvJAghxzVAeJbs=";
-                    };
+                    file = "git.plugin.zsh";
+                    src = ./plugins/git;
+                }
+                {
+                    name = "gitfast";
+                    file = "gitfast.plugin.zsh";
+                    src = ./plugins/gitfast;
                 }
             ];
 
