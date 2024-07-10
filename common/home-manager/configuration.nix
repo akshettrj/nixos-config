@@ -34,6 +34,8 @@
             VISUAL = editors_meta."${pro_editors.main}".cmd;
             SUDO_EDITOR = editors_meta."${pro_editors.main}".cmd;
 
+            GOPATH = "${config.xdg.dataHome}/golang";
+
         } // lib.optionalAttrs pro_terminals.enable {
 
             TERMINAL = terminals_meta."${pro_terminals.main}".cmd;
