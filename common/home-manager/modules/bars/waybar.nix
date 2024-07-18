@@ -90,7 +90,8 @@
                         format = "{icon} {percent}%";
                         on-scroll-up = "brightnessup 1";
                         on-scroll-down = "brightnessdown 1";
-                        format-icons = [ "󰃚" "󰃛" "󰃜" "󰃝" "󰃞" "󰃟" "󰃠" ];
+                        # format-icons = [ "󰃚" "󰃛" "󰃜" "󰃝" "󰃞" "󰃟" "󰃠" ];
+                        format-icons = [ "󰃠" ];
                     };
                     cpu = {
                         format = "  {usage}%";
@@ -110,7 +111,8 @@
                         format-charging = " {capacity}%";
                         format-plugged = " {capacity}%";
                         format-alt = "{icon} {time}";
-                        format-icons = [ "" "" "" "" "" ];
+                        # format-icons = [ "" "" "" "" "" ];
+                        format-icons = [ "" ];
                         interval = 10;
                     };
                     "hyprland/workspaces" = {
@@ -154,7 +156,8 @@
                             portable = "";
                             car = "";
                             hdmi = "󰡁";
-                            default = [ "" "" "" ];
+                            # default = [ "" "" "" ];
+                            default = [ "" ];
                         };
                     } // lib.optionalAttrs pro_servies.pipewire.enable {
                         on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
@@ -174,9 +177,9 @@
                         on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 1%+";
                         on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 1%-";
                     } // lib.optionalAttrs pro_hw.pulseaudio.enable {
-                        on-click = "pactl set-sink-mute @DEFAULT_SOURCE@ toggle";
-                        on-scroll-up = "pactl set-sink-volume @DEFAULT_SOURCE@ +1%";
-                        on-scroll-down = "pactl set-sink-volume @DEFAULT_SOURCE@ -1%";
+                        on-click = "pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+                        on-scroll-up = "pactl set-source-volume @DEFAULT_SOURCE@ +1%";
+                        on-scroll-down = "pactl set-source-volume @DEFAULT_SOURCE@ -1%";
                     };
                     privacy = {
                         icon-size = pro_bars.waybar.icon_size;
