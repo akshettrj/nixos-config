@@ -330,6 +330,11 @@
                     "$mainMod, F6, exec, wpctl set-mute '@DEFAULT_AUDIO_SINK@' toggle"
                     ",XF86AudioMute, exec, wpctl set-mute '@DEFAULT_AUDIO_SINK@' toggle"
 
+                ] ++ lib.optionals pro_hw.pulseaudio.enable [
+
+                    "$mainMod, F6, exec, pactl set-sink-mute '@DEFAULT_SINK@' toggle"
+                    ",XF86AudioMute, exec, wpctl set-sink-mute '@DEFAULT_SINK@' toggle"
+
                 ] ++ lib.optionals pro_mpd.enable [
 
                     "$mainMod, F9, exec, ${pkgs.mpc-cli}/bin/mpc -q prev"
@@ -360,6 +365,13 @@
                     ",XF86AudioLowerVolume, exec, wpctl set-volume '@DEFAULT_AUDIO_SINK@' '1%-'"
                     "$mainMod, F8, exec, wpctl set-volume '@DEFAULT_AUDIO_SINK@' '1%+'"
                     ",XF86AudioRaiseVolume, exec, wpctl set-volume '@DEFAULT_AUDIO_SINK@' '1%+'"
+
+                ] ++ lib.optionals pro_hw.pulseaudio.enable [
+
+                    "$mainMod, F7, exec, pactl set-sink-volume '@DEFAULT_SINK@' '-1%'"
+                    ",XF86AudioLowerVolume, exec, pactl set-sink-volume '@DEFAULT_SINK@' '-1%'"
+                    "$mainMod, F8, exec, pactl set-sink-volume '@DEFAULT_SINK@' '+1%'"
+                    ",XF86AudioRaiseVolume, exec, pactl set-sink-volume '@DEFAULT_SINK@' '+1%'"
                 ];
 
                 bindm = [

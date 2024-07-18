@@ -25,6 +25,7 @@
 
         hardware = {
             bluetooth.enable = true;
+            pulseaudio.enable = true;
             nvidia = {
                 enable = true;
                 package = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -39,7 +40,7 @@
                 tcp_ports = [22];
                 udp_ports = [];
             };
-            pipewire.enable = true;
+            pipewire.enable = false;
             openssh = {
                 server = {
                     enable = true;

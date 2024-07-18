@@ -4,6 +4,7 @@
     config = let
 
         pro_bars = config.propheci.programs.bars;
+        pro_hw = config.propheci.hardware;
         pro_media = config.propheci.programs.media;
         pro_notifiers = config.propheci.programs.notification_daemons;
         pro_servies = config.propheci.services;
@@ -155,17 +156,27 @@
                             hdmi = "󰡁";
                             default = [ "" "" "" ];
                         };
+                    } // lib.optionalAttrs pro_servies.pipewire.enable {
                         on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
                         on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+";
                         on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-";
+                    } // lib.optionalAttrs pro_hw.pulseaudio.enable {
+                        on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+                        on-scroll-up = "pactl set-sink-volume @DEFAULT_SINK@ +1%";
+                        on-scroll-down = "pactl set-sink-volume @DEFAULT_SINK@ -1%";
                     };
                     "pulseaudio#input" = {
                         format = "{format_source}";
                         format-source = " {volume}%";
                         format-source-muted = " {volume}%";
+                    } // lib.optionalAttrs pro_servies.pipewire.enable {
                         on-click = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
                         on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 1%+";
                         on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 1%-";
+                    } // lib.optionalAttrs pro_hw.pulseaudio.enable {
+                        on-click = "pactl set-sink-mute @DEFAULT_SOURCE@ toggle";
+                        on-scroll-up = "pactl set-sink-volume @DEFAULT_SOURCE@ +1%";
+                        on-scroll-down = "pactl set-sink-volume @DEFAULT_SOURCE@ -1%";
                     };
                     privacy = {
                         icon-size = pro_bars.waybar.icon_size;
@@ -283,7 +294,7 @@
                         "clock"
                         "custom/separator"
                     ];
-                    modules-right = [
+                    modules-right = [] ++lib.optionals pro_servies.pipewire.enable [
                         "privacy"
                         "custom/separator"
                     ] ++ lib.optionals (pro_notifiers.enable && pro_notifiers.dunst.enable) [
@@ -297,7 +308,7 @@
                         "custom/separator"
                         "backlight"
                         "custom/separator"
-                    ] ++ lib.optionals pro_servies.pipewire.enable [
+                    ] ++ lib.optionals (pro_servies.pipewire.enable || pro_hw.pulseaudio.enable) [
                         "pulseaudio#output"
                         "custom/separator"
                         "pulseaudio#input"

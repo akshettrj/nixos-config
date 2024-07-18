@@ -6,21 +6,16 @@
         pro_hw = config.propheci.hardware;
         pro_services = config.propheci.services;
 
-    in lib.mkIf pro_services.pipewire.enable {
+    in lib.mkIf pro_hw.pulseaudio.enable {
 
         assertions = [{
-            assertion = (!pro_hw.pulseaudio.enable);
+            assertion = (!pro_services.pipewire.enable);
             message = "Both pulseaudio and pipewire are enabled. Disable one of them.";
         }];
 
-        security.rtkit.enable = true;
-
-        services.pipewire = {
+        hardware.pulseaudio = {
             enable = true;
-            alsa.enable = true;
-            alsa.support32Bit = true;
-            audio.enable = true;
-            pulse.enable = true;
+            support32Bit = true;
         };
 
         environment.systemPackages = [ pkgs.pulsemixer ];
