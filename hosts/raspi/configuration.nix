@@ -37,6 +37,7 @@
 
         hardware = {
             bluetooth.enable = true;
+            pulseaudio.enable = false;
             nvidia.enable = false;
         };
 
