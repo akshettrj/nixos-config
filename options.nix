@@ -3,7 +3,7 @@
 {
     options = let
 
-        inherit (lib) mkOption types;
+        inherit (lib) mkOption mkEnableOption types;
 
         known_browsers = lib.attrNames (import ./common/metadata/programs/browsers/metadata.nix { inherit pkgs; });
         known_clipboard_managers = lib.attrNames (import ./common/metadata/programs/clipboard_managers/metadata.nix { inherit pkgs; });
@@ -160,19 +160,17 @@
                     };
                 };
                 extra_utilities = {
-                    enable = mkOption { type = types.bool; };
-                    drivedlgo.enable = mkOption { type = types.bool; };
-                    ffmpeg.enable = mkOption { type = types.bool; };
-                    rclone.enable = mkOption { type = types.bool; };
+                    drivedlgo.enable = mkEnableOption "drivedlgo";
+                    ffmpeg.enable = mkEnableOption "ffmpeg";
+                    rclone.enable = mkEnableOption "rclone";
                 };
                 social_media = {
-                    enable = mkOption { type = types.bool; };
-                    telegram.enable = mkOption { type = types.bool; };
-                    discord.enable = mkOption { type = types.bool; };
-                    beeper.enable = mkOption { type = types.bool; };
-                    slack.enable = mkOption { type = types.bool; };
-                    teams.enable = mkOption { type = types.bool; };
-                    zulip.enable = mkOption { type = types.bool; };
+                    telegram.enable = mkEnableOption "telegram";
+                    discord.enable = mkEnableOption "discord";
+                    beeper.enable = mkEnableOption "beeper";
+                    slack.enable = mkEnableOption "slack";
+                    teams.enable = mkEnableOption "teams";
+                    zulip.enable = mkEnableOption "zulip";
                 };
                 editors = {
                     main = mkOption { type = types.enum(known_editors); example = "neovim"; };
@@ -223,7 +221,11 @@
                     main = mkOption { type = types.enum(known_file_explorers); };
                     backup = mkOption { type = types.enum(known_file_explorers); };
                     lf.enable = mkOption { type = types.bool; };
-                    yazi.enable = mkOption { type = types.bool; };
+                    yazi = {
+                        enable = mkOption { type = types.bool; };
+                        enableUeberzugpp = mkOption { type = types.bool; };
+                        enableFfmpeg = mkOption { type = types.bool; };
+                    };
                 };
                 launchers = {
                     enable = mkOption { type = types.bool; };

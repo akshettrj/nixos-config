@@ -5,7 +5,7 @@
 
         pro_social_media = config.propheci.programs.social_media;
 
-    in lib.mkIf (pro_social_media.enable && pro_social_media.zulip.enable) {
+    in lib.mkIf pro_social_media.zulip.enable {
 
         home.packages = [ pkgs.zulip pkgs.zulip-term ];
 

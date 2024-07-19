@@ -5,7 +5,7 @@
 
       pro_programs = config.propheci.programs;
 
-   in lib.mkIf (pro_programs.extra_utilities.enable && pro_programs.extra_utilities.rclone.enable) {
+   in lib.mkIf pro_programs.extra_utilities.rclone.enable {
 
       environment.systemPackages = [ pkgs.rclone ];
 

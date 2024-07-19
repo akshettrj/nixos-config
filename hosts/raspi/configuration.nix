@@ -91,7 +91,6 @@
 
         programs = {
             media.enable = false;
-            social_media.enable = false;
             editors = {
                 main = "neovim";
                 backup = "helix";
@@ -110,7 +109,11 @@
                 main = "lf";
                 backup = "yazi";
                 lf.enable = true;
-                yazi.enable = true;
+                yazi = {
+                    enable = true;
+                    enableUeberzugpp = false;
+                    enableFfmpeg = false;
+                };
             };
             launchers.enable = false;
             screenshot_tools.enable = false;
@@ -119,8 +122,6 @@
             bars.enable = false;
             screenlocks.enable = false;
             extra_utilities = {
-                enable = true;
-                ffmpeg.enable = false;
                 drivedlgo.enable = true;
                 rclone.enable = true;
             };

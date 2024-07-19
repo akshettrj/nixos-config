@@ -123,16 +123,13 @@
                 };
             };
             extra_utilities = {
-                enable = true;
                 drivedlgo.enable = true;
                 ffmpeg.enable = true;
                 rclone.enable = true;
             };
             social_media = {
-                enable = true;
                 telegram.enable = true;
                 discord.enable = true;
-                slack.enable = false;
                 beeper.enable = true;
                 teams.enable = true;
                 zulip.enable = true;
@@ -178,7 +175,11 @@
                 main = "lf";
                 backup = "yazi";
                 lf.enable = true;
-                yazi.enable = true;
+                yazi = {
+                    enable = true;
+                    enableUeberzugpp = true;
+                    enableFfmpeg = true;
+                };
             };
             launchers = {
                 enable = true;

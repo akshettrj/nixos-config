@@ -88,12 +88,6 @@
                     };
                 };
             };
-            social_media = {
-                telegram.enable = false;
-                discord.enable = false;
-                slack.enable = false;
-                beeper.enable = false;
-            };
             editors = {
                 main = "neovim";
                 backup = "helix";
