@@ -297,7 +297,7 @@
                         "clock"
                         "custom/separator"
                     ];
-                    modules-right = [] ++lib.optionals pro_servies.pipewire.enable [
+                    modules-right = [] ++ lib.optionals pro_servies.pipewire.enable [
                         "privacy"
                         "custom/separator"
                     ] ++ lib.optionals (pro_notifiers.enable && pro_notifiers.dunst.enable) [

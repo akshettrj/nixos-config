@@ -145,7 +145,7 @@
                     echo -ne '\e[5 q'
                 }
 
-            '' + lib.optionals pro_file_explorers.lf.enable /*sh*/ ''
+            '' + lib.optionalString pro_file_explorers.lf.enable /*sh*/ ''
 
                 ###################################################
 
@@ -164,7 +164,7 @@
 
                 bindkey -s '^o' "${if pro_file_explorers.main == "lf" then "lfcd" else "yy"}\n"
 
-            '' + lib.optionals (pro_deskenvs.enable && builtins.length(lib.attrNames pro_deskenvs.defaults) > 0) /*sh*/ ''
+            '' + lib.optionalString (pro_deskenvs.enable && builtins.length(lib.attrNames pro_deskenvs.defaults) > 0) /*sh*/ ''
 
                 current_tty="$(tty)"
                 ${

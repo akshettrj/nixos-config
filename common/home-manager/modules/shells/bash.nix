@@ -20,7 +20,7 @@
             historySize = 10000;
 
             initExtra = ''
-            '' + lib.optionals pro_file_explorers.lf.enable /*sh*/ ''
+            '' + lib.optionalString pro_file_explorers.lf.enable /*sh*/ ''
 
                 ###################################################
 

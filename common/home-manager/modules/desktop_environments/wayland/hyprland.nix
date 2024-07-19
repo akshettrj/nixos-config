@@ -68,7 +68,7 @@
                         /* sh */ ''
                             ${hyprctl} keyword monitor "${mon.name},${mon_config}"
 
-                        '' + lib.optionals mon.enabled /* sh */ ''
+                        '' + lib.optionalString mon.enabled /* sh */ ''
 
                             for wk in ${toString mon.workspaces}; do
                                 ${hyprctl} keyword workspace "$wk,monitor:${mon.name}" &
