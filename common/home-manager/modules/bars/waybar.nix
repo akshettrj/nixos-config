@@ -107,12 +107,13 @@
                             warning = 40;
                             critical = 25;
                         };
-                        format = "{icon}  {capacity}%";
-                        format-charging = " {capacity}%";
-                        format-plugged = " {capacity}%";
-                        format-alt = "{icon} {time}";
+                        format = " {icon}  {capacity}% ";
+                        format-charging = "  {capacity}% ";
+                        format-plugged = "  {capacity}% ";
+                        format-alt = " {icon} {time} ";
                         # format-icons = [ "" "" "" "" "" ];
                         format-icons = [ "" ];
+                        tooltip-format = "{timeTo} (Health: {health})";
                         interval = 10;
                     };
                     "hyprland/workspaces" = {
@@ -390,6 +391,16 @@
 
                 #mpd, #mpris {
                     margin: 0px 6px;
+                }
+
+                #battery.warning {
+                    background-color: #fcba03;
+                    color: black;
+                }
+
+                #battery.critical {
+                    background-color: red;
+                    color: white;
                 }
 
             '';
