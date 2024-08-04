@@ -307,7 +307,6 @@
                     # SUPER + SHIFT
                     "$mainMod SHIFT, C, exec, ${kill_window_script}/bin/kill_window -f"
                     "$mainMod SHIFT, MINUS, togglespecialworkspace"
-                    "$mainMod SHIFT, F, fakefullscreen"
 
                     # TERMINALS AND FILE EXPLORERS
                     "$mainMod, Return, exec, ${terminals_meta."${pro_terminals.main}".cmd}"
