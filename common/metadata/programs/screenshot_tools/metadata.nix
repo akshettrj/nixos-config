@@ -14,7 +14,7 @@
         pkg = pkgs.hyprshot;
         bin = "${pkg}/bin/hyprshot";
         cmd = {
-            fullscreen = "${bin} --freeze --mode output";
+            fullscreen = "${bin} --freeze --mode output --mode active";
             region = "${bin} --freeze --mode region";
         };
         deps = {
