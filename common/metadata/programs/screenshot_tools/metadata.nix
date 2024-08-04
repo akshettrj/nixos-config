@@ -10,14 +10,17 @@
         };
         deps = { grim = pkgs.grim; };
     };
-    wayshot = rec {
-        pkg = pkgs.wayshot;
-        bin = "${pkg}/bin/wayshot";
+    hyprshot = rec {
+        pkg = pkgs.hyprshot;
+        bin = "${pkg}/bin/hyprshot";
         cmd = {
-            fullscreen = "${bin} --cursor";
-            region = ''${bin} --cursor --slurp "''$(${deps.slurp}/bin/slurp)"'';
+            fullscreen = "${bin} --freeze --mode output";
+            region = "${bin} --freeze --mode region";
         };
-        deps = { slurp = pkgs.slurp; };
+        deps = {
+            grim = pkgs.grim;
+            slurp = pkgs.slurp;
+        };
     };
     shotman = rec {
         pkg = pkgs.shotman;
@@ -25,6 +28,15 @@
         cmd = {
             fullscreen = "shotman --capture output";
             region = "shotman --capture region";
+        };
+        deps = { slurp = pkgs.slurp; };
+    };
+    wayshot = rec {
+        pkg = pkgs.wayshot;
+        bin = "${pkg}/bin/wayshot";
+        cmd = {
+            fullscreen = "${bin} --cursor";
+            region = ''${bin} --cursor --slurp "''$(${deps.slurp}/bin/slurp)"'';
         };
         deps = { slurp = pkgs.slurp; };
     };

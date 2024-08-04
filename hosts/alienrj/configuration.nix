@@ -193,6 +193,7 @@
                 flameshot.enable = true;
                 wayshot.enable = true;
                 shotman.enable = true;
+                hyprshot.enable = true;
             };
             screenlocks = {
                 enable = true;
@@ -252,7 +253,7 @@
                 scroll_factor = 0.2;
                 launcher = "bemenu";
                 screenlock = "swaylock";
-                screenshot_tool = "wayshot";
+                screenshot_tool = "hyprshot";
                 clipboard_manager = "copyq";
                 monitors = [
                     {

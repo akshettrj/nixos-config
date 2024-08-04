@@ -239,6 +239,7 @@
                     flameshot.enable = mkOption { type = types.bool; };
                     wayshot.enable = mkOption { type = types.bool; };
                     shotman.enable = mkOption { type = types.bool; };
+                    hyprshot.enable = mkOption { type = types.bool; };
                 };
                 screenlocks = {
                     enable = mkOption { type = types.bool; };
