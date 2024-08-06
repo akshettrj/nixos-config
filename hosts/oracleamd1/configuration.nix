@@ -29,8 +29,9 @@
         };
 
         hardware = {
-            bluetooth.enable = true;
+            bluetooth.enable = false;
             nvidia.enable = false;
+            pulseaudio.enable = false;
         };
 
         # Various Services
@@ -54,6 +55,7 @@
             };
             tailscale.enable = true;
             xdg_portal.enable = false;
+            telegram_bot_api.enable = false;
         };
 
         # Nix/NixOS specific
@@ -77,16 +79,13 @@
                 delta.enable = true;
                 default_branch = "main";
             };
+            direnv.enable = true;
+            cachix.enable = false;
         };
 
         programs = {
             media = {
-                audio = {
-                    mpd = {
-                        enable = false;
-                        ncmpcpp.enable = false;
-                    };
-                };
+                enable = false;
             };
             editors = {
                 main = "neovim";
@@ -106,10 +105,18 @@
                 main = "lf";
                 backup = "yazi";
                 lf.enable = true;
-                yazi.enable = true;
+                yazi = {
+                    enable = true;
+                    enableFfmpeg = false;
+                    enableUeberzugpp = false;
+                };
             };
             launchers.enable = false;
             screenshot_tools.enable = false;
+            notification_daemons.enable = false;
+            clipboard_managers.enable = false;
+            bars.enable = false;
+            screenlocks.enable = false;
         };
 
         shells = {
