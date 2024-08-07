@@ -95,6 +95,13 @@
                     port = mkOption { type = types.port; };
                     data_dir = mkOption { type = types.oneOf [ types.str types.path ]; };
                 };
+                self_hosted = {
+                    adguard = {
+                        enable = mkEnableOption "adguard dns";
+                        open_firewall = mkOption { type = types.bool; };
+                        port = mkOption { type = types.port; };
+                    };
+                };
             };
 
             # Nix/NixOS specific

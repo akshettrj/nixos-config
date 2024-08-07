@@ -56,11 +56,18 @@
             tailscale.enable = true;
             xdg_portal.enable = false;
             telegram_bot_api.enable = false;
+            self_hosted = {
+                adguard = {
+                    enable = true;
+                    port = 3000;
+                    open_firewall = true;
+                };
+            };
         };
 
         # Nix/NixOS specific
         nix = {
-            garbage_collection.enable = true;
+            garbage_collection.enable = false;
             nix_community_cache = true;
             hyprland_cache = true;
             helix_cache = true;
