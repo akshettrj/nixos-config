@@ -56,6 +56,11 @@
             url = "gitlab:akshettrj/wallpapers";
             flake = false;
         };
+
+        propheci_secrets = {
+            url = "git+ssh://git@github.com/akshettrj/nixos_flake_secrets.git";
+            flake = false;
+        };
     };
 
     outputs = { self, nixpkgs, ... }@inputs:

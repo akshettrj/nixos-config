@@ -754,6 +754,22 @@
         "type": "github"
       }
     },
+    "propheci_secrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1723141467,
+        "narHash": "sha256-7XxkURNoQlq7kE+mK2zhvQ3DcEKUV4TJSi8YzBSoNxI=",
+        "ref": "refs/heads/main",
+        "rev": "9d2b6eb87a2a4f05827320107987f5df1404b044",
+        "revCount": 8,
+        "type": "git",
+        "url": "ssh://git@github.com/akshettrj/nixos_flake_secrets.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/akshettrj/nixos_flake_secrets.git"
+      }
+    },
     "root": {
       "inputs": {
         "helix": "helix",
@@ -765,6 +781,7 @@
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_4",
         "nur": "nur",
+        "propheci_secrets": "propheci_secrets",
         "wallpapers": "wallpapers",
         "waybar": "waybar"
       }

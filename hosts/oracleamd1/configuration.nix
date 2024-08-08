@@ -5,6 +5,8 @@
         ./hardware-configuration.nix
         ../../common/nixos/configuration.nix
 
+        "${inputs.propheci_secrets}/hosts/oracleamd1/secrets.nix"
+
         inputs.home-manager.nixosModules.home-manager
     ];
 
@@ -56,13 +58,6 @@
             tailscale.enable = true;
             xdg_portal.enable = false;
             telegram_bot_api.enable = false;
-            self_hosted = {
-                adguard = {
-                    enable = true;
-                    port = 3000;
-                    open_firewall = true;
-                };
-            };
         };
 
         # Nix/NixOS specific

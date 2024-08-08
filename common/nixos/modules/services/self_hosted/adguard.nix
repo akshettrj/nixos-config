@@ -14,5 +14,8 @@
             port = pro_adguard.port;
         };
 
+        networking.firewall.allowedTCPPorts = [ 443 853 53 80 ];
+        networking.firewall.allowedUDPPorts = [ 443 853 53 ];
+
     };
 }
