@@ -5,7 +5,7 @@
         ./hardware-configuration.nix
         ../../common/nixos/configuration.nix
 
-        "${inputs.propheci_secrets}/hosts/alienrj/secrets.nix"
+        "${inputs.propheci_secrets}/hosts/alienrj"
 
         inputs.home-manager.nixosModules.home-manager
     ];

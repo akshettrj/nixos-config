@@ -5,7 +5,7 @@
         ./hardware-configuration.nix
         ../../common/nixos/configuration.nix
 
-        "${inputs.propheci_secrets}/hosts/oracleamd1/secrets.nix"
+        "${inputs.propheci_secrets}/hosts/oracleamd1"
 
         inputs.home-manager.nixosModules.home-manager
     ];
