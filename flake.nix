@@ -124,6 +124,10 @@
                 path = ./templates/golang;
                 description = "Flake for Golang devShell and packaging";
             };
+            python_poetry = {
+                path = ./templates/python_poetry;
+                description = "Flake for Python poetry devShell and packaging";
+            };
         };
     };
 }
