@@ -14,7 +14,12 @@
         system = {
             hostname = "alienrj";
             time_zone = "Asia/Kolkata";
-            swap_devices = [];
+            swap_devices = [
+                {
+                    device = "/var/lib/swapfile";
+                    size = 6 * 1024;
+                }
+            ];
         };
         user = {
             username = "akshettrj";
@@ -132,7 +137,7 @@
                 discord.enable = true;
                 beeper.enable = true;
                 teams.enable = true;
-                zulip.enable = true;
+                zulip.enable = false;
             };
             editors = {
                 main = "neovim";
