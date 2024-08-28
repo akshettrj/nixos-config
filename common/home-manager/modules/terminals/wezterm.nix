@@ -47,6 +47,8 @@
 
                 config.enable_wayland = ${if pro_terminals.wezterm.enable_wayland then "true" else "false"}
 
+                config.front_end = "WebGpu"
+
                 return config
             '';
         };
