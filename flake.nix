@@ -128,6 +128,10 @@
                 path = ./templates/python_poetry;
                 description = "Flake for Python poetry devShell and packaging";
             };
+            rust_workspace = {
+                path = ./templates/rust_workspace;
+                description = "Flake for Cargo workspace libraries";
+            };
         };
     };
 }
