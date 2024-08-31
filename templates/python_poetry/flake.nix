@@ -43,7 +43,7 @@
         }).env.overrideAttrs (oldAttrs: {
           name = "<name>";
           nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [
-            basedpyright
+            pyright
             ruff
             poetry
             pythonPackages.ipython
