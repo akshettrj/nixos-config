@@ -18,6 +18,7 @@
                 command_timeout = 1000;
 
                 character = {
+                    format = "\n$symbol ";
                     success_symbol = "[󰁕](bold green)";
                     error_symbol = "[󰁕](bold red)";
                 };
