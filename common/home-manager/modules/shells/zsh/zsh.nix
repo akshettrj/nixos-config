@@ -51,7 +51,9 @@
                 }
             ];
 
-            envExtra = "";
+            envExtra = /*sh*/ ''
+                export FPATH="$ZDOTDIR/my_fpath:$FPATH"
+            '';
 
             initExtraFirst = /*sh*/ ''
                 setopt HIST_REDUCE_BLANKS
