@@ -223,7 +223,7 @@
                 enable = true;
                 waybar = {
                     enable = true;
-                    use_official_package = true;
+                    use_official_package = false;
                     heights = 28;
                     font_size = 12;
                     separator_size = 18;

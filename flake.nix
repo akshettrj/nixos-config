@@ -53,7 +53,7 @@
 
         # Misc
         wallpapers = {
-            url = "gitlab:akshettrj/wallpapers";
+            url = "github:Propheci/wallpapers";
             flake = false;
         };
 
