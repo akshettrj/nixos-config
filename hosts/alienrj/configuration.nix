@@ -126,6 +126,12 @@
                     feh.enable = true;
                     sxiv.enable = true;
                 };
+                documents = {
+                    zathura = {
+                        enable = true;
+                        useMupdf = true;
+                    };
+                };
             };
             extra_utilities = {
                 drivedlgo.enable = true;

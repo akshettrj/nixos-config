@@ -165,6 +165,12 @@
                         feh.enable = mkOption { type = types.bool; };
                         sxiv.enable = mkOption { type = types.bool; };
                     };
+                    documents = {
+                        zathura = {
+                            enable = mkOption { type = types.bool; };
+                            useMupdf = mkOption { type = types.bool; };
+                        };
+                    };
                 };
                 extra_utilities = {
                     drivedlgo.enable = mkEnableOption "drivedlgo";
