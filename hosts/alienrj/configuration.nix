@@ -121,6 +121,7 @@
                 video = {
                     mpv.enable = true;
                     vlc.enable = false;
+                    stremio.enable = true;
                 };
                 picture = {
                     feh.enable = true;

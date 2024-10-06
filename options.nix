@@ -160,6 +160,7 @@
                     video = {
                         mpv.enable = mkOption { type = types.bool; };
                         vlc.enable = mkOption { type = types.bool; };
+                        stremio.enable = mkOption { type = types.bool; };
                     };
                     picture = {
                         feh.enable = mkOption { type = types.bool; };
