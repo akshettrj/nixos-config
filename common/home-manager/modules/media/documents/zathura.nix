@@ -10,72 +10,67 @@
 
     in lib.mkIf (pro_media.enable && pro_docs.zathura.enable) {
 
-        home.packages = [
-            (pkgs.zathura.override {
+        programs.zathura = {
+            enable = true;
+            package = (pkgs.zathura.override {
                 useMupdf = pro_docs.zathura.useMupdf;
-            })
-        ];
+            });
 
-        xdg.configFile."zathura/zathurarc".text = /*zathurarc*/ ''
+            mappings = {
+                R = "recolor";
+                "<Left>" = "navigate previous";
+                "<Right>" = "navigate next";
+                "<Button8>" = "navigate previous";
+                "<Button9>" = "navigate next";
+            };
 
-set window-title-basename "true"
-set selection-clipboard "clipboard"
-set adjust-open "best-fit"
-set scroll-page-aware "true"
-set scroll-full-overlap 0.01
-set scroll-step 100
-set zoom-min 10
-set sandbox "none"
-set guioptions ""
+            options = {
+                window-title-basename = "true";
+                selection-clipboard = "clipboard";
+                scroll-page-aware = "true";
+                # scroll-full-overlap = 0.01;
+                zoom-min = 10;
+                sandbox = "none";
+                guioptions = "";
+                adjust-open = "width";
+                render-loading = "false";
+                scroll-step = 50;
 
-set adjust-open width
-set recolor true
-set render-loading "false"
-set scroll-step 50
-map R recolor
-map <Left> navigate previous
-map <Right> navigate next
-map <Button8> navigate previous
-map <Button9> navigate next
+                font = "${pro_theming.fonts.main.name} ${toString(pro_theming.fonts.main.size)}";
+                default-bg =                  "#282828";
+                default-fg =                  "#3c3836";
 
-# Theming
+                statusbar-fg =                "#bdae93";
+                statusbar-bg =                "#504945";
 
-set font "${pro_theming.fonts.main.name} ${toString(pro_theming.fonts.main.size)}"
+                inputbar-bg =                 "#282828";
+                inputbar-fg =                 "#fbf1c7";
 
-set default-bg                  "#282828"
-set default-fg                  "#3c3836"
+                notification-bg =             "#282828";
+                notification-fg =             "#fbf1c7";
 
-set statusbar-fg                "#bdae93"
-set statusbar-bg                "#504945"
+                notification-error-bg =       "#282828";
+                notification-error-fg =       "#fb4934";
 
-set inputbar-bg                 "#282828"
-set inputbar-fg                 "#fbf1c7"
+                notification-warning-bg =     "#282828";
+                notification-warning-fg =     "#fb4934";
 
-set notification-bg             "#282828"
-set notification-fg             "#fbf1c7"
+                highlight-color =             "#fabd2f";
+                highlight-active-color =      "#83a598";
 
-set notification-error-bg       "#282828"
-set notification-error-fg       "#fb4934"
+                completion-bg =               "#3c3836";
+                completion-fg =               "#83a598";
 
-set notification-warning-bg     "#282828"
-set notification-warning-fg     "#fb4934"
+                completion-highlight-fg =     "#fbf1c7";
+                completion-highlight-bg =     "#83a598";
 
-set highlight-color             "#fabd2f"
-set highlight-active-color      "#83a598"
+                recolor-lightcolor =          "#282828";
+                recolor-darkcolor =           "#ebdbb2";
 
-set completion-bg               "#3c3836"
-set completion-fg               "#83a598"
-
-set completion-highlight-fg     "#fbf1c7"
-set completion-highlight-bg     "#83a598"
-
-set recolor-lightcolor          "#282828"
-set recolor-darkcolor           "#ebdbb2"
-
-set recolor                     "false"
-set recolor-keephue             "false"
-
-        '';
+                recolor =                     "false";
+                recolor-keephue =             "false";
+            };
+        };
 
     };
 }
