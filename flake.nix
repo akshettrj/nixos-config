@@ -132,6 +132,14 @@
                 path = ./templates/rust_workspace;
                 description = "Flake for Cargo workspace libraries";
             };
+            rust = {
+                path = ./templates/rust;
+                description = "Flake for Cargo non-workspace binaries";
+            };
+            rust_lib = {
+                path = ./templates/rust_lib;
+                description = "Flake for Cargo non-workspace libraries";
+            };
         };
     };
 }
