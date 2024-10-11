@@ -28,7 +28,7 @@
                 window-title-basename = "true";
                 selection-clipboard = "clipboard";
                 scroll-page-aware = "true";
-                # scroll-full-overlap = 0.01;
+                scroll-full-overlap = 0.01;
                 zoom-min = 10;
                 sandbox = "none";
                 guioptions = "";
