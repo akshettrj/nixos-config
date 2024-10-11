@@ -68,7 +68,10 @@
             };
             portal = lib.mkIf pro_services.xdg_portal.enable {
                 enable = true;
-                config.common.default = [ "gtk" ];
+                config = {
+                    common.default = [ "gtk" ];
+                    hyprland.default = ["gtk" "hyprland"];
+                };
                 extraPortals = [
                     pkgs.xdg-desktop-portal-gtk
                 ] ++ lib.optionals pro_deskenvs.hyprland.enable [

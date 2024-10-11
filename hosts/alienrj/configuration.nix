@@ -32,7 +32,7 @@
 
         hardware = {
             bluetooth.enable = true;
-            pulseaudio.enable = true;
+            pulseaudio.enable = false;
             nvidia = {
                 enable = true;
                 package = config.boot.kernelPackages.nvidiaPackages.latest;
@@ -47,7 +47,7 @@
                 tcp_ports = [22];
                 udp_ports = [];
             };
-            pipewire.enable = false;
+            pipewire.enable = true;
             openssh = {
                 server = {
                     enable = true;
@@ -261,7 +261,7 @@
             wayland.enable = true;
             hyprland = {
                 enable = true;
-                use_official_packages = true;
+                use_official_packages = false;
                 scroll_factor = 0.2;
                 launcher = "bemenu";
                 screenlock = "swaylock";
