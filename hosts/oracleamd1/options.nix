@@ -1,17 +1,11 @@
 { config, inputs, pkgs, ... }:
 
 {
-    imports = [
-        ./hardware-configuration.nix
-        ../../common/nixos/configuration.nix
-
-        inputs.home-manager.nixosModules.home-manager
-    ];
 
     propheci = {
         system = {
-            hostname = "oracleamd2";
-            time_zone = "EST";
+            hostname = "oracleamd1";
+            time_zone = "Etc/UTC";
             swap_devices = [
                 {
                     device = "/var/lib/swapfile";
@@ -29,8 +23,9 @@
         };
 
         hardware = {
-            bluetooth.enable = true;
+            bluetooth.enable = false;
             nvidia.enable = false;
+            pulseaudio.enable = false;
         };
 
         # Various Services
@@ -49,16 +44,16 @@
                     password_authentication = false;
                     root_login = "no";
                     x11_forwarding = false;
-                    public_keys = [ ''ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZwkmaaZ+i9usypmporvPyirpVCqoELZ1xa8HCTWBCRzFcg2Ym/S6TtISJI0uv3lV4AuosYWU9pNj20u17UUZpf8L6PbRRfdchKoll4ZdkAg+BU8TTlFAIuKexW1skq+TvaV1S4cFPY28iHhzp61EtfILxHwgRf3OZUM4UkoNoVxIkPAa+D3gS4SR+8JuhD+lcNvz7IMJ4D2b6+u/9u0fe9bBJdzRC/larHiY5Pi03p9ewnCAw3QndYZ7fF9cR9tIlvT8zXVwzW1DmURjKW3q6JfBkhQYgtDA8jBEjtgi9haqo+qWYsp2nFu7grikP1/Fb6nCokphuroLUwdTOELAr ssh-key-2022-10-03'' ];
                 };
             };
             tailscale.enable = true;
             xdg_portal.enable = false;
+            telegram_bot_api.enable = false;
         };
 
         # Nix/NixOS specific
         nix = {
-            garbage_collection.enable = true;
+            garbage_collection.enable = false;
             nix_community_cache = true;
             hyprland_cache = true;
             helix_cache = true;
@@ -72,21 +67,17 @@
                 enable = true;
                 user = {
                     name = "Akshett Rai Jindal";
-                    email = "jindalakshett@gmail.com";
                 };
                 delta.enable = true;
                 default_branch = "main";
             };
+            direnv.enable = true;
+            cachix.enable = false;
         };
 
         programs = {
             media = {
-                audio = {
-                    mpd = {
-                        enable = false;
-                        ncmpcpp.enable = false;
-                    };
-                };
+                enable = false;
             };
             editors = {
                 main = "neovim";
@@ -97,7 +88,7 @@
                 };
                 helix = {
                     enable = true;
-                    nightly = true;
+                    nightly = false;
                 };
             };
             terminals.enable = false;
@@ -106,9 +97,18 @@
                 main = "lf";
                 backup = "yazi";
                 lf.enable = true;
-                yazi.enable = true;
+                yazi = {
+                    enable = true;
+                    enableFfmpeg = false;
+                    enableUeberzugpp = false;
+                };
             };
             launchers.enable = false;
+            screenshot_tools.enable = false;
+            notification_daemons.enable = false;
+            clipboard_managers.enable = false;
+            bars.enable = false;
+            screenlocks.enable = false;
         };
 
         shells = {
@@ -127,22 +127,4 @@
         desktop_environments.enable = false;
     };
 
-    # DO NOT DELETE
-    system.stateVersion = "23.11";
-
-    home-manager = {
-        extraSpecialArgs = {
-            inherit inputs pkgs;
-            propheci = config.propheci;
-        };
-        users = {
-            "${config.propheci.user.username}" = { propheci, ... }: {
-                imports = [
-                    ../../common/home-manager/configuration.nix
-                ];
-
-                propheci = propheci;
-            };
-        };
-    };
 }
