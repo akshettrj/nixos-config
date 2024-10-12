@@ -96,6 +96,7 @@
                 in {
                     "x-scheme-handler/tg" = [ "org.telegram.desktop.desktop" ];
                     "x-scheme-handler/msteams" = [ "teams-for-linux.desktop" ];
+                    "application/pdf" = [ "org.pwmt.zathura-pdf-mupdf.desktop" ];
                     "image/png" = image_desktop_entries;
                     "image/jpeg" = image_desktop_entries;
                     "image/webp" = image_desktop_entries;
