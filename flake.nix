@@ -68,16 +68,30 @@
 
         common_overlays = [];
 
-    in {
+        alienrj_pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config = { allowUnfree = true; allowUnsafe = false; };
+            overlays = common_overlays;
+        };
+
+        oracleamd1_pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config = { allowUnfree = false; allowUnsafe = false; };
+            overlays = common_overlays;
+        };
+
+        raspi_pkgs = import nixpkgs {
+            system = "aarch64-linux";
+            config = { allowUnfree = false; allowUnsafe = false; };
+            overlays = common_overlays;
+        };
+
+    in rec {
         nixosConfigurations = {
             alienrj = nixpkgs.lib.nixosSystem {
                 specialArgs = {
                     inherit inputs;
-                    pkgs = import nixpkgs {
-                        system = "x86_64-linux";
-                        config = { allowUnfree = true; allowUnsafe = false; };
-                        overlays = common_overlays;
-                    };
+                    pkgs = alienrj_pkgs;
                 };
                 modules = [ ./hosts/alienrj/configuration.nix ];
             };
@@ -85,38 +99,40 @@
             oracleamd1 = nixpkgs.lib.nixosSystem {
                 specialArgs = {
                     inherit inputs;
-                    pkgs = import nixpkgs {
-                        system = "x86_64-linux";
-                        config = { allowUnfree = false; allowUnsafe = false; };
-                        overlays = common_overlays;
-                    };
+                    pkgs = oracleamd1_pkgs;
                 };
                 modules = [ ./hosts/oracleamd1/configuration.nix ];
-            };
-
-            oracleamd2 = nixpkgs.lib.nixosSystem {
-                specialArgs = {
-                    inherit inputs;
-                    pkgs = import nixpkgs {
-                        system = "x86_64-linux";
-                        config = { allowUnfree = false; allowUnsafe = false; };
-                        overlays = common_overlays;
-                    };
-                };
-                modules = [ ./hosts/oracleamd2/configuration.nix ];
             };
 
             raspi = nixpkgs.lib.nixosSystem {
                 specialArgs = {
                     inherit inputs;
-                    pkgs = import nixpkgs {
-                        system = "aarch64-linux";
-                        config = { allowUnfree = false; allowUnsafe = false; };
-                        overlays = common_overlays;
-                    };
+                    pkgs = raspi_pkgs;
                 };
                 modules = [ ./hosts/raspi/configuration.nix ];
             };
+        };
+
+        homeConfigurations = {
+
+            "akshettrj@alienrj" = import ./common/home-manager/homeManagerMaker.nix {
+                inherit inputs;
+                pkgs = alienrj_pkgs;
+                config = nixosConfigurations.alienrj.config;
+            };
+
+            "akshettrj@oracleamd1" = import ./common/home-manager/homeManagerMaker.nix {
+                inherit inputs;
+                pkgs = oracleamd1_pkgs;
+                config = nixosConfigurations.alienrj.config;
+            };
+
+            "akshettrj@raspi" = import ./common/home-manager/homeManagerMaker.nix {
+                inherit inputs;
+                pkgs = raspi_pkgs;
+                config = nixosConfigurations.alienrj.config;
+            };
+
         };
 
         templates = {

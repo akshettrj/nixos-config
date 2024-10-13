@@ -159,6 +159,9 @@
             xdg-utils
             zellij
             zip
+
+            # Extra utilities
+            (inputs.home-manager.packages."${pkgs.system}".default)
         ];
 
         # Fights with nix-index
