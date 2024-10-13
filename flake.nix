@@ -124,13 +124,13 @@
             "akshettrj@oracleamd1" = import ./common/home-manager/homeManagerMaker.nix {
                 inherit inputs;
                 pkgs = oracleamd1_pkgs;
-                config = nixosConfigurations.alienrj.config;
+                config = nixosConfigurations.oracleamd1.config;
             };
 
             "akshettrj@raspi" = import ./common/home-manager/homeManagerMaker.nix {
                 inherit inputs;
                 pkgs = raspi_pkgs;
-                config = nixosConfigurations.alienrj.config;
+                config = nixosConfigurations.raspi.config;
             };
 
         };
