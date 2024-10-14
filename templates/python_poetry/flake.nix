@@ -42,7 +42,7 @@
           preferWheels = true;
         }).env.overrideAttrs (oldAttrs: {
           name = "<name>";
-          nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [
+          buildInputs = oldAttrs.buildInputs ++ [
             pyright
             ruff
             poetry

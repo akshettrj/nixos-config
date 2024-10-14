@@ -25,7 +25,7 @@
       devShells.default = mkShell {
         name = "<name>";
 
-        nativeBuildInputs = [
+        buildInputs = [
           clang
           rustToolchain
           protobuf

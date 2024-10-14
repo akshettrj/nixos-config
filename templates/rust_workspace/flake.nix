@@ -16,7 +16,7 @@
       devShells.default = mkShell {
         name = "<name>";
 
-        nativeBuildInputs = [
+        buildInputs = [
           clang
           fenix.packages."${system}".stable.toolchain
           protobuf

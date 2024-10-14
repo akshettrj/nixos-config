@@ -27,7 +27,7 @@
 
             devShell = pkgs.mkShell {
                 name = builtins.throw "please enter dev-shell name in flake.nix";
-                nativeBuildInputs = with pkgs; [
+                buildInputs = with pkgs; [
                     go
                     gopls
                     gomod2nix.packages."${system}".default
