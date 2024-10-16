@@ -115,19 +115,19 @@
 
         homeConfigurations = {
 
-            "akshettrj@alienrj" = import ./common/home-manager/homeManagerMaker.nix {
+            "${nixosConfigurations.alienrj.config.propheci.user.username}@${nixosConfigurations.alienrj.config.propheci.system.hostname}" = import ./common/home-manager/homeManagerMaker.nix {
                 inherit inputs;
                 pkgs = alienrj_pkgs;
                 config = nixosConfigurations.alienrj.config;
             };
 
-            "akshettrj@oracleamd1" = import ./common/home-manager/homeManagerMaker.nix {
+            "${nixosConfigurations.oracleamd1.config.propheci.user.username}@${nixosConfigurations.oracleamd1.config.propheci.system.hostname}" = import ./common/home-manager/homeManagerMaker.nix {
                 inherit inputs;
                 pkgs = oracleamd1_pkgs;
                 config = nixosConfigurations.oracleamd1.config;
             };
 
-            "akshettrj@raspi" = import ./common/home-manager/homeManagerMaker.nix {
+            "${nixosConfigurations.raspi.config.propheci.user.username}@${nixosConfigurations.oracleamd1.config.raspi.system.hostname}" = import ./common/home-manager/homeManagerMaker.nix {
                 inherit inputs;
                 pkgs = raspi_pkgs;
                 config = nixosConfigurations.raspi.config;
