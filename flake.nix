@@ -127,7 +127,7 @@
                 config = nixosConfigurations.oracleamd1.config;
             };
 
-            "${nixosConfigurations.raspi.config.propheci.user.username}@${nixosConfigurations.oracleamd1.config.raspi.system.hostname}" = import ./common/home-manager/homeManagerMaker.nix {
+            "${nixosConfigurations.raspi.config.propheci.user.username}@${nixosConfigurations.raspi.config.propheci.system.hostname}" = import ./common/home-manager/homeManagerMaker.nix {
                 inherit inputs;
                 pkgs = raspi_pkgs;
                 config = nixosConfigurations.raspi.config;
