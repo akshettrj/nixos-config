@@ -23,7 +23,7 @@
             pulse.enable = true;
         };
 
-        hardware.alsa.enablePersistence = false;
+        hardware.alsa.enablePersistence = true;
 
         environment.systemPackages = [ pkgs.pulsemixer ];
 
