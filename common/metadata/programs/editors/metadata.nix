@@ -11,5 +11,6 @@ in {
 
     helix = rec { pkg = helix_package; cmd = "${pkg}/bin/hx"; };
     neovim = rec { pkg = neovim_package; cmd = "${pkg}/bin/nvim"; };
+    zeditor = rec { pkg = pkgs.zed-editor; cmd = "${pkg}/bin/zeditor"; };
 
 }

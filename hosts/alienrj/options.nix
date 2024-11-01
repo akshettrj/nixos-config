@@ -149,6 +149,7 @@
                     enable = true;
                     nightly = true;
                 };
+                zeditor.enable = false;
             };
             terminals = {
                 enable = true;

@@ -197,6 +197,7 @@
                         enable = mkOption { type = types.bool; };
                         nightly = mkOption { type = types.bool; };
                     };
+                    zeditor = { enable = mkOption { type = types.bool; }; };
                 };
                 terminals = {
                     enable = mkOption { type = types.bool; };
