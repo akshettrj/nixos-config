@@ -136,6 +136,11 @@
                         icon = true;
                         icon-size = pro_bars.waybar.icon_size;
                     };
+                    "hyprland/submap" = {
+                        format = "  󰌌  [{}]";
+                        always-on = true;
+                        default-submap = "NA";
+                    };
                     network = {
                         format-wifi = "  {bandwidthDownBytes} 󰇚 {bandwidthUpBytes} 󰕒";
                         format-ethernet = "󰈀  {bandwidthDownBytes} 󰇚 {bandwidthUpBytes} 󰕒";
@@ -289,6 +294,8 @@
                     spacing = 0;
 
                     modules-left = [
+                        "hyprland/submap"
+                        "custom/separator"
                         "hyprland/workspaces"
                         "custom/separator"
                         "hyprland/window"

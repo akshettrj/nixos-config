@@ -261,6 +261,7 @@
                 };
 
                 "$mainMod" = "SUPER";
+                "$resetSubmap" = "hyprctl dispatch submap reset";
 
                 bind = [
                     # BASIC
@@ -320,9 +321,9 @@
                     # BROWSER
                     "$mainMod, F1, exec, ${browsers_meta."${pro_browsers.main}".cmd}"
 
-                    # SCREENSHOTS
-                    "$mainMod SHIFT, S, exec, ${ss_tools_meta."${ss_tool}".cmd.region}"
-                    "$mainMod CONTROL, S, exec, ${ss_tools_meta."${ss_tool}".cmd.fullscreen}"
+                    # # SCREENSHOTS
+                    # "$mainMod SHIFT, S, exec, ${ss_tools_meta."${ss_tool}".cmd.region}"
+                    # "$mainMod CONTROL, S, exec, ${ss_tools_meta."${ss_tool}".cmd.fullscreen}"
 
                 ] ++ lib.optionals pro_services.pipewire.enable [
 
@@ -378,6 +379,10 @@
                     "$mainMod, mouse:273, resizewindow"
                 ];
 
+                bindl = [
+                    ",switch:on:Lid Switch, exec, ${screenlocks_meta."${screenlock}".cmd}"
+                ];
+
                 windowrulev2 = [
                     "workspace 9,class:org.telegram.desktop"
                     "workspace 10,class:teams-for-linux"
@@ -387,6 +392,22 @@
                     "pin,class:dragon-drop"
                 ];
             };
+
+            extraConfig = /* hyprlang */ ''
+
+                # SCREENSHOTS BINDINGS
+                bind = $mainMod SHIFT, S, submap, screenshot
+
+                submap = screenshot
+
+                bind = , Escape, submap, reset
+
+                bind = , R, exec, $resetSubmap & ${ss_tools_meta."${ss_tool}".cmd.region}
+                bind = , F, exec, $resetSubmap & ${ss_tools_meta."${ss_tool}".cmd.fullscreen}
+
+
+                submap = reset
+            '';
         };
 
         xdg.configFile."hypr/hyprpaper.conf".text = ''
