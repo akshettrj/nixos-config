@@ -14,7 +14,7 @@
             enableNushellIntegration = lib.mkIf pro_shells.nushell.enable true;
             enableZshIntegration = lib.mkIf pro_shells.zsh.enable true;
             git = true;
-            icons = true;
+            icons = "auto";
         };
 
     };
