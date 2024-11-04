@@ -90,6 +90,7 @@
                     enable = true;
                     nightly = false;
                 };
+                zeditor.enable = false;
             };
             terminals.enable = false;
             browsers.enable = false;
