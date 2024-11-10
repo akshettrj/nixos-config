@@ -131,7 +131,7 @@
                     };
                     "hyprland/window" = {
                         max-length = 200;
-                        separate-outputs = false;
+                        separate-outputs = true;
                         format = "{title}";
                         icon = true;
                         icon-size = pro_bars.waybar.icon_size;
