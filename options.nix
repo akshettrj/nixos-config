@@ -14,7 +14,7 @@
         known_shells = lib.attrNames (import ./common/metadata/programs/shells/metadata.nix { inherit pkgs; });
         known_screenlocks = lib.attrNames (import ./common/metadata/programs/screenlocks/metadata.nix { inherit config inputs pkgs; });
         known_screenshot_tools = lib.attrNames (import ./common/metadata/programs/screenshot_tools/metadata.nix { inherit pkgs; });
-        known_terminals = lib.attrNames (import ./common/metadata/programs/terminals/metadata.nix { inherit pkgs; });
+        known_terminals = lib.attrNames (import ./common/metadata/programs/terminals/metadata.nix { inherit config inputs pkgs; });
 
         font_type = lib.types.submodule {
             options = {
@@ -110,6 +110,7 @@
                 nix_community_cache = mkOption { type = types.bool; };
                 hyprland_cache = mkOption { type = types.bool; };
                 helix_cache = mkOption { type = types.bool; };
+                wezterm_cache = mkOption { type = types.bool; };
             };
 
             # Appearance
@@ -207,6 +208,7 @@
                     wezterm = {
                         enable = mkOption { type = types.bool; };
                         font_size = mkOption { type = types.number; };
+                        use_official_package = mkOption { type = types.bool; };
                         enable_wayland = mkOption { type = types.bool; };
                     };
                     alacritty = {

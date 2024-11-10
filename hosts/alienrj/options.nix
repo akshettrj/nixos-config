@@ -158,6 +158,7 @@
                 backup = "alacritty";
                 wezterm = {
                     enable = true;
+                    use_official_package = true;
                     font_size = 17;
                     enable_wayland = false;
                 };

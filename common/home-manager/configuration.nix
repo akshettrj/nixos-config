@@ -19,7 +19,7 @@
 
         browsers_meta = import ../metadata/programs/browsers/metadata.nix { inherit pkgs; };
         editors_meta = import ../metadata/programs/editors/metadata.nix { inherit config inputs pkgs; };
-        terminals_meta = import ../metadata/programs/terminals/metadata.nix { inherit pkgs; };
+        terminals_meta = import ../metadata/programs/terminals/metadata.nix { inherit config inputs pkgs; };
 
     in {
 

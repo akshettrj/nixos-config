@@ -5,14 +5,11 @@
 
         pro_editors = config.propheci.programs.editors;
 
+        editors_meta = import ../../../metadata/programs/editors/metadata.nix { inherit config inputs pkgs; };
+
     in lib.mkIf pro_editors.helix.enable {
 
-        home.packages = [ (
-            if pro_editors.helix.nightly then
-                inputs.helix.packages."${pkgs.system}".helix
-            else
-                pkgs.helix
-        ) ];
+        home.packages = [ editors_meta.helix.pkg ];
 
     };
 }

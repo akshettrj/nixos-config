@@ -88,7 +88,8 @@
                     ]
                     ++ lib.optionals pro_nix.nix_community_cache [ "https://nix-community.cachix.org" ]
                     ++ lib.optionals pro_nix.hyprland_cache [ "https://hyprland.cachix.org" ]
-                    ++ lib.optionals pro_nix.helix_cache [ "https://helix.cachix.org" ];
+                    ++ lib.optionals pro_nix.helix_cache [ "https://helix.cachix.org" ]
+                    ++ lib.optionals pro_nix.wezterm_cache [ "https://wezterm.cachix.org" ];
                 extra-trusted-public-keys =
                     [
                         "propheci.cachix.org-1:CwV87KMySX+rhW88NhTx2hRzdNltV497nhXvWswFGDc="
@@ -102,6 +103,9 @@
                     ]
                     ++ lib.optionals pro_nix.helix_cache [
                         "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
+                    ]
+                    ++ lib.optionals pro_nix.wezterm_cache [
+                        "wezterm.cachix.org-1:kAbhjYUC9qvblTE+s7S+kl5XM1zVa4skO+E/1IDWdH0="
                     ];
                 trusted-users = [
                     "root"

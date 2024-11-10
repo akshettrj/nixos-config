@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 {
     config = let
@@ -7,10 +7,14 @@
         pro_terminals = config.propheci.programs.terminals;
         pro_theming = config.propheci.theming;
 
+        terminals_meta = import ../../../metadata/programs/terminals/metadata.nix { inherit config inputs pkgs; };
+
     in lib.mkIf (pro_terminals.enable && pro_terminals.wezterm.enable) {
 
         programs.wezterm = {
             enable = true;
+
+            package = terminals_meta.wezterm.pkg;
 
             enableBashIntegration = lib.mkIf pro_shells.bash.enable true;
             enableZshIntegration = lib.mkIf pro_shells.zsh.enable true;
