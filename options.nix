@@ -177,6 +177,7 @@
                     drivedlgo.enable = mkEnableOption "drivedlgo";
                     ffmpeg.enable = mkEnableOption "ffmpeg";
                     rclone.enable = mkEnableOption "rclone";
+                    obs.enable = mkEnableOption "obs";
                 };
                 social_media = {
                     telegram.enable = mkEnableOption "telegram";
