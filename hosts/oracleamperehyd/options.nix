@@ -6,12 +6,7 @@
         system = {
             hostname = "oracleamperehyd";
             time_zone = "Asia/Kolkata";
-            swap_devices = [
-                {
-                    device = "/var/lib/swapfile";
-                    size = 6 * 1024;
-                }
-            ];
+            swap_devices = [];
         };
         user = {
             username = "akshettrj";

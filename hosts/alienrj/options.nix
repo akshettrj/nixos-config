@@ -64,6 +64,7 @@
             nix_community_cache = true;
             hyprland_cache = true;
             helix_cache = true;
+            wezterm_cache = true;
         };
 
         # Appearance
