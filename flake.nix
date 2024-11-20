@@ -26,6 +26,9 @@
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        disko = {
+            url = "github:nix-community/disko";
+        };
 
         # Hyprland related
         hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
@@ -80,6 +83,12 @@
             overlays = common_overlays;
         };
 
+        oracleamperehyd_pkgs = import nixpkgs {
+            system = "aarch64-linux";
+            config = { allowUnfree = false; allowUnsafe = false; };
+            overlays = common_overlays;
+        };
+
         oracleamd1_pkgs = import nixpkgs {
             system = "x86_64-linux";
             config = { allowUnfree = false; allowUnsafe = false; };
@@ -100,6 +109,17 @@
                     pkgs = alienrj_pkgs;
                 };
                 modules = [ ./hosts/alienrj/configuration.nix ];
+            };
+
+            oracleamperehyd = nixpkgs.lib.nixosSystem {
+                specialArgs = {
+                    inherit inputs;
+                    pkgs = oracleamperehyd_pkgs;
+                };
+                modules = [
+                    ./hosts/oracleamperehyd/configuration.nix
+                    inputs.disko.nixosModules.disko
+                ];
             };
 
             oracleamd1 = nixpkgs.lib.nixosSystem {
@@ -125,6 +145,12 @@
                 inherit inputs;
                 pkgs = alienrj_pkgs;
                 config = nixosConfigurations.alienrj.config;
+            };
+
+            "${nixosConfigurations.oracleamperehyd.config.propheci.user.username}@${nixosConfigurations.oracleamperehyd.config.propheci.system.hostname}" = import ./common/home-manager/homeManagerMaker.nix {
+                inherit inputs;
+                pkgs = oracleamperehyd_pkgs;
+                config = nixosConfigurations.oracleamperehyd.config;
             };
 
             "${nixosConfigurations.oracleamd1.config.propheci.user.username}@${nixosConfigurations.oracleamd1.config.propheci.system.hostname}" = import ./common/home-manager/homeManagerMaker.nix {

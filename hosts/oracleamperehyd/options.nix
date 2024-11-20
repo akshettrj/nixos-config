@@ -4,8 +4,8 @@
 
     propheci = {
         system = {
-            hostname = "oracleamd1";
-            time_zone = "Etc/UTC";
+            hostname = "oracleamperehyd";
+            time_zone = "Asia/Kolkata";
             swap_devices = [
                 {
                     device = "/var/lib/swapfile";
