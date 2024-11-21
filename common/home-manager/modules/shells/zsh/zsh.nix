@@ -11,6 +11,8 @@
 
     in lib.mkIf pro_shells.zsh.enable {
 
+        xdg.configFile."zsh/my_fpath".source = ./my_fpath;
+
         programs.zsh = {
             enable = true;
 
