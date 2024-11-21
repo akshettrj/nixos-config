@@ -57,6 +57,8 @@
             shell = shells_meta."${pro_shells.main}".pkg;
         };
 
+        users.users.nginx.extraGroups = [ "acme" ];
+
         security.sudo.extraRules = lib.mkIf pro_sec.sudo_without_password [
             {
                 users = [ "${pro_user.username}" ];

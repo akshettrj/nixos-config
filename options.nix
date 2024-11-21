@@ -101,6 +101,18 @@
                         open_firewall = mkOption { type = types.bool; };
                         port = mkOption { type = types.port; };
                     };
+                    vikunja = {
+                        enable = mkEnableOption "vikunja";
+                        frontend_hostname = mkOption { type = types.str; };
+                        frontend_scheme = mkOption { type = types.enum [ "http" "https" ]; };
+                        port = mkOption { type = types.port; }; # Default 3456
+                        settings = mkOption { type = (pkgs.formats.yaml {}).type; };
+                        nginx = {
+                            enable = mkOption { type = types.bool; };
+                            hostname = mkOption { type = types.str; };
+                            enable_ssl = mkOption { type = types.bool; };
+                        };
+                    };
                 };
             };
 
