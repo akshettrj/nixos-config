@@ -113,6 +113,18 @@
                             enable_ssl = mkOption { type = types.bool; };
                         };
                     };
+                    navidrome = {
+                        enable = mkEnableOption "navidrome";
+                        frontend_hostname = mkOption { type = types.str; };
+                        frontend_scheme = mkOption { type = types.enum [ "http" "https" ]; };
+                        port = mkOption { type = types.port; }; # Default 4533
+                        settings = mkOption { type = (pkgs.formats.json {}).type; };
+                        nginx = {
+                            enable = mkOption { type = types.bool; };
+                            hostname = mkOption { type = types.str; };
+                            enable_ssl = mkOption { type = types.bool; };
+                        };
+                    };
                 };
             };
 
