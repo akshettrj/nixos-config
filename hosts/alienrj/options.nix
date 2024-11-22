@@ -56,6 +56,7 @@
                 port = 8082;
                 data_dir = user.homedir + "/.local/share/telegram-bot-api";
             };
+            nginx.enable = false;
         };
 
         # Nix/NixOS specific
