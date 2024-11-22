@@ -2,6 +2,7 @@
 
 {
     imports = [
+        ./nginx.nix
         ./openssh.nix
         ./pipewire.nix
         ./printing.nix

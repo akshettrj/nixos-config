@@ -95,6 +95,7 @@
                     port = mkOption { type = types.port; };
                     data_dir = mkOption { type = types.oneOf [ types.str types.path ]; };
                 };
+                nginx.enable = mkOption { type = types.bool; };
                 self_hosted = {
                     adguard = {
                         enable = mkEnableOption "adguard dns";

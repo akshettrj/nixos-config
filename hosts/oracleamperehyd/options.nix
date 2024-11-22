@@ -44,6 +44,7 @@
             tailscale.enable = true;
             xdg_portal.enable = false;
             telegram_bot_api.enable = false;
+            nginx.enable = true;
         };
 
         # Nix/NixOS specific

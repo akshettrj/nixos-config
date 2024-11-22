@@ -3,9 +3,15 @@
 {
     config = let
 
+        pro_nginx = config.propheci.services.nginx;
         pro_vikunja = config.propheci.services.self_hosted.vikunja;
 
     in lib.mkIf pro_vikunja.enable {
+
+        assertions = [{
+            assertion = (if pro_vikunja.nginx.enable then pro_nginx.enable else true);
+            message = "Vikunja's nginx is enabled, but global nginx is not";
+        }];
 
         services.vikunja = {
             enable = true;
@@ -16,7 +22,6 @@
         };
 
         services.nginx = lib.mkIf pro_vikunja.nginx.enable {
-            enable = true;
             virtualHosts."${pro_vikunja.nginx.hostname}" = let
                 certDir = config.security.acme.certs."${pro_vikunja.frontend_hostname}".directory;
             in {
