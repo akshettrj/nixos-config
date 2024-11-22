@@ -155,6 +155,7 @@
             lf
             lshw
             nix-output-monitor
+            nixfmt-rfc-style
             tmux
             unzip
             vim
