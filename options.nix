@@ -126,6 +126,10 @@
                             enable_ssl = mkOption { type = types.bool; };
                         };
                     };
+                    watgbridge = {
+                        enable = mkEnableOption "watgbridge";
+                        settings = mkOption { type = types.anything; default = null; };
+                    };
                 };
             };
 

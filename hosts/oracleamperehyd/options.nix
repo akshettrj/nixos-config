@@ -43,8 +43,32 @@
             };
             tailscale.enable = true;
             xdg_portal.enable = false;
-            telegram_bot_api.enable = true;
+            telegram_bot_api = {
+                enable = true;
+                port = 8082;
+                data_dir = config.propheci.user.homedir + "/.local/share/telegram-bot-api";
+            };
             nginx.enable = true;
+            self_hosted.watgbridge = {
+                enable = true;
+                settings = {
+                    enable = true;
+                    commonSettings = {
+                        requires = [ "tgbotapi.service" ];
+                        maxRuntime = null;
+                    };
+                    instances = {
+                        vi = {
+                            enable = true;
+                            workingDirectory = "${config.propheci.user.homedir}/work/watgbridge/vi";
+                        };
+                        jio = {
+                            enable = true;
+                            workingDirectory = "${config.propheci.user.homedir}/work/watgbridge/jio";
+                        };
+                    };
+                };
+            };
         };
 
         # Nix/NixOS specific
