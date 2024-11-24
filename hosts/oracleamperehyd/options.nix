@@ -43,7 +43,7 @@
             };
             tailscale.enable = true;
             xdg_portal.enable = false;
-            telegram_bot_api.enable = false;
+            telegram_bot_api.enable = true;
             nginx.enable = true;
         };
 

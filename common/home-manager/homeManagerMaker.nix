@@ -10,5 +10,8 @@ inputs.home-manager.lib.homeManagerConfiguration {
         inherit inputs pkgs;
         propheci = config.propheci;
     };
-    modules = [ ./homeManagerInitModule.nix ];
+    modules = [
+        ./homeManagerInitModule.nix
+        inputs.watgbridge.homeManagerModules."${pkgs.system}".default
+    ];
 }

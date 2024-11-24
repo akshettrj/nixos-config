@@ -70,6 +70,10 @@
             url = "git+ssh://git@github.com/akshettrj/nixos_flake_secrets.git";
             flake = false;
         };
+
+        watgbridge = {
+            url = "github:akshettrj/watgbridge";
+        };
     };
 
     outputs = { self, nixpkgs, ... }@inputs:
