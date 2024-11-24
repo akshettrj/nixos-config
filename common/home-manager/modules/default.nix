@@ -16,7 +16,6 @@
         ./screenlocks
         ./screenshot_tools
         ./scripts
-        ./self_hosted
         ./shells
         ./social_media
         ./terminals

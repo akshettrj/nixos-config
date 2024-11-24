@@ -1240,11 +1240,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1732458898,
-        "narHash": "sha256-y5J7/Z7QlqbrW3ynT1uQbySrBjGu5CHQqTbHWTvWgXE=",
+        "lastModified": 1732466765,
+        "narHash": "sha256-hoBhNSBX0f6/PJ7PotEZvRxoTleWxS855QBqk+Pziak=",
         "owner": "akshettrj",
         "repo": "watgbridge",
-        "rev": "f317abaacd3a63a243fd04da7e098e25a9f7af3c",
+        "rev": "1eb808b7b770e936c954e17f4d4161ac5f4b46b5",
         "type": "github"
       },
       "original": {

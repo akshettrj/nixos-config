@@ -12,6 +12,5 @@ inputs.home-manager.lib.homeManagerConfiguration {
     };
     modules = [
         ./homeManagerInitModule.nix
-        inputs.watgbridge.homeManagerModules."${pkgs.system}".default
     ];
 }

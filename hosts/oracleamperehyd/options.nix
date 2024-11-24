@@ -54,8 +54,10 @@
                 settings = {
                     enable = true;
                     commonSettings = {
-                        requires = [ "tgbotapi.service" ];
+                        after = [ "tgbotapi.service" ];
                         maxRuntime = null;
+                        user = "akshettrj";
+                        group = "akshettrj";
                     };
                     instances = {
                         vi = {
