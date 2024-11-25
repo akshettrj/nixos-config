@@ -31,7 +31,7 @@
 
             serviceConfig = {
                 User = pro_user.username;
-                Type = "idle";
+                Type = "exec";
                 Restart = "on-failure";
                 ExecStart = "${tgbotapi_script}/bin/tgbotapi";
             };
