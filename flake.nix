@@ -112,10 +112,7 @@
                     inherit inputs;
                     pkgs = alienrj_pkgs;
                 };
-                modules = [
-                    ./hosts/alienrj/configuration.nix
-                    inputs.watgbridge.nixosModules."${alienrj_pkgs.system}".default
-                ];
+                modules = [ ./hosts/alienrj/configuration.nix ];
             };
 
             oracleamperehyd = nixpkgs.lib.nixosSystem {
@@ -126,7 +123,6 @@
                 modules = [
                     ./hosts/oracleamperehyd/configuration.nix
                     inputs.disko.nixosModules.disko
-                    inputs.watgbridge.nixosModules."${oracleamperehyd_pkgs.system}".default
                 ];
             };
 
@@ -135,10 +131,7 @@
                     inherit inputs;
                     pkgs = oracleamd1_pkgs;
                 };
-                modules = [
-                    ./hosts/oracleamd1/configuration.nix
-                    inputs.watgbridge.nixosModules."${oracleamd1_pkgs.system}".default
-                ];
+                modules = [ ./hosts/oracleamd1/configuration.nix ];
             };
 
             raspi = nixpkgs.lib.nixosSystem {
@@ -146,10 +139,7 @@
                     inherit inputs;
                     pkgs = raspi_pkgs;
                 };
-                modules = [
-                    ./hosts/raspi/configuration.nix
-                    inputs.watgbridge.nixosModules."${raspi_pkgs.system}".default
-                ];
+                modules = [ ./hosts/raspi/configuration.nix ];
             };
         };
 

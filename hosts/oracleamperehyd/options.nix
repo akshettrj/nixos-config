@@ -2,7 +2,7 @@
 
 {
 
-    propheci = {
+    propheci = rec {
         system = {
             hostname = "oracleamperehyd";
             time_zone = "Asia/Kolkata";
@@ -51,25 +51,30 @@
             nginx.enable = true;
             self_hosted.watgbridge = {
                 enable = true;
-                settings = {
-                    enable = true;
-                    commonSettings = {
-                        after = [ "tgbotapi.service" ];
-                        maxRuntime = null;
-                        user = "akshettrj";
-                        group = "akshettrj";
-                    };
-                    instances = {
-                        vi = {
-                            enable = true;
-                            workingDirectory = "${config.propheci.user.homedir}/work/watgbridge/vi";
-                        };
-                        jio = {
-                            enable = true;
-                            workingDirectory = "${config.propheci.user.homedir}/work/watgbridge/jio";
-                        };
-                    };
-                };
+                settings = [
+                    {
+                        enabled = true;
+                        instance_name = "jio";
+                        config_file = null;
+                        user = user.username;
+                        group = "users";
+                        max_runtime = null;
+                        working_directory = user.homedir + "/work/watgbridge/jio";
+                        after = ["tgbotapi.service"];
+                        requires = ["tgbotapi.service"];
+                    }
+                    {
+                        enabled = true;
+                        instance_name = "vi";
+                        config_file = null;
+                        user = user.username;
+                        group = "users";
+                        max_runtime = null;
+                        working_directory = user.homedir + "/work/watgbridge/vi";
+                        after = ["tgbotapi.service"];
+                        requires = ["tgbotapi.service"];
+                    }
+                ];
             };
         };
 

@@ -37,6 +37,24 @@
             };
         };
 
+        watgbridge_instance_type = lib.types.submodule {
+            options = {
+                enabled = mkOption { type = types.bool; };
+                package = mkOption {
+                    type = types.package;
+                    default = inputs.watgbridge.packages."${pkgs.system}".default;
+                };
+                instance_name = mkOption { type = types.str; };
+                config_file = mkOption { type = (types.nullOr types.str); };
+                user = mkOption { type = types.str; };
+                group = mkOption { type = types.str; };
+                max_runtime = mkOption { type = (types.nullOr types.str); };
+                working_directory = mkOption { type = (types.nullOr types.str); };
+                after = mkOption { type = (types.listOf types.str); };
+                requires = mkOption { type = (types.listOf types.str); };
+            };
+        };
+
     in {
         propheci = {
             # System Meta
@@ -128,7 +146,7 @@
                     };
                     watgbridge = {
                         enable = mkEnableOption "watgbridge";
-                        settings = mkOption { type = types.anything; default = null; };
+                        settings = mkOption { type = (types.listOf watgbridge_instance_type); };
                     };
                 };
             };
