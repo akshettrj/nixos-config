@@ -1,17 +1,19 @@
 { config, lib, ... }:
 
 {
-    config = let
+  config =
+    let
 
-        pro_nginx = config.propheci.services.nginx;
+      pro_nginx = config.propheci.services.nginx;
 
-    in lib.mkIf pro_nginx.enable {
+    in
+    lib.mkIf pro_nginx.enable {
 
-        services.nginx = {
-            enable = true;
-        };
+      services.nginx = {
+        enable = true;
+      };
 
-        users.users.nginx.extraGroups = [ "acme" ];
+      users.users.nginx.extraGroups = [ "acme" ];
 
     };
 }

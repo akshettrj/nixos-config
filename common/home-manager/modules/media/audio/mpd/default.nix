@@ -1,8 +1,8 @@
 { ... }:
 
 {
-    imports = [
-        ./mpd.nix
-        ./ncmpcpp.nix
-    ];
+  imports = [
+    ./mpd.nix
+    ./ncmpcpp.nix
+  ];
 }

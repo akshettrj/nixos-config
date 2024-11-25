@@ -1,13 +1,23 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_social_media = config.propheci.programs.social_media;
+      pro_social_media = config.propheci.programs.social_media;
 
-    in lib.mkIf pro_social_media.zulip.enable {
+    in
+    lib.mkIf pro_social_media.zulip.enable {
 
-        home.packages = [ pkgs.zulip pkgs.zulip-term ];
+      home.packages = [
+        pkgs.zulip
+        pkgs.zulip-term
+      ];
 
     };
 }

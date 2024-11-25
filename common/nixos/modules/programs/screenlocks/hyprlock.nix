@@ -1,13 +1,15 @@
 { config, lib, ... }:
 
 {
-    config = let
+  config =
+    let
 
-        pro_screenlocks = config.propheci.programs.screenlocks;
+      pro_screenlocks = config.propheci.programs.screenlocks;
 
-    in lib.mkIf (pro_screenlocks.enable && pro_screenlocks.hyprlock.enable) {
+    in
+    lib.mkIf (pro_screenlocks.enable && pro_screenlocks.hyprlock.enable) {
 
-        security.pam.services.hyprlock = {};
+      security.pam.services.hyprlock = { };
 
     };
 }

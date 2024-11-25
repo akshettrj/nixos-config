@@ -1,13 +1,15 @@
 { config, lib, ... }:
 
 {
-    config = let
+  config =
+    let
 
-        pro_theming = config.propheci.theming;
+      pro_theming = config.propheci.theming;
 
-    in lib.mkIf (pro_theming.enable && pro_theming.gtk) {
+    in
+    lib.mkIf (pro_theming.enable && pro_theming.gtk) {
 
-        programs.dconf.enable = true;
+      programs.dconf.enable = true;
 
     };
 }

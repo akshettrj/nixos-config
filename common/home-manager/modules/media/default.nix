@@ -1,11 +1,11 @@
 { ... }:
 
 {
-    imports = [
-        ./audio
-        ./documents
-        ./picture
-        ./services
-        ./video
-    ];
+  imports = [
+    ./audio
+    ./documents
+    ./picture
+    ./services
+    ./video
+  ];
 }

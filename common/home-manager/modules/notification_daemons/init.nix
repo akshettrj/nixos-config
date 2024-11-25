@@ -1,14 +1,20 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_notifiers = config.propheci.programs.notification_daemons;
+      pro_notifiers = config.propheci.programs.notification_daemons;
 
-    in lib.mkIf pro_notifiers.enable {
+    in
+    lib.mkIf pro_notifiers.enable {
 
-        home.packages = [ pkgs.libnotify ];
+      home.packages = [ pkgs.libnotify ];
 
     };
 }
-

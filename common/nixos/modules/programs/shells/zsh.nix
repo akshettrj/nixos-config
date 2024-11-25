@@ -1,15 +1,17 @@
 { config, lib, ... }:
 
 {
-    config = let
+  config =
+    let
 
-        pro_shells = config.propheci.shells;
+      pro_shells = config.propheci.shells;
 
-    in lib.mkIf pro_shells.zsh.enable {
+    in
+    lib.mkIf pro_shells.zsh.enable {
 
-        environment.pathsToLink = [ "/share/zsh" ];
+      environment.pathsToLink = [ "/share/zsh" ];
 
-        programs.zsh.enable = true;
+      programs.zsh.enable = true;
 
     };
 }

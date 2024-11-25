@@ -1,10 +1,10 @@
 { ... }:
 
 {
-    imports = [
-        ./editors
-        ./screenlocks
-        ./shells
-        ./utilities
-    ];
+  imports = [
+    ./editors
+    ./screenlocks
+    ./shells
+    ./utilities
+  ];
 }

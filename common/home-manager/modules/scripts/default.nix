@@ -1,7 +1,7 @@
 { ... }:
 
 {
-    imports = [
-        ./utilities
-    ];
+  imports = [
+    ./utilities
+  ];
 }

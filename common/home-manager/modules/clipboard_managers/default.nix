@@ -1,7 +1,7 @@
 { ... }:
 
 {
-    imports = [
-        ./copyq.nix
-    ];
+  imports = [
+    ./copyq.nix
+  ];
 }

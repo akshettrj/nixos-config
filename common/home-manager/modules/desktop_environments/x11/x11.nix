@@ -1,16 +1,23 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_deskenvs = config.propheci.desktop_environments;
+      pro_deskenvs = config.propheci.desktop_environments;
 
-    in lib.mkIf pro_deskenvs.enable {
+    in
+    lib.mkIf pro_deskenvs.enable {
 
-        home.packages = with pkgs; [
-            xclip
-            xdotool
-        ];
+      home.packages = with pkgs; [
+        xclip
+        xdotool
+      ];
 
     };
 

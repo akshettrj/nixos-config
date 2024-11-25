@@ -1,7 +1,7 @@
 { ... }:
 
 {
-    imports = [
-        ./bemenu.nix
-    ];
+  imports = [
+    ./bemenu.nix
+  ];
 }

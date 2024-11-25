@@ -1,7 +1,8 @@
-{ lib
-, buildGoApplication
-, nix-filter
-, self
+{
+  lib,
+  buildGoApplication,
+  nix-filter,
+  self,
 }:
 
 let
@@ -27,14 +28,18 @@ let
       "dev"
   );
 
-in buildGoApplication {
+in
+buildGoApplication {
   pname = builtins.throw "please enter package name in nix/ and rename the file";
   version = devVersion;
 
   src = localSrc;
   pwd = localSrc;
 
-  ldflags = [ "-s" "-w" ];
+  ldflags = [
+    "-s"
+    "-w"
+  ];
 
   meta = with lib; rec {
     description = "Add description here";

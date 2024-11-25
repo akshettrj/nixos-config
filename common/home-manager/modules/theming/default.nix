@@ -1,9 +1,9 @@
 { ... }:
 
 {
-    imports = [
-        ./gtk.nix
-        ./qt.nix
-        ./xsession.nix
-    ];
+  imports = [
+    ./gtk.nix
+    ./qt.nix
+    ./xsession.nix
+  ];
 }

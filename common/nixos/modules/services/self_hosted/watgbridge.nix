@@ -21,7 +21,7 @@
               description = "WaTgBridge for instance ${setting.instance_name}";
               after = [ "network.target" ] ++ setting.after;
               requires = [ "network.target" ] ++ setting.requires;
-              wantedBy = [] ++ lib.optionals setting.enabled [ "multi-user.target" ];
+              wantedBy = [ ] ++ lib.optionals setting.enabled [ "multi-user.target" ];
 
               serviceConfig =
                 {
@@ -29,12 +29,12 @@
                   Group = setting.group;
                   Type = "exec";
                   Restart = "on-failure";
-                  ExecStart =
-                    "${setting.package}/bin/watgbridge" + config_file_arg;
+                  ExecStart = "${setting.package}/bin/watgbridge" + config_file_arg;
                 }
                 // (lib.optionalAttrs (setting.max_runtime != null) {
                   RuntimeMaxSec = setting.max_runtime;
-                }) // (lib.optionalAttrs (setting.working_directory != null) {
+                })
+                // (lib.optionalAttrs (setting.working_directory != null) {
                   WorkingDirectory = setting.working_directory;
                 });
             };

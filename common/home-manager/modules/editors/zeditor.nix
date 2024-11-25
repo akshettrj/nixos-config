@@ -1,13 +1,21 @@
-{ config, inputs, lib, pkgs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_editors = config.propheci.programs.editors;
+      pro_editors = config.propheci.programs.editors;
 
-    in lib.mkIf pro_editors.zeditor.enable {
+    in
+    lib.mkIf pro_editors.zeditor.enable {
 
-        home.packages = [ pkgs.zed-editor ];
+      home.packages = [ pkgs.zed-editor ];
 
     };
 }

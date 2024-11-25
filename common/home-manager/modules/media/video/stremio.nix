@@ -1,14 +1,21 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_media = config.propheci.programs.media;
-        pro_video = config.propheci.programs.media.video;
+      pro_media = config.propheci.programs.media;
+      pro_video = config.propheci.programs.media.video;
 
-    in lib.mkIf (pro_media.enable && pro_video.stremio.enable) {
+    in
+    lib.mkIf (pro_media.enable && pro_video.stremio.enable) {
 
-        home.packages = [ pkgs.stremio ];
+      home.packages = [ pkgs.stremio ];
 
     };
 }

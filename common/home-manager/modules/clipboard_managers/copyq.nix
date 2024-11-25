@@ -1,15 +1,17 @@
 { config, lib, ... }:
 
 {
-    config = let
+  config =
+    let
 
-        pro_clips = config.propheci.programs.clipboard_managers;
+      pro_clips = config.propheci.programs.clipboard_managers;
 
-    in lib.mkIf (pro_clips.enable && pro_clips.copyq.enable) {
+    in
+    lib.mkIf (pro_clips.enable && pro_clips.copyq.enable) {
 
-        services.copyq = {
-            enable = true;
-        };
+      services.copyq = {
+        enable = true;
+      };
 
     };
 }

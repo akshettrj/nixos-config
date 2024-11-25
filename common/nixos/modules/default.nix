@@ -1,11 +1,11 @@
 { ... }:
 
 {
-    imports = [
-        ./hardware
-        ./misc
-        ./programs
-        ./services
-        ./theming
-    ];
+  imports = [
+    ./hardware
+    ./misc
+    ./programs
+    ./services
+    ./theming
+  ];
 }

@@ -1,10 +1,10 @@
 { ... }:
 
 {
-    imports = [
-        ./drivedlgo.nix
-        ./ffmpeg.nix
-        ./obs-studio.nix
-        ./rclone.nix
-    ];
+  imports = [
+    ./drivedlgo.nix
+    ./ffmpeg.nix
+    ./obs-studio.nix
+    ./rclone.nix
+  ];
 }

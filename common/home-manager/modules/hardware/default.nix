@@ -1,7 +1,7 @@
 { ... }:
 
 {
-    imports = [
-        ./bluetooth.nix
-    ];
+  imports = [
+    ./bluetooth.nix
+  ];
 }

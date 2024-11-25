@@ -1,31 +1,40 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_hw = config.propheci.hardware;
-        pro_services = config.propheci.services;
+      pro_hw = config.propheci.hardware;
+      pro_services = config.propheci.services;
 
-    in lib.mkIf pro_services.pipewire.enable {
+    in
+    lib.mkIf pro_services.pipewire.enable {
 
-        assertions = [{
-            assertion = (!pro_hw.pulseaudio.enable);
-            message = "Both pulseaudio and pipewire are enabled. Disable one of them.";
-        }];
+      assertions = [
+        {
+          assertion = (!pro_hw.pulseaudio.enable);
+          message = "Both pulseaudio and pipewire are enabled. Disable one of them.";
+        }
+      ];
 
-        security.rtkit.enable = true;
+      security.rtkit.enable = true;
 
-        services.pipewire = {
-            enable = true;
-            alsa.enable = true;
-            alsa.support32Bit = true;
-            audio.enable = true;
-            pulse.enable = true;
-        };
+      services.pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        audio.enable = true;
+        pulse.enable = true;
+      };
 
-        hardware.alsa.enablePersistence = true;
+      hardware.alsa.enablePersistence = true;
 
-        environment.systemPackages = [ pkgs.pulsemixer ];
+      environment.systemPackages = [ pkgs.pulsemixer ];
 
     };
 }

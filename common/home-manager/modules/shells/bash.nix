@@ -1,26 +1,39 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_shells = config.propheci.shells;
-        pro_file_explorers = config.propheci.programs.file_explorers;
+      pro_shells = config.propheci.shells;
+      pro_file_explorers = config.propheci.programs.file_explorers;
 
-    in lib.mkIf pro_shells.bash.enable {
+    in
+    lib.mkIf pro_shells.bash.enable {
 
-        programs.bash = {
-            enable = true;
+      programs.bash = {
+        enable = true;
 
-            enableVteIntegration = true;
-            enableCompletion = true;
+        enableVteIntegration = true;
+        enableCompletion = true;
 
-            historyControl = ["erasedups" "ignorespace"];
-            historyFile = "$HOME/.cache/bash_history";
-            historyIgnore = (import ./history_ignore_patterns.nix);
-            historySize = 10000;
+        historyControl = [
+          "erasedups"
+          "ignorespace"
+        ];
+        historyFile = "$HOME/.cache/bash_history";
+        historyIgnore = (import ./history_ignore_patterns.nix);
+        historySize = 10000;
 
-            initExtra = ''
-            '' + lib.optionalString pro_file_explorers.lf.enable /*sh*/ ''
+        initExtra =
+          ''''
+          +
+            lib.optionalString pro_file_explorers.lf.enable # sh
+              ''
 
                 ###################################################
 
@@ -35,8 +48,8 @@
                     fi
                 }
 
-            '';
-        };
+              '';
+      };
 
     };
 

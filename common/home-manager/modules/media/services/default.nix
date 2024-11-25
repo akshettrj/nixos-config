@@ -1,7 +1,7 @@
 { ... }:
 
 {
-    imports = [
-        ./mpris.nix
-    ];
+  imports = [
+    ./mpris.nix
+  ];
 }

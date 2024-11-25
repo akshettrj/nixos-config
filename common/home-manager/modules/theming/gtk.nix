@@ -1,41 +1,48 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_theming = config.propheci.theming;
-        pro_user = config.propheci.user;
+      pro_theming = config.propheci.theming;
+      pro_user = config.propheci.user;
 
-    in lib.mkIf (pro_theming.enable && pro_theming.gtk) {
+    in
+    lib.mkIf (pro_theming.enable && pro_theming.gtk) {
 
-        gtk = {
-            enable = true;
-            cursorTheme = {
-                package = pro_theming.cursor.package;
-                name = pro_theming.cursor.name;
-                size = pro_theming.cursor.size;
-            };
-            font = {
-                name = pro_theming.fonts.main.name;
-                size = pro_theming.fonts.main.size;
-            };
-            iconTheme = {
-                package = pkgs.papirus-icon-theme;
-                name = "Papirus-Dark";
-            };
-            theme = {
-                package = pkgs.materia-theme;
-                name = "Materia-dark-compact";
-            };
-            gtk3 = {
-                bookmarks = [
-                    "file:///tmp"
-                    "file://${pro_user.homedir}/media"
-                ];
-            };
+      gtk = {
+        enable = true;
+        cursorTheme = {
+          package = pro_theming.cursor.package;
+          name = pro_theming.cursor.name;
+          size = pro_theming.cursor.size;
         };
+        font = {
+          name = pro_theming.fonts.main.name;
+          size = pro_theming.fonts.main.size;
+        };
+        iconTheme = {
+          package = pkgs.papirus-icon-theme;
+          name = "Papirus-Dark";
+        };
+        theme = {
+          package = pkgs.materia-theme;
+          name = "Materia-dark-compact";
+        };
+        gtk3 = {
+          bookmarks = [
+            "file:///tmp"
+            "file://${pro_user.homedir}/media"
+          ];
+        };
+      };
 
-        home.packages = [ pkgs.lxappearance ];
+      home.packages = [ pkgs.lxappearance ];
 
     };
 }

@@ -1,15 +1,25 @@
-{ config, inputs, lib, pkgs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_editors = config.propheci.programs.editors;
+      pro_editors = config.propheci.programs.editors;
 
-        editors_meta = import ../../../metadata/programs/editors/metadata.nix { inherit config inputs pkgs; };
+      editors_meta = import ../../../metadata/programs/editors/metadata.nix {
+        inherit config inputs pkgs;
+      };
 
-    in lib.mkIf pro_editors.helix.enable {
+    in
+    lib.mkIf pro_editors.helix.enable {
 
-        home.packages = [ editors_meta.helix.pkg ];
+      home.packages = [ editors_meta.helix.pkg ];
 
     };
 }

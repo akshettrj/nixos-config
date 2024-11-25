@@ -1,13 +1,20 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_media = config.propheci.programs.media;
+      pro_media = config.propheci.programs.media;
 
-    in lib.mkIf (pro_media.enable && pro_media.services.mpris.enable) {
+    in
+    lib.mkIf (pro_media.enable && pro_media.services.mpris.enable) {
 
-        home.packages = [ pkgs.playerctl ];
+      home.packages = [ pkgs.playerctl ];
 
     };
 }

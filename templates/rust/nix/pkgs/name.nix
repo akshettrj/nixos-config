@@ -1,7 +1,8 @@
-{ lib
-, makeRustPlatform
-, toolchain
-, nix-filter
+{
+  lib,
+  makeRustPlatform,
+  toolchain,
+  nix-filter,
 }:
 
 let
@@ -18,21 +19,22 @@ let
     ];
   };
 
-in (makeRustPlatform {
+in
+(makeRustPlatform {
   cargo = toolchain;
   rustc = toolchain;
-}).buildRustPackage {
-  name = pkgName;
-  version = "0.1.0";
+}).buildRustPackage
+  {
+    name = pkgName;
+    version = "0.1.0";
 
-  src = localSrc;
-  cargoLock.lockFile = ../../Cargo.lock;
+    src = localSrc;
+    cargoLock.lockFile = ../../Cargo.lock;
 
-  meta = with lib; {
-    description = "Nix package for ${pkgName}";
-    homepage = "Add link here";
-    license = licenses.mit;
-    mainProgram = pkgName;
-  };
-}
-
+    meta = with lib; {
+      description = "Nix package for ${pkgName}";
+      homepage = "Add link here";
+      license = licenses.mit;
+      mainProgram = pkgName;
+    };
+  }

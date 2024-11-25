@@ -1,13 +1,20 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_dev = config.propheci.dev;
+      pro_dev = config.propheci.dev;
 
-    in lib.mkIf pro_dev.cachix.enable {
+    in
+    lib.mkIf pro_dev.cachix.enable {
 
-        home.packages = [ pkgs.cachix ];
+      home.packages = [ pkgs.cachix ];
 
     };
 }

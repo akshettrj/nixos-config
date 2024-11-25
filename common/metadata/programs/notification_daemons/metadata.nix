@@ -1,5 +1,8 @@
 { pkgs }:
 
 {
-    dunst = rec { pkg = pkgs.dunst; cmd = "${pkg}/bin/dunst"; };
+  dunst = rec {
+    pkg = pkgs.dunst;
+    cmd = "${pkg}/bin/dunst";
+  };
 }

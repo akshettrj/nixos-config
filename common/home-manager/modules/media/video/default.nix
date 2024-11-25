@@ -1,9 +1,9 @@
 { ... }:
 
 {
-    imports = [
-        ./mpv.nix
-        ./stremio.nix
-        ./vlc.nix
-    ];
+  imports = [
+    ./mpv.nix
+    ./stremio.nix
+    ./vlc.nix
+  ];
 }

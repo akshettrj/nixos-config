@@ -1,9 +1,9 @@
 { ... }:
 
 {
-    imports = [
-        ./helix.nix
-        ./neovim.nix
-        ./zeditor.nix
-    ];
+  imports = [
+    ./helix.nix
+    ./neovim.nix
+    ./zeditor.nix
+  ];
 }

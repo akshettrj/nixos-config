@@ -1,8 +1,8 @@
 { ... }:
 
 {
-    imports = [
-        ./feh.nix
-        ./sxiv.nix
-    ];
+  imports = [
+    ./feh.nix
+    ./sxiv.nix
+  ];
 }

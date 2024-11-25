@@ -1,7 +1,7 @@
 { ... }:
 
 {
-    imports = [
-        ./zathura.nix
-    ];
+  imports = [
+    ./zathura.nix
+  ];
 }

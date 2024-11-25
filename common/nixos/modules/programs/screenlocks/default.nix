@@ -1,8 +1,8 @@
 { ... }:
 
 {
-    imports = [
-        ./hyprlock.nix
-        ./swaylock.nix
-    ];
+  imports = [
+    ./hyprlock.nix
+    ./swaylock.nix
+  ];
 }

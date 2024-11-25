@@ -1,13 +1,20 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_editors = config.propheci.programs.editors;
+      pro_editors = config.propheci.programs.editors;
 
-    in lib.mkIf pro_editors.helix.enable {
+    in
+    lib.mkIf pro_editors.helix.enable {
 
-        environment.systemPackages = [ pkgs.helix ];
+      environment.systemPackages = [ pkgs.helix ];
 
     };
 }

@@ -7,23 +7,32 @@
     fenix.url = "github:nix-community/fenix";
   };
 
-  outputs = { self, nixpkgs, flake-utils, fenix }: flake-utils.lib.eachDefaultSystem (system:
-    let
-      pkgs = import nixpkgs { inherit system; };
-    in with pkgs;
+  outputs =
     {
+      self,
+      nixpkgs,
+      flake-utils,
+      fenix,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      with pkgs;
+      {
 
-      devShells.default = mkShell {
-        name = "<name>";
+        devShells.default = mkShell {
+          name = "<name>";
 
-        buildInputs = [
-          clang
-          fenix.packages."${system}".stable.toolchain
-          protobuf
-          taplo
-        ];
-      };
+          buildInputs = [
+            clang
+            fenix.packages."${system}".stable.toolchain
+            protobuf
+            taplo
+          ];
+        };
 
-    }
-  );
+      }
+    );
 }

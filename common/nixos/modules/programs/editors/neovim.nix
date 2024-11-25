@@ -1,18 +1,26 @@
-{ config, inputs, lib, pkgs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_editors = config.propheci.programs.editors;
+      pro_editors = config.propheci.programs.editors;
 
-    in lib.mkIf pro_editors.neovim.enable {
+    in
+    lib.mkIf pro_editors.neovim.enable {
 
-        programs.neovim = {
-            enable = true;
-            defaultEditor = if pro_editors.main == "neovim" then true else false;
-        };
+      programs.neovim = {
+        enable = true;
+        defaultEditor = if pro_editors.main == "neovim" then true else false;
+      };
 
-        environment.systemPackages = [ pkgs.neovim ];
+      environment.systemPackages = [ pkgs.neovim ];
 
     };
 }

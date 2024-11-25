@@ -1,16 +1,26 @@
-{ config, inputs, lib, pkgs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-    config = let
+  config =
+    let
 
-        pro_screenlocks = config.propheci.programs.screenlocks;
-        pro_theming = config.propheci.theming;
+      pro_screenlocks = config.propheci.programs.screenlocks;
+      pro_theming = config.propheci.theming;
 
-        screenlocks_meta = import ../../../metadata/programs/screenlocks/metadata.nix { inherit config inputs pkgs; };
+      screenlocks_meta = import ../../../metadata/programs/screenlocks/metadata.nix {
+        inherit config inputs pkgs;
+      };
 
-    in lib.mkIf (pro_screenlocks.enable && pro_screenlocks.hyprlock.enable) {
+    in
+    lib.mkIf (pro_screenlocks.enable && pro_screenlocks.hyprlock.enable) {
 
-        xdg.configFile."hypr/hyprlock.conf".text = ''
+      xdg.configFile."hypr/hyprlock.conf".text = ''
 
         general {
             disable_loading_bar = false
@@ -39,9 +49,9 @@
             position = 0, -120
         }
 
-        '';
+      '';
 
-        home.packages = [ screenlocks_meta.hyprlock.pkg ];
+      home.packages = [ screenlocks_meta.hyprlock.pkg ];
 
     };
 }

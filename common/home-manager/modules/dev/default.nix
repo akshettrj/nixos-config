@@ -1,9 +1,9 @@
 { ... }:
 
 {
-    imports = [
-        ./cachix.nix
-        ./direnv.nix
-        ./git.nix
-    ];
+  imports = [
+    ./cachix.nix
+    ./direnv.nix
+    ./git.nix
+  ];
 }

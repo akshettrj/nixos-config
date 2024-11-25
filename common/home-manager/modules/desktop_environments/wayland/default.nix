@@ -1,8 +1,8 @@
 { ... }:
 
 {
-    imports = [
-        ./hyprland.nix
-        ./wayland.nix
-    ];
+  imports = [
+    ./hyprland.nix
+    ./wayland.nix
+  ];
 }

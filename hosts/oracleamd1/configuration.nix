@@ -1,14 +1,14 @@
 { inputs, ... }:
 
 {
-    imports = [
-        ./options.nix
-        ./hardware-configuration.nix
-        ../../common/nixos/configuration.nix
+  imports = [
+    ./options.nix
+    ./hardware-configuration.nix
+    ../../common/nixos/configuration.nix
 
-        "${inputs.propheci_secrets}/hosts/oracleamd1"
-    ];
+    "${inputs.propheci_secrets}/hosts/oracleamd1"
+  ];
 
-    # DO NOT DELETE
-    system.stateVersion = "23.11";
+  # DO NOT DELETE
+  system.stateVersion = "23.11";
 }
