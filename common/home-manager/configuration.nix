@@ -58,7 +58,7 @@
         dust
         fd
         nh
-        nil
+        nixd
         ripgrep
       ];
 
