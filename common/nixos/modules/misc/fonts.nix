@@ -3,19 +3,13 @@
   lib,
   pkgs,
   ...
-}:
-
-{
-  config =
-    let
-
-      pro_theming = config.propheci.theming;
-
-    in
+}: {
+  config = let
+    pro_theming = config.propheci.theming;
+  in
     lib.mkIf pro_theming.enable {
-
       fonts.packages = with pkgs; [
-        (nerdfonts.override { fonts = pro_theming.fonts.nerdfonts; })
+        (nerdfonts.override {fonts = pro_theming.fonts.nerdfonts;})
 
         noto-fonts
         noto-fonts-cjk-sans
@@ -47,12 +41,13 @@
       fonts.fontconfig = {
         enable = true;
         defaultFonts = {
-          emoji = [ "Noto Color Emoji" ];
-          monospace = [ "${pro_theming.fonts.main.name}" ];
-          sansSerif = [ "${pro_theming.fonts.main.name}" ];
-          serif = [ "${pro_theming.fonts.main.name}" ];
+          emoji = ["Noto Color Emoji"];
+          monospace = ["${pro_theming.fonts.main.name}"];
+          sansSerif = ["${pro_theming.fonts.main.name}"];
+          serif = ["${pro_theming.fonts.main.name}"];
         };
-        localConf = # xml
+        localConf =
+          # xml
           ''
             <fontconfig>
             <match target="pattern">
@@ -96,6 +91,5 @@
             </fontconfig>
           '';
       };
-
     };
 }

@@ -1,14 +1,12 @@
-{ config, lib, ... }:
-
 {
-  config =
-    let
-
-      pro_shells = config.propheci.shells;
-
-    in
+  config,
+  lib,
+  ...
+}: {
+  config = let
+    pro_shells = config.propheci.shells;
+  in
     lib.mkIf pro_shells.eza.enable {
-
       programs.eza = {
         enable = true;
         enableBashIntegration = lib.mkIf pro_shells.bash.enable true;
@@ -18,6 +16,5 @@
         git = true;
         icons = "auto";
       };
-
     };
 }

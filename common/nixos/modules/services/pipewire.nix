@@ -3,21 +3,15 @@
   lib,
   config,
   ...
-}:
-
-{
-  config =
-    let
-
-      pro_hw = config.propheci.hardware;
-      pro_services = config.propheci.services;
-
-    in
+}: {
+  config = let
+    pro_hw = config.propheci.hardware;
+    pro_services = config.propheci.services;
+  in
     lib.mkIf pro_services.pipewire.enable {
-
       assertions = [
         {
-          assertion = (!pro_hw.pulseaudio.enable);
+          assertion = !pro_hw.pulseaudio.enable;
           message = "Both pulseaudio and pipewire are enabled. Disable one of them.";
         }
       ];
@@ -34,7 +28,6 @@
 
       hardware.alsa.enablePersistence = true;
 
-      environment.systemPackages = [ pkgs.pulsemixer ];
-
+      environment.systemPackages = [pkgs.pulsemixer];
     };
 }

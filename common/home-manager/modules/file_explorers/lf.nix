@@ -3,19 +3,13 @@
   pkgs,
   lib,
   ...
-}:
+}: {
+  config = let
+    pro_shells = config.propheci.shells;
 
-{
-  config =
-    let
-
-      pro_shells = config.propheci.shells;
-
-      shells_meta = import ../../../metadata/programs/shells/metadata.nix { inherit pkgs; };
-
-    in
+    shells_meta = import ../../../metadata/programs/shells/metadata.nix {inherit pkgs;};
+  in
     lib.mkIf config.propheci.programs.file_explorers.lf.enable {
-
       programs.lf = {
         enable = true;
         settings = {
@@ -46,10 +40,8 @@
             # Basics
             mkdir = ''%mkdir "$@"'';
             touch = ''%touch "$@"'';
-
           }
           // lib.optionalAttrs pro_shells.zoxide.enable {
-
             # Zoxide
             z = ''
               %{{
@@ -68,6 +60,5 @@
           %[ $LF_LEVEL -eq 1 ] || echo "Warning: You're in a nested lf instance! [LEVEL $LF_LEVEL]"
         '';
       };
-
     };
 }

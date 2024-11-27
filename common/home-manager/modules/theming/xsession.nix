@@ -1,14 +1,12 @@
-{ config, lib, ... }:
-
 {
-  config =
-    let
-
-      pro_theming = config.propheci.theming;
-
-    in
+  config,
+  lib,
+  ...
+}: {
+  config = let
+    pro_theming = config.propheci.theming;
+  in
     lib.mkIf pro_theming.enable {
-
       xsession.enable = true;
 
       home.pointerCursor = {
@@ -18,6 +16,5 @@
         name = pro_theming.cursor.name;
         size = pro_theming.cursor.size;
       };
-
     };
 }

@@ -1,15 +1,13 @@
-{ lib, config, ... }:
-
 {
-  config =
-    let
-
-      pro_screenlocks = config.propheci.programs.screenlocks;
-      pro_theming = config.propheci.theming;
-
-    in
+  lib,
+  config,
+  ...
+}: {
+  config = let
+    pro_screenlocks = config.propheci.programs.screenlocks;
+    pro_theming = config.propheci.theming;
+  in
     lib.mkIf (pro_screenlocks.enable && pro_screenlocks.swaylock.enable) {
-
       programs.swaylock = {
         enable = true;
         settings = {
@@ -41,6 +39,5 @@
           text-caps-lock-color = "f8f8f2";
         };
       };
-
     };
 }

@@ -1,15 +1,13 @@
-{ config, lib, ... }:
-
 {
-  config =
-    let
-
-      pro_notifiers = config.propheci.programs.notification_daemons;
-      pro_theming = config.propheci.theming;
-
-    in
+  config,
+  lib,
+  ...
+}: {
+  config = let
+    pro_notifiers = config.propheci.programs.notification_daemons;
+    pro_theming = config.propheci.theming;
+  in
     lib.mkIf (pro_notifiers.enable && pro_notifiers.dunst.enable) {
-
       services.dunst = {
         enable = true;
 
@@ -68,6 +66,5 @@
           };
         };
       };
-
     };
 }

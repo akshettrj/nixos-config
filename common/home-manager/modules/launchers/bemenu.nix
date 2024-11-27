@@ -1,15 +1,13 @@
-{ lib, config, ... }:
-
 {
-  config =
-    let
-
-      pro_launchers = config.propheci.programs.launchers;
-      pro_theming = config.propheci.theming;
-
-    in
+  lib,
+  config,
+  ...
+}: {
+  config = let
+    pro_launchers = config.propheci.programs.launchers;
+    pro_theming = config.propheci.theming;
+  in
     lib.mkIf (pro_launchers.enable && pro_launchers.bemenu.enable) {
-
       programs.bemenu = {
         enable = true;
 
@@ -28,6 +26,5 @@
           no-cursor = true;
         };
       };
-
     };
 }

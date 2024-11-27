@@ -1,15 +1,13 @@
-{ config, lib, ... }:
-
 {
-  config =
-    let
-
-      pro_services = config.propheci.services;
-      pro_user = config.propheci.user;
-
-    in
+  config,
+  lib,
+  ...
+}: {
+  config = let
+    pro_services = config.propheci.services;
+    pro_user = config.propheci.user;
+  in
     lib.mkIf pro_services.openssh.server.enable {
-
       services.openssh = {
         enable = true;
         ports = pro_services.openssh.server.ports;
@@ -23,6 +21,5 @@
       users.users.root.openssh.authorizedKeys.keys = pro_services.openssh.server.public_keys;
       users.users."${pro_user.username}".openssh.authorizedKeys.keys =
         pro_services.openssh.server.public_keys;
-
     };
 }

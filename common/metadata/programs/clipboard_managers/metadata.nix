@@ -1,6 +1,4 @@
-{ pkgs }:
-
-{
+{pkgs}: {
   copyq = rec {
     pkg = pkgs.copyq;
     bin = "copyq";

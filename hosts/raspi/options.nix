@@ -1,7 +1,4 @@
-{ ... }:
-
-{
-
+{...}: {
   propheci = {
     system = {
       hostname = "raspi";
@@ -33,14 +30,14 @@
       printing.enable = false;
       firewall = {
         enable = true;
-        tcp_ports = [ 22 ];
-        udp_ports = [ ];
+        tcp_ports = [22];
+        udp_ports = [];
       };
       pipewire.enable = false;
       openssh = {
         server = {
           enable = true;
-          ports = [ 22 ];
+          ports = [22];
           password_authentication = true;
           root_login = "prohibit-password";
           x11_forwarding = false;
@@ -119,7 +116,7 @@
 
     shells = {
       main = "zsh";
-      aliases = import (../../common/home-manager/modules/shells/aliases.nix);
+      aliases = import ../../common/home-manager/modules/shells/aliases.nix;
       bash.enable = true;
       fish.enable = false;
       nushell.enable = false;
@@ -132,5 +129,4 @@
 
     desktop_environments.enable = false;
   };
-
 }

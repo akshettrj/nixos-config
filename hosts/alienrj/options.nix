@@ -4,10 +4,7 @@
   lib,
   pkgs,
   ...
-}:
-
-{
-
+}: {
   propheci = rec {
     system = {
       hostname = "alienrj";
@@ -42,14 +39,14 @@
       printing.enable = false;
       firewall = {
         enable = true;
-        tcp_ports = [ 22 ];
-        udp_ports = [ ];
+        tcp_ports = [22];
+        udp_ports = [];
       };
       pipewire.enable = true;
       openssh = {
         server = {
           enable = true;
-          ports = [ 22 ];
+          ports = [22];
           password_authentication = true;
           root_login = "prohibit-password";
           x11_forwarding = false;
@@ -189,7 +186,7 @@
         main = "brave";
         brave = {
           enable = true;
-          cmd_args = [ "--force-device-scale-factor=1.5" ];
+          cmd_args = ["--force-device-scale-factor=1.5"];
         };
         firefox.enable = true;
         chromium.enable = false;
@@ -256,7 +253,7 @@
 
     shells = {
       main = "zsh";
-      aliases = import (../../common/home-manager/modules/shells/aliases.nix);
+      aliases = import ../../common/home-manager/modules/shells/aliases.nix;
       bash.enable = true;
       fish.enable = false;
       nushell.enable = false;
@@ -291,7 +288,7 @@
             x = 0;
             y = 0;
             additional_settings = "1.6";
-            workspaces = (lib.range 1 10);
+            workspaces = lib.range 1 10;
           }
           {
             enabled = true;
@@ -303,11 +300,10 @@
             x = 1602;
             y = 0;
             additional_settings = "1";
-            workspaces = (lib.range 11 20);
+            workspaces = lib.range 11 20;
           }
         ];
       };
     };
   };
-
 }

@@ -76,144 +76,141 @@
     };
   };
 
-  outputs =
-    { self, nixpkgs, ... }@inputs:
-    let
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: let
+    common_overlays = [];
 
-      common_overlays = [ ];
+    alienrj_pkgs = import nixpkgs {
+      system = "x86_64-linux";
+      config = {
+        allowUnfree = true;
+        allowUnsafe = false;
+      };
+      overlays = common_overlays;
+    };
 
-      alienrj_pkgs = import nixpkgs {
-        system = "x86_64-linux";
-        config = {
-          allowUnfree = true;
-          allowUnsafe = false;
+    oracleamperehyd_pkgs = import nixpkgs {
+      system = "aarch64-linux";
+      config = {
+        allowUnfree = false;
+        allowUnsafe = false;
+      };
+      overlays = common_overlays;
+    };
+
+    oracleamd1_pkgs = import nixpkgs {
+      system = "x86_64-linux";
+      config = {
+        allowUnfree = false;
+        allowUnsafe = false;
+      };
+      overlays = common_overlays;
+    };
+
+    raspi_pkgs = import nixpkgs {
+      system = "aarch64-linux";
+      config = {
+        allowUnfree = false;
+        allowUnsafe = false;
+      };
+      overlays = common_overlays;
+    };
+  in rec {
+    nixosConfigurations = {
+      alienrj = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          pkgs = alienrj_pkgs;
         };
-        overlays = common_overlays;
+        modules = [./hosts/alienrj/configuration.nix];
       };
 
-      oracleamperehyd_pkgs = import nixpkgs {
-        system = "aarch64-linux";
-        config = {
-          allowUnfree = false;
-          allowUnsafe = false;
+      oracleamperehyd = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          pkgs = oracleamperehyd_pkgs;
         };
-        overlays = common_overlays;
+        modules = [
+          ./hosts/oracleamperehyd/configuration.nix
+          inputs.disko.nixosModules.disko
+        ];
       };
 
-      oracleamd1_pkgs = import nixpkgs {
-        system = "x86_64-linux";
-        config = {
-          allowUnfree = false;
-          allowUnsafe = false;
+      oracleamd1 = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          pkgs = oracleamd1_pkgs;
         };
-        overlays = common_overlays;
+        modules = [./hosts/oracleamd1/configuration.nix];
       };
 
-      raspi_pkgs = import nixpkgs {
-        system = "aarch64-linux";
-        config = {
-          allowUnfree = false;
-          allowUnsafe = false;
+      raspi = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          pkgs = raspi_pkgs;
         };
-        overlays = common_overlays;
-      };
-
-    in
-    rec {
-      nixosConfigurations = {
-        alienrj = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            pkgs = alienrj_pkgs;
-          };
-          modules = [ ./hosts/alienrj/configuration.nix ];
-        };
-
-        oracleamperehyd = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            pkgs = oracleamperehyd_pkgs;
-          };
-          modules = [
-            ./hosts/oracleamperehyd/configuration.nix
-            inputs.disko.nixosModules.disko
-          ];
-        };
-
-        oracleamd1 = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            pkgs = oracleamd1_pkgs;
-          };
-          modules = [ ./hosts/oracleamd1/configuration.nix ];
-        };
-
-        raspi = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            pkgs = raspi_pkgs;
-          };
-          modules = [ ./hosts/raspi/configuration.nix ];
-        };
-      };
-
-      homeConfigurations = {
-
-        "${nixosConfigurations.alienrj.config.propheci.user.username}@${nixosConfigurations.alienrj.config.propheci.system.hostname}" =
-          import ./common/home-manager/homeManagerMaker.nix
-            {
-              inherit inputs;
-              pkgs = alienrj_pkgs;
-              config = nixosConfigurations.alienrj.config;
-            };
-
-        "${nixosConfigurations.oracleamperehyd.config.propheci.user.username}@${nixosConfigurations.oracleamperehyd.config.propheci.system.hostname}" =
-          import ./common/home-manager/homeManagerMaker.nix
-            {
-              inherit inputs;
-              pkgs = oracleamperehyd_pkgs;
-              config = nixosConfigurations.oracleamperehyd.config;
-            };
-
-        "${nixosConfigurations.oracleamd1.config.propheci.user.username}@${nixosConfigurations.oracleamd1.config.propheci.system.hostname}" =
-          import ./common/home-manager/homeManagerMaker.nix
-            {
-              inherit inputs;
-              pkgs = oracleamd1_pkgs;
-              config = nixosConfigurations.oracleamd1.config;
-            };
-
-        "${nixosConfigurations.raspi.config.propheci.user.username}@${nixosConfigurations.raspi.config.propheci.system.hostname}" =
-          import ./common/home-manager/homeManagerMaker.nix
-            {
-              inherit inputs;
-              pkgs = raspi_pkgs;
-              config = nixosConfigurations.raspi.config;
-            };
-
-      };
-
-      templates = {
-        golang = {
-          path = ./templates/golang;
-          description = "Flake for Golang devShell and packaging";
-        };
-        python_poetry = {
-          path = ./templates/python_poetry;
-          description = "Flake for Python poetry devShell and packaging";
-        };
-        rust_workspace = {
-          path = ./templates/rust_workspace;
-          description = "Flake for Cargo workspace libraries";
-        };
-        rust = {
-          path = ./templates/rust;
-          description = "Flake for Cargo non-workspace binaries";
-        };
-        rust_lib = {
-          path = ./templates/rust_lib;
-          description = "Flake for Cargo non-workspace libraries";
-        };
+        modules = [./hosts/raspi/configuration.nix];
       };
     };
+
+    homeConfigurations = {
+      "${nixosConfigurations.alienrj.config.propheci.user.username}@${nixosConfigurations.alienrj.config.propheci.system.hostname}" =
+        import ./common/home-manager/homeManagerMaker.nix
+        {
+          inherit inputs;
+          pkgs = alienrj_pkgs;
+          config = nixosConfigurations.alienrj.config;
+        };
+
+      "${nixosConfigurations.oracleamperehyd.config.propheci.user.username}@${nixosConfigurations.oracleamperehyd.config.propheci.system.hostname}" =
+        import ./common/home-manager/homeManagerMaker.nix
+        {
+          inherit inputs;
+          pkgs = oracleamperehyd_pkgs;
+          config = nixosConfigurations.oracleamperehyd.config;
+        };
+
+      "${nixosConfigurations.oracleamd1.config.propheci.user.username}@${nixosConfigurations.oracleamd1.config.propheci.system.hostname}" =
+        import ./common/home-manager/homeManagerMaker.nix
+        {
+          inherit inputs;
+          pkgs = oracleamd1_pkgs;
+          config = nixosConfigurations.oracleamd1.config;
+        };
+
+      "${nixosConfigurations.raspi.config.propheci.user.username}@${nixosConfigurations.raspi.config.propheci.system.hostname}" =
+        import ./common/home-manager/homeManagerMaker.nix
+        {
+          inherit inputs;
+          pkgs = raspi_pkgs;
+          config = nixosConfigurations.raspi.config;
+        };
+    };
+
+    templates = {
+      golang = {
+        path = ./templates/golang;
+        description = "Flake for Golang devShell and packaging";
+      };
+      python_poetry = {
+        path = ./templates/python_poetry;
+        description = "Flake for Python poetry devShell and packaging";
+      };
+      rust_workspace = {
+        path = ./templates/rust_workspace;
+        description = "Flake for Cargo workspace libraries";
+      };
+      rust = {
+        path = ./templates/rust;
+        description = "Flake for Cargo non-workspace binaries";
+      };
+      rust_lib = {
+        path = ./templates/rust_lib;
+        description = "Flake for Cargo non-workspace libraries";
+      };
+    };
+  };
 }

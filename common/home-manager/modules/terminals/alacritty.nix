@@ -1,15 +1,13 @@
-{ config, lib, ... }:
-
 {
-  config =
-    let
-
-      pro_terminals = config.propheci.programs.terminals;
-      pro_theming = config.propheci.theming;
-
-    in
+  config,
+  lib,
+  ...
+}: {
+  config = let
+    pro_terminals = config.propheci.programs.terminals;
+    pro_theming = config.propheci.theming;
+  in
     lib.mkIf (pro_terminals.enable && pro_terminals.alacritty.enable) {
-
       programs.alacritty = {
         enable = true;
 
@@ -142,6 +140,5 @@
           ];
         };
       };
-
     };
 }

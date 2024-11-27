@@ -4,152 +4,141 @@
   lib,
   pkgs,
   ...
-}:
+}: {
+  imports = [./wayland.nix];
 
-{
-  imports = [ ./wayland.nix ];
+  config = let
+    pro_browsers = config.propheci.programs.browsers;
+    pro_clips = config.propheci.programs.clipboard_managers;
+    pro_deskenvs = config.propheci.desktop_environments;
+    pro_file_explorers = config.propheci.programs.file_explorers;
+    pro_launchers = config.propheci.programs.launchers;
+    pro_mpd = config.propheci.programs.media.audio.mpd;
+    pro_mpris = config.propheci.programs.media.services.mpris;
+    pro_services = config.propheci.services;
+    pro_hw = config.propheci.hardware;
+    pro_ss_tools = config.propheci.programs.screenshot_tools;
+    pro_terminals = config.propheci.programs.terminals;
+    pro_theming = config.propheci.theming;
 
-  config =
-    let
+    browsers_meta = import ../../../../metadata/programs/browsers/metadata.nix {inherit pkgs;};
+    clips_meta = import ../../../../metadata/programs/clipboard_managers/metadata.nix {inherit pkgs;};
+    file_explorers_meta = import ../../../../metadata/programs/file_explorers/metadata.nix {
+      inherit pkgs;
+    };
+    launchers_meta = import ../../../../metadata/programs/launchers/metadata.nix {inherit pkgs;};
+    screenlocks_meta = import ../../../../metadata/programs/screenlocks/metadata.nix {
+      inherit config inputs pkgs;
+    };
+    ss_tools_meta = import ../../../../metadata/programs/screenshot_tools/metadata.nix {
+      inherit pkgs;
+    };
+    terminals_meta = import ../../../../metadata/programs/terminals/metadata.nix {
+      inherit config inputs pkgs;
+    };
 
-      pro_browsers = config.propheci.programs.browsers;
-      pro_clips = config.propheci.programs.clipboard_managers;
-      pro_deskenvs = config.propheci.desktop_environments;
-      pro_file_explorers = config.propheci.programs.file_explorers;
-      pro_launchers = config.propheci.programs.launchers;
-      pro_mpd = config.propheci.programs.media.audio.mpd;
-      pro_mpris = config.propheci.programs.media.services.mpris;
-      pro_services = config.propheci.services;
-      pro_hw = config.propheci.hardware;
-      pro_ss_tools = config.propheci.programs.screenshot_tools;
-      pro_terminals = config.propheci.programs.terminals;
-      pro_theming = config.propheci.theming;
-
-      browsers_meta = import ../../../../metadata/programs/browsers/metadata.nix { inherit pkgs; };
-      clips_meta = import ../../../../metadata/programs/clipboard_managers/metadata.nix { inherit pkgs; };
-      file_explorers_meta = import ../../../../metadata/programs/file_explorers/metadata.nix {
-        inherit pkgs;
+    normal_desktops =
+      lib.listToAttrs (
+        builtins.map (ws: {
+          name = toString ws;
+          value = toString ws;
+        }) (lib.range 1 9)
+      )
+      // {
+        "0" = "10";
       };
-      launchers_meta = import ../../../../metadata/programs/launchers/metadata.nix { inherit pkgs; };
-      screenlocks_meta = import ../../../../metadata/programs/screenlocks/metadata.nix {
-        inherit config inputs pkgs;
+    alt_desktops =
+      lib.listToAttrs (
+        builtins.map (ws: {
+          name = toString (ws - 10);
+          value = toString ws;
+        }) (lib.range 11 19)
+      )
+      // {
+        "0" = "20";
       };
-      ss_tools_meta = import ../../../../metadata/programs/screenshot_tools/metadata.nix {
-        inherit pkgs;
-      };
-      terminals_meta = import ../../../../metadata/programs/terminals/metadata.nix {
-        inherit config inputs pkgs;
-      };
 
-      normal_desktops =
-        lib.listToAttrs (
-          builtins.map (ws: {
-            name = toString (ws);
-            value = toString (ws);
-          }) (lib.range 1 9)
-        )
-        // {
-          "0" = "10";
-        };
-      alt_desktops =
-        lib.listToAttrs (
-          builtins.map (ws: {
-            name = toString (ws - 10);
-            value = toString (ws);
-          }) (lib.range 11 19)
-        )
-        // {
-          "0" = "20";
-        };
+    launcher = pro_deskenvs.hyprland.launcher;
+    ss_tool = pro_deskenvs.hyprland.screenshot_tool;
+    screenlock = pro_deskenvs.hyprland.screenlock;
+    clipboard_manager = pro_deskenvs.hyprland.clipboard_manager;
 
-      launcher = pro_deskenvs.hyprland.launcher;
-      ss_tool = pro_deskenvs.hyprland.screenshot_tool;
-      screenlock = pro_deskenvs.hyprland.screenlock;
-      clipboard_manager = pro_deskenvs.hyprland.clipboard_manager;
+    hyprpaper_pkg = (
+      if pro_deskenvs.hyprland.use_official_packages
+      then inputs.hyprpaper.packages."${pkgs.system}".hyprpaper
+      else pkgs.hyprpaper
+    );
+    hyprland_pkg = (
+      if pro_deskenvs.hyprland.use_official_packages
+      then inputs.hyprland.packages."${pkgs.system}".hyprland
+      else pkgs.hyprland
+    );
 
-      hyprpaper_pkg = (
-        if pro_deskenvs.hyprland.use_official_packages then
-          inputs.hyprpaper.packages."${pkgs.system}".hyprpaper
-        else
-          pkgs.hyprpaper
-      );
-      hyprland_pkg = (
-        if pro_deskenvs.hyprland.use_official_packages then
-          inputs.hyprland.packages."${pkgs.system}".hyprland
-        else
-          pkgs.hyprland
-      );
+    startup_script = let
+      clipboard_manager_meta = clips_meta."${clipboard_manager}";
+      hyprpaper = "${hyprpaper_pkg}/bin/hyprpaper";
+      hyprctl = "${hyprland_pkg}/bin/hyprctl";
+      nm-applet = "${pkgs.networkmanagerapplet}/bin/nm-applet";
+    in
+      pkgs.writeShellScriptBin "start" ''
 
-      startup_script =
-        let
-          clipboard_manager_meta = clips_meta."${clipboard_manager}";
-          hyprpaper = "${hyprpaper_pkg}/bin/hyprpaper";
-          hyprctl = "${hyprland_pkg}/bin/hyprctl";
-          nm-applet = "${pkgs.networkmanagerapplet}/bin/nm-applet";
-        in
-        pkgs.writeShellScriptBin "start" ''
-
-          # Setting up monitors
-          ${lib.strings.concatStringsSep "\n" (
-            map (
-              mon:
-              let
-                resolution = "${toString mon.width}x${toString mon.height}@${toString mon.refresh_rate}";
-                position = "${toString mon.x}x${toString mon.y}";
-                mon_config =
-                  if mon.enabled then "${resolution},${position},${mon.additional_settings}" else "disable";
-              in
+        # Setting up monitors
+        ${lib.strings.concatStringsSep "\n" (
+          map (
+            mon: let
+              resolution = "${toString mon.width}x${toString mon.height}@${toString mon.refresh_rate}";
+              position = "${toString mon.x}x${toString mon.y}";
+              mon_config =
+                if mon.enabled
+                then "${resolution},${position},${mon.additional_settings}"
+                else "disable";
+            in
               # sh
               ''
                 ${hyprctl} keyword monitor "${mon.name},${mon_config}"
 
               ''
-              +
-                lib.optionalString mon.enabled # sh
-                  ''
+              + lib.optionalString mon.enabled # sh
+              
+              ''
 
-                    for wk in ${toString mon.workspaces}; do
-                        ${hyprctl} keyword workspace "$wk,monitor:${mon.name}" &
-                    done
-                  ''
-            ) (pro_deskenvs.hyprland.monitors)
-          )}
+                for wk in ${toString mon.workspaces}; do
+                    ${hyprctl} keyword workspace "$wk,monitor:${mon.name}" &
+                done
+              ''
+          ) (pro_deskenvs.hyprland.monitors)
+        )}
 
-          pidof ${hyprpaper} && killall -9 ${hyprpaper}
-          pidof ${clipboard_manager_meta.bin} && killall -9 ${clipboard_manager_meta.bin}
-          pidof ${nm-applet} && killall -9 ${nm-applet}
+        pidof ${hyprpaper} && killall -9 ${hyprpaper}
+        pidof ${clipboard_manager_meta.bin} && killall -9 ${clipboard_manager_meta.bin}
+        pidof ${nm-applet} && killall -9 ${nm-applet}
 
-          ${hyprpaper} &
-          ${clipboard_manager_meta.cmd} &
-          ${nm-applet} &
+        ${hyprpaper} &
+        ${clipboard_manager_meta.cmd} &
+        ${nm-applet} &
 
-        '';
+      '';
 
-      kill_window_script =
-        let
-
-          jq = "${pkgs.jq}/bin/jq";
-          xdotool = "${pkgs.xdotool}/bin/xdotool";
-
-        in
-        pkgs.writeShellScriptBin "kill_window" ''
-
-          if [ "$1" = "-f" ]; then
-              current_pid="$(hyprctl activewindow -j | ${jq} -r ".pid")"
-              kill -9 $current_pid
-          else
-              if [ "$(hyprctl activewindow -j | ${jq} -r ".class")" = "Steam" ]; then
-                  ${xdotool} getactivewindow windowunmap
-              else
-                  hyprctl dispatch killactive ""
-              fi
-          fi
-
-        '';
-
+    kill_window_script = let
+      jq = "${pkgs.jq}/bin/jq";
+      xdotool = "${pkgs.xdotool}/bin/xdotool";
     in
-    lib.mkIf (pro_deskenvs.enable && pro_deskenvs.hyprland.enable) {
+      pkgs.writeShellScriptBin "kill_window" ''
 
+        if [ "$1" = "-f" ]; then
+            current_pid="$(hyprctl activewindow -j | ${jq} -r ".pid")"
+            kill -9 $current_pid
+        else
+            if [ "$(hyprctl activewindow -j | ${jq} -r ".class")" = "Steam" ]; then
+                ${xdotool} getactivewindow windowunmap
+            else
+                hyprctl dispatch killactive ""
+            fi
+        fi
+
+      '';
+  in
+    lib.mkIf (pro_deskenvs.enable && pro_deskenvs.hyprland.enable) {
       assertions = [
         {
           assertion = screenlocks_meta."${screenlock}".wayland;
@@ -194,7 +183,7 @@
 
         systemd = {
           enable = true;
-          variables = [ "--all" ];
+          variables = ["--all"];
         };
         xwayland.enable = true;
 
@@ -214,10 +203,8 @@
 
               "XCURSOR_THEME,${pro_theming.cursor.name}"
               "XCURSOR_SIZE,${toString (pro_theming.cursor.size)}"
-
             ]
             ++ lib.optionals pro_hw.nvidia.enable [
-
               "LIBVA_DRIVER_NAME,nvidia"
               "WLR_NO_HARDWARE_CURSORS,1"
             ];
@@ -325,12 +312,14 @@
             ++ (builtins.attrValues (
               builtins.mapAttrs (
                 key: desk: "$mainMod SHIFT, ${key}, movetoworkspacesilent, ${desk}"
-              ) normal_desktops
+              )
+              normal_desktops
             ))
             ++ (builtins.attrValues (
               builtins.mapAttrs (
                 key: desk: "$mainMod ALT SHIFT, ${key}, movetoworkspacesilent, ${desk}"
-              ) alt_desktops
+              )
+              alt_desktops
             ))
             ++ [
               "$mainMod, BracketRight, workspace, m+1"
@@ -379,29 +368,21 @@
               # # SCREENSHOTS
               # "$mainMod SHIFT, S, exec, ${ss_tools_meta."${ss_tool}".cmd.region}"
               # "$mainMod CONTROL, S, exec, ${ss_tools_meta."${ss_tool}".cmd.fullscreen}"
-
             ]
             ++ lib.optionals pro_services.pipewire.enable [
-
               "$mainMod, F6, exec, wpctl set-mute '@DEFAULT_AUDIO_SINK@' toggle"
               ",XF86AudioMute, exec, wpctl set-mute '@DEFAULT_AUDIO_SINK@' toggle"
-
             ]
             ++ lib.optionals pro_hw.pulseaudio.enable [
-
               "$mainMod, F6, exec, pactl set-sink-mute '@DEFAULT_SINK@' toggle"
               ",XF86AudioMute, exec, wpctl set-sink-mute '@DEFAULT_SINK@' toggle"
-
             ]
             ++ lib.optionals pro_mpd.enable [
-
               "$mainMod, F9, exec, ${pkgs.mpc-cli}/bin/mpc -q prev"
               "$mainMod, F10, exec, ${pkgs.mpc-cli}/bin/mpc -q toggle"
               "$mainMod, F11, exec, ${pkgs.mpc-cli}/bin/mpc -q next"
-
             ]
             ++ lib.optionals pro_mpris.enable [
-
               ",XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
               ",XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
               ",XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
@@ -418,18 +399,14 @@
               ",XF86MonBrightnessUp, exec, brightnessup"
               "$mainMod, F2, exec, brightnessdown"
               "$mainMod, F3, exec, brightnessup"
-
             ]
             ++ lib.optionals pro_services.pipewire.enable [
-
               "$mainMod, F7, exec, wpctl set-volume '@DEFAULT_AUDIO_SINK@' '1%-'"
               ",XF86AudioLowerVolume, exec, wpctl set-volume '@DEFAULT_AUDIO_SINK@' '1%-'"
               "$mainMod, F8, exec, wpctl set-volume '@DEFAULT_AUDIO_SINK@' '1%+'"
               ",XF86AudioRaiseVolume, exec, wpctl set-volume '@DEFAULT_AUDIO_SINK@' '1%+'"
-
             ]
             ++ lib.optionals pro_hw.pulseaudio.enable [
-
               "$mainMod, F7, exec, pactl set-sink-volume '@DEFAULT_SINK@' '-1%'"
               ",XF86AudioLowerVolume, exec, pactl set-sink-volume '@DEFAULT_SINK@' '-1%'"
               "$mainMod, F8, exec, pactl set-sink-volume '@DEFAULT_SINK@' '+1%'"
@@ -455,7 +432,8 @@
           ];
         };
 
-        extraConfig = # hyprlang
+        extraConfig =
+          # hyprlang
           ''
 
             # SCREENSHOTS BINDINGS
@@ -486,6 +464,5 @@
         hyprpaper_pkg
         pkgs.networkmanagerapplet
       ];
-
     };
 }

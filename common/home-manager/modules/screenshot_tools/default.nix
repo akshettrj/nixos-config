@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   imports = [
     ./flameshot.nix
     ./hyprshot.nix

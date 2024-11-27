@@ -1,14 +1,12 @@
-{ config, lib, ... }:
-
 {
-  config =
-    let
-
-      pro_shells = config.propheci.shells;
-
-    in
+  config,
+  lib,
+  ...
+}: {
+  config = let
+    pro_shells = config.propheci.shells;
+  in
     lib.mkIf pro_shells.starship.enable {
-
       programs.starship = {
         enable = true;
         enableBashIntegration = lib.mkIf pro_shells.bash.enable true;
@@ -175,7 +173,7 @@
               "python3"
               "python2"
             ];
-            detect_extensions = [ ];
+            detect_extensions = [];
             detect_files = [
               "requirements.txt"
               ".python-version"
@@ -185,7 +183,7 @@
               "setup.py"
               "__init__.py"
             ];
-            detect_folders = [ ];
+            detect_folders = [];
           };
 
           rust = {
@@ -231,6 +229,5 @@
           };
         };
       };
-
     };
 }
