@@ -60,7 +60,7 @@
           enable = true;
           settings = {
             service = {
-                enableregistration = true;
+                enableregistration = false;
                 enableemailreminders = false;
                 customlogourl = "https://avatars.githubusercontent.com/u/176999088?v=4";
             };
