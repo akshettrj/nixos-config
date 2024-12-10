@@ -55,32 +55,48 @@
         data_dir = config.propheci.user.homedir + "/.local/share/telegram-bot-api";
       };
       nginx.enable = true;
-      self_hosted.watgbridge = {
-        enable = true;
-        settings = [
-          {
-            enabled = true;
-            instance_name = "jio";
-            config_file = null;
-            user = user.username;
-            group = "users";
-            max_runtime = null;
-            working_directory = user.homedir + "/work/watgbridge/jio";
-            after = ["tgbotapi.service"];
-            requires = ["tgbotapi.service"];
-          }
-          {
-            enabled = true;
-            instance_name = "vi";
-            config_file = null;
-            user = user.username;
-            group = "users";
-            max_runtime = null;
-            working_directory = user.homedir + "/work/watgbridge/vi";
-            after = ["tgbotapi.service"];
-            requires = ["tgbotapi.service"];
-          }
-        ];
+      self_hosted = {
+        vikunja = {
+          enable = true;
+          settings = {
+            service = {
+                enableregistration = true;
+                enableemailreminders = false;
+                customlogourl = "https://avatars.githubusercontent.com/u/176999088?v=4";
+            };
+            mailer = {
+                enabled = true;
+                forcessl = true;
+            };
+          };
+        };
+        watgbridge = {
+          enable = true;
+          settings = [
+            {
+              enabled = true;
+              instance_name = "jio";
+              config_file = null;
+              user = user.username;
+              group = "users";
+              max_runtime = null;
+              working_directory = user.homedir + "/work/watgbridge/jio";
+              after = ["tgbotapi.service"];
+              requires = ["tgbotapi.service"];
+            }
+            {
+              enabled = true;
+              instance_name = "vi";
+              config_file = null;
+              user = user.username;
+              group = "users";
+              max_runtime = null;
+              working_directory = user.homedir + "/work/watgbridge/vi";
+              after = ["tgbotapi.service"];
+              requires = ["tgbotapi.service"];
+            }
+          ];
+        };
       };
     };
 
