@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   imports = [
     ./bash.nix
     ./fish.nix
@@ -9,11 +8,9 @@
     ./utils
   ];
 
-  config =
-    let
-      pro_shells = config.propheci.shells;
-    in
-    {
-      home.shellAliases = pro_shells.aliases;
-    };
+  config = let
+    pro_shells = config.propheci.shells;
+  in {
+    home.shellAliases = pro_shells.aliases;
+  };
 }

@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./brave.nix
     ./chrome.nix

@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./adguard.nix
     ./navidrome.nix

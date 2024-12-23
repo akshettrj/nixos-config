@@ -3,13 +3,11 @@
   pkgs,
   lib,
   ...
-}:
-{
-  config =
-    let
-      pro_theming = config.propheci.theming;
-      pro_user = config.propheci.user;
-    in
+}: {
+  config = let
+    pro_theming = config.propheci.theming;
+    pro_user = config.propheci.user;
+  in
     lib.mkIf (pro_theming.enable && pro_theming.gtk) {
       gtk = {
         enable = true;
@@ -38,6 +36,6 @@
         };
       };
 
-      home.packages = [ pkgs.lxappearance ];
+      home.packages = [pkgs.lxappearance];
     };
 }

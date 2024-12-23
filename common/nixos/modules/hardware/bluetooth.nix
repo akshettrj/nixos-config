@@ -3,12 +3,10 @@
   lib,
   config,
   ...
-}:
-{
-  config =
-    let
-      pro_hw = config.propheci.hardware;
-    in
+}: {
+  config = let
+    pro_hw = config.propheci.hardware;
+  in
     lib.mkIf pro_hw.bluetooth.enable {
       hardware.bluetooth = {
         enable = true;
@@ -16,6 +14,6 @@
         settings.General.Experimental = true;
       };
 
-      environment.systemPackages = [ pkgs.bluetuith ];
+      environment.systemPackages = [pkgs.bluetuith];
     };
 }

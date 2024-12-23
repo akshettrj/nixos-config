@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./both
     ./wayland

@@ -4,18 +4,16 @@
   lib,
   pkgs,
   ...
-}:
-{
-  config =
-    let
-      pro_shells = config.propheci.shells;
-      pro_deskenvs = config.propheci.desktop_environments;
-      pro_file_explorers = config.propheci.programs.file_explorers;
+}: {
+  config = let
+    pro_shells = config.propheci.shells;
+    pro_deskenvs = config.propheci.desktop_environments;
+    pro_file_explorers = config.propheci.programs.file_explorers;
 
-      deskenvs_meta = import ../../../../metadata/programs/desktop_environments/metadata.nix {
-        inherit config inputs pkgs;
-      };
-    in
+    deskenvs_meta = import ../../../../metadata/programs/desktop_environments/metadata.nix {
+      inherit config inputs pkgs;
+    };
+  in
     lib.mkIf pro_shells.zsh.enable {
       xdg.configFile."zsh/my_fpath".source = ./my_fpath;
 
@@ -166,56 +164,56 @@
             }
 
           ''
-          +
-            lib.optionalString pro_file_explorers.lf.enable # sh
+          + lib.optionalString pro_file_explorers.lf.enable # sh
+          
+          ''
 
-              ''
+            ###################################################
 
-                ###################################################
+            # LFCD
+            function lfcd() {
+                tmp="$(mktemp)"
+                ${pkgs.lf}/bin/lf -last-dir-path="$tmp" "$@"
+                if [ -f "$tmp" ]; then
+                    dir="$(cat "$tmp")"
+                    rm -f "$tmp" >/dev/null
+                    [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+                fi
+            }
 
-                # LFCD
-                function lfcd() {
-                    tmp="$(mktemp)"
-                    ${pkgs.lf}/bin/lf -last-dir-path="$tmp" "$@"
-                    if [ -f "$tmp" ]; then
-                        dir="$(cat "$tmp")"
-                        rm -f "$tmp" >/dev/null
-                        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-                    fi
-                }
-
-              ''
+          ''
           # sh
           + ''
 
-            bindkey -s '^o' "${if pro_file_explorers.main == "lf" then "lfcd" else "yy"}\n"
+            bindkey -s '^o' "${
+              if pro_file_explorers.main == "lf"
+              then "lfcd"
+              else "yy"
+            }\n"
 
           ''
-          +
-            lib.optionalString
-              (pro_deskenvs.enable && builtins.length (lib.attrNames pro_deskenvs.defaults) > 0) # sh
+          + lib.optionalString
+          (pro_deskenvs.enable && builtins.length (lib.attrNames pro_deskenvs.defaults) > 0) # sh
+          
+          ''
 
-              ''
+            current_tty="$(tty)"
+            ${
+              (lib.strings.concatStrings (
+                lib.attrsets.mapAttrsToList (
+                  tty: deskenv: let
+                    cmd = deskenvs_meta."${deskenv}".cmd;
+                  in (lib.strings.concatStringsSep "\n" [
+                    ''if [[ "$current_tty" == "${tty}" ]]; then''
+                    "    pgrep ${cmd} || ${cmd} &"
+                    ''el''
+                  ])
+                ) (pro_deskenvs.defaults)
+              ))
+              + "if false; then\n    echo bye\nfi"
+            }
 
-                current_tty="$(tty)"
-                ${
-                  (lib.strings.concatStrings (
-                    lib.attrsets.mapAttrsToList (
-                      tty: deskenv:
-                      let
-                        cmd = deskenvs_meta."${deskenv}".cmd;
-                      in
-                      (lib.strings.concatStringsSep "\n" [
-                        ''if [[ "$current_tty" == "${tty}" ]]; then''
-                        "    pgrep ${cmd} || ${cmd} &"
-                        ''el''
-                      ])
-                    ) (pro_deskenvs.defaults)
-                  ))
-                  + "if false; then\n    echo bye\nfi"
-                }
-
-              '';
+          '';
       };
     };
 }

@@ -11,23 +11,20 @@
     };
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      flake-utils,
-      nix-filter,
-      gomod2nix,
-    }:
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    nix-filter,
+    gomod2nix,
+  }:
     flake-utils.lib.eachDefaultSystem (
-      system:
-      let
+      system: let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [ gomod2nix.overlays.default ];
+          overlays = [gomod2nix.overlays.default];
         };
-      in
-      {
+      in {
         devShell = pkgs.mkShell {
           name = builtins.throw "please enter dev-shell name in flake.nix";
           buildInputs = with pkgs; [
@@ -38,7 +35,7 @@
         };
 
         packages = rec {
-          name = pkgs.callPackage ./nix/pkgs/name.nix { inherit nix-filter; };
+          name = pkgs.callPackage ./nix/pkgs/name.nix {inherit nix-filter;};
           default = name;
         };
       }

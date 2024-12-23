@@ -2,12 +2,10 @@
   config,
   lib,
   ...
-}:
-{
-  config =
-    let
-      pro_adguard = config.propheci.services.self_hosted.adguard;
-    in
+}: {
+  config = let
+    pro_adguard = config.propheci.services.self_hosted.adguard;
+  in
     lib.mkIf pro_adguard.enable {
       services.adguardhome = {
         enable = true;

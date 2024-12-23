@@ -3,12 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-{
-  config =
-    let
-      pro_dev = config.propheci.dev;
-    in
+}: {
+  config = let
+    pro_dev = config.propheci.dev;
+  in
     lib.mkIf pro_dev.git.enable {
       programs.git = {
         enable = true;
@@ -20,6 +18,6 @@
         };
       };
 
-      home.packages = [ pkgs.gitu ];
+      home.packages = [pkgs.gitu];
     };
 }

@@ -2,8 +2,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     ./options.nix
     ./hardware-configuration.nix

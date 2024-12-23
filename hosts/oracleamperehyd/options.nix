@@ -3,13 +3,12 @@
   inputs,
   pkgs,
   ...
-}:
-{
+}: {
   propheci = rec {
     system = {
       hostname = "oracleamperehyd";
       time_zone = "Asia/Kolkata";
-      swap_devices = [ ];
+      swap_devices = [];
     };
     user = {
       username = "akshettrj";
@@ -36,13 +35,13 @@
           80
           443
         ];
-        udp_ports = [ ];
+        udp_ports = [];
       };
       pipewire.enable = false;
       openssh = {
         server = {
           enable = true;
-          ports = [ 22 ];
+          ports = [22];
           password_authentication = false;
           root_login = "no";
           x11_forwarding = false;
@@ -82,8 +81,8 @@
               group = "users";
               max_runtime = null;
               working_directory = user.homedir + "/work/watgbridge/jio";
-              after = [ "tgbotapi.service" ];
-              requires = [ "tgbotapi.service" ];
+              after = ["tgbotapi.service"];
+              requires = ["tgbotapi.service"];
             }
             {
               enabled = true;
@@ -93,8 +92,8 @@
               group = "users";
               max_runtime = null;
               working_directory = user.homedir + "/work/watgbridge/vi";
-              after = [ "tgbotapi.service" ];
-              requires = [ "tgbotapi.service" ];
+              after = ["tgbotapi.service"];
+              requires = ["tgbotapi.service"];
             }
           ];
         };

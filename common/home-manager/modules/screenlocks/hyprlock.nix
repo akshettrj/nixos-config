@@ -4,17 +4,15 @@
   lib,
   pkgs,
   ...
-}:
-{
-  config =
-    let
-      pro_screenlocks = config.propheci.programs.screenlocks;
-      pro_theming = config.propheci.theming;
+}: {
+  config = let
+    pro_screenlocks = config.propheci.programs.screenlocks;
+    pro_theming = config.propheci.theming;
 
-      screenlocks_meta = import ../../../metadata/programs/screenlocks/metadata.nix {
-        inherit config inputs pkgs;
-      };
-    in
+    screenlocks_meta = import ../../../metadata/programs/screenlocks/metadata.nix {
+      inherit config inputs pkgs;
+    };
+  in
     lib.mkIf (pro_screenlocks.enable && pro_screenlocks.hyprlock.enable) {
       xdg.configFile."hypr/hyprlock.conf".text = ''
 
@@ -47,6 +45,6 @@
 
       '';
 
-      home.packages = [ screenlocks_meta.hyprlock.pkg ];
+      home.packages = [screenlocks_meta.hyprlock.pkg];
     };
 }

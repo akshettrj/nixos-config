@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./bars
     ./browsers
