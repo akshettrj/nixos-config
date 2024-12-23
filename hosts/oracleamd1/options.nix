@@ -3,7 +3,8 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   propheci = {
     system = {
       hostname = "oracleamd1";
@@ -35,14 +36,14 @@
       printing.enable = false;
       firewall = {
         enable = true;
-        tcp_ports = [22];
-        udp_ports = [];
+        tcp_ports = [ 22 ];
+        udp_ports = [ ];
       };
       pipewire.enable = false;
       openssh = {
         server = {
           enable = true;
-          ports = [22];
+          ports = [ 22 ];
           password_authentication = false;
           root_login = "no";
           x11_forwarding = false;

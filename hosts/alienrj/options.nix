@@ -4,7 +4,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   propheci = rec {
     system = {
       hostname = "alienrj";
@@ -39,14 +40,14 @@
       printing.enable = false;
       firewall = {
         enable = true;
-        tcp_ports = [22];
-        udp_ports = [];
+        tcp_ports = [ 22 ];
+        udp_ports = [ ];
       };
       pipewire.enable = true;
       openssh = {
         server = {
           enable = true;
-          ports = [22];
+          ports = [ 22 ];
           password_authentication = true;
           root_login = "prohibit-password";
           x11_forwarding = false;
@@ -186,7 +187,7 @@
         main = "brave";
         brave = {
           enable = true;
-          cmd_args = ["--force-device-scale-factor=1.5"];
+          cmd_args = [ "--force-device-scale-factor=1.5" ];
         };
         firefox.enable = true;
         chromium.enable = false;

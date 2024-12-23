@@ -2,11 +2,13 @@
   config,
   lib,
   ...
-}: {
-  config = let
-    pro_dev = config.propheci.dev;
-    pro_shells = config.propheci.shells;
-  in
+}:
+{
+  config =
+    let
+      pro_dev = config.propheci.dev;
+      pro_shells = config.propheci.shells;
+    in
     lib.mkIf pro_dev.direnv.enable {
       programs.direnv = {
         enable = true;

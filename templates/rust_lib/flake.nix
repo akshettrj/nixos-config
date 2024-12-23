@@ -8,30 +8,33 @@
     nix-filter.url = "github:numtide/nix-filter";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils,
-    fenix,
-    nix-filter,
-  }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      fenix,
+      nix-filter,
+    }:
     flake-utils.lib.eachDefaultSystem (
-      system: let
-        pkgs = import nixpkgs {inherit system;};
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
 
         rustToolchain = fenix.packages."${system}".stable.toolchain;
       in
-        with pkgs; {
-          devShells.default = mkShell {
-            name = "<name>";
+      with pkgs;
+      {
+        devShells.default = mkShell {
+          name = "<name>";
 
-            buildInputs = [
-              clang
-              rustToolchain
-              protobuf
-              taplo
-            ];
-          };
-        }
+          buildInputs = [
+            clang
+            rustToolchain
+            protobuf
+            taplo
+          ];
+        };
+      }
     );
 }

@@ -9,5 +9,5 @@ inputs.home-manager.lib.homeManagerConfiguration {
     inherit inputs pkgs;
     propheci = config.propheci;
   };
-  modules = [./homeManagerInitModule.nix];
+  modules = [ ./homeManagerInitModule.nix ];
 }

@@ -8,62 +8,65 @@
     nix-filter.url = "github:numtide/nix-filter";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils,
-    nix-filter,
-    ...
-  } @ inputs:
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {inherit system;};
-      poetry2nix = inputs.poetry2nix.lib.mkPoetry2Nix {inherit pkgs;};
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      nix-filter,
+      ...
+    }@inputs:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+        poetry2nix = inputs.poetry2nix.lib.mkPoetry2Nix { inherit pkgs; };
 
-      python = pkgs.python312;
-      pythonPackages = pkgs.python312Packages;
-      projectDir = {forEnv}:
-        nix-filter {
-          name = "<name>";
-          root = ./.;
-          include =
-            [
-              "pyproject.toml"
-              "poetry.lock"
-            ]
-            ++ pkgs.lib.optionals (!forEnv) [
-              ./name
-            ];
-        };
-    in
-      with pkgs; {
+        python = pkgs.python312;
+        pythonPackages = pkgs.python312Packages;
+        projectDir =
+          { forEnv }:
+          nix-filter {
+            name = "<name>";
+            root = ./.;
+            include =
+              [
+                "pyproject.toml"
+                "poetry.lock"
+              ]
+              ++ pkgs.lib.optionals (!forEnv) [
+                ./name
+              ];
+          };
+      in
+      with pkgs;
+      {
         devShells.default = (
           (poetry2nix.mkPoetryEnv {
             inherit python;
-            projectDir = projectDir {forEnv = true;};
+            projectDir = projectDir { forEnv = true; };
             preferWheels = true;
-          })
-          .env
-          .overrideAttrs (oldAttrs: {
-            name = "<name>";
-            buildInputs =
-              oldAttrs.buildInputs
-              ++ [
+          }).env.overrideAttrs
+            (oldAttrs: {
+              name = "<name>";
+              buildInputs = oldAttrs.buildInputs ++ [
                 pyright
                 ruff
                 poetry
                 pythonPackages.ipython
               ];
-          })
+            })
         );
 
         packages = rec {
           name = (
             callPackage ./nix/pkgs/name.nix {
               inherit poetry2nix python pythonPackages;
-              projectDir = projectDir {forEnv = false;};
+              projectDir = projectDir { forEnv = false; };
             }
           );
           default = name;
         };
-      });
+      }
+    );
 }

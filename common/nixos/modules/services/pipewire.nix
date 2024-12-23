@@ -3,11 +3,13 @@
   lib,
   config,
   ...
-}: {
-  config = let
-    pro_hw = config.propheci.hardware;
-    pro_services = config.propheci.services;
-  in
+}:
+{
+  config =
+    let
+      pro_hw = config.propheci.hardware;
+      pro_services = config.propheci.services;
+    in
     lib.mkIf pro_services.pipewire.enable {
       assertions = [
         {
@@ -28,6 +30,6 @@
 
       hardware.alsa.enablePersistence = true;
 
-      environment.systemPackages = [pkgs.pulsemixer];
+      environment.systemPackages = [ pkgs.pulsemixer ];
     };
 }

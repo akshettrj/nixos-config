@@ -2,11 +2,13 @@
   config,
   lib,
   ...
-}: {
-  config = let
-    pro_services = config.propheci.services;
-    pro_user = config.propheci.user;
-  in
+}:
+{
+  config =
+    let
+      pro_services = config.propheci.services;
+      pro_user = config.propheci.user;
+    in
     lib.mkIf pro_services.openssh.server.enable {
       services.openssh = {
         enable = true;

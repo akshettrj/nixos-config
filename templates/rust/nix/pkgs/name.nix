@@ -3,7 +3,8 @@
   makeRustPlatform,
   toolchain,
   nix-filter,
-}: let
+}:
+let
   pkgName = "<name>";
 
   localSrc = nix-filter {
@@ -16,11 +17,10 @@
     ];
   };
 in
-  (makeRustPlatform {
-    cargo = toolchain;
-    rustc = toolchain;
-  })
-  .buildRustPackage
+(makeRustPlatform {
+  cargo = toolchain;
+  rustc = toolchain;
+}).buildRustPackage
   {
     name = pkgName;
     version = "0.1.0";

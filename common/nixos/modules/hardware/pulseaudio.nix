@@ -3,11 +3,13 @@
   lib,
   config,
   ...
-}: {
-  config = let
-    pro_hw = config.propheci.hardware;
-    pro_services = config.propheci.services;
-  in
+}:
+{
+  config =
+    let
+      pro_hw = config.propheci.hardware;
+      pro_services = config.propheci.services;
+    in
     lib.mkIf pro_hw.pulseaudio.enable {
       assertions = [
         {
@@ -21,6 +23,6 @@
         support32Bit = true;
       };
 
-      environment.systemPackages = [pkgs.pulsemixer];
+      environment.systemPackages = [ pkgs.pulsemixer ];
     };
 }

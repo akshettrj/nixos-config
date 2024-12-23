@@ -3,13 +3,15 @@
   lib,
   pkgs,
   ...
-}: {
-  config = let
-    pro_media = config.propheci.programs.media;
-    pro_docs = pro_media.documents;
+}:
+{
+  config =
+    let
+      pro_media = config.propheci.programs.media;
+      pro_docs = pro_media.documents;
 
-    pro_theming = config.propheci.theming;
-  in
+      pro_theming = config.propheci.theming;
+    in
     lib.mkIf (pro_media.enable && pro_docs.zathura.enable) {
       programs.zathura = {
         enable = true;

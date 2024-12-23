@@ -3,12 +3,14 @@
   pkgs,
   lib,
   ...
-}: {
-  config = let
-    pro_shells = config.propheci.shells;
+}:
+{
+  config =
+    let
+      pro_shells = config.propheci.shells;
 
-    shells_meta = import ../../../metadata/programs/shells/metadata.nix {inherit pkgs;};
-  in
+      shells_meta = import ../../../metadata/programs/shells/metadata.nix { inherit pkgs; };
+    in
     lib.mkIf config.propheci.programs.file_explorers.lf.enable {
       programs.lf = {
         enable = true;

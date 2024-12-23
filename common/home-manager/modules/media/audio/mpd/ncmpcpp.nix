@@ -2,11 +2,13 @@
   config,
   lib,
   ...
-}: {
-  config = let
-    pro_media = config.propheci.programs.media;
-    pro_mpd = config.propheci.programs.media.audio.mpd;
-  in
+}:
+{
+  config =
+    let
+      pro_media = config.propheci.programs.media;
+      pro_mpd = config.propheci.programs.media.audio.mpd;
+    in
     lib.mkIf (pro_media.enable && pro_mpd.enable && pro_mpd.ncmpcpp.enable) {
       programs.ncmpcpp = {
         enable = true;

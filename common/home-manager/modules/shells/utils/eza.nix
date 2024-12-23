@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: {
-  config = let
-    pro_shells = config.propheci.shells;
-  in
+}:
+{
+  config =
+    let
+      pro_shells = config.propheci.shells;
+    in
     lib.mkIf pro_shells.eza.enable {
       programs.eza = {
         enable = true;

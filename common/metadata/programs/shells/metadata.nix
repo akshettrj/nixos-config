@@ -1,4 +1,5 @@
-{pkgs}: {
+{ pkgs }:
+{
   bash = rec {
     pkg = pkgs.bash;
     bin = "${pkg}/bin/bash";
