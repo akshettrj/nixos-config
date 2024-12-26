@@ -165,7 +165,7 @@
 
           ''
           + lib.optionalString pro_file_explorers.lf.enable # sh
-          
+
           ''
 
             ###################################################
@@ -194,7 +194,7 @@
           ''
           + lib.optionalString
           (pro_deskenvs.enable && builtins.length (lib.attrNames pro_deskenvs.defaults) > 0) # sh
-          
+
           ''
 
             current_tty="$(tty)"
@@ -205,7 +205,7 @@
                     cmd = deskenvs_meta."${deskenv}".cmd;
                   in (lib.strings.concatStringsSep "\n" [
                     ''if [[ "$current_tty" == "${tty}" ]]; then''
-                    "    pgrep ${cmd} || ${cmd} &"
+                    "    pgrep \"$(basename ${cmd})\" || ${cmd} &"
                     ''el''
                   ])
                 ) (pro_deskenvs.defaults)
