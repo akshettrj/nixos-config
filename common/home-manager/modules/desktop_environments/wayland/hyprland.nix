@@ -76,7 +76,6 @@
 
     startup_script = let
       clipboard_manager_meta = clips_meta."${clipboard_manager}";
-      hyprpaper = "${hyprpaper_pkg}/bin/hyprpaper";
       hyprctl = "${hyprland_pkg}/bin/hyprctl";
       nm-applet = "${pkgs.networkmanagerapplet}/bin/nm-applet";
     in
@@ -99,7 +98,7 @@
 
               ''
               + lib.optionalString mon.enabled # sh
-              
+
               ''
 
                 for wk in ${toString mon.workspaces}; do
@@ -109,11 +108,9 @@
           ) (pro_deskenvs.hyprland.monitors)
         )}
 
-        pidof ${hyprpaper} && killall -9 ${hyprpaper}
         pidof ${clipboard_manager_meta.bin} && killall -9 ${clipboard_manager_meta.bin}
         pidof ${nm-applet} && killall -9 ${nm-applet}
 
-        ${hyprpaper} &
         ${clipboard_manager_meta.cmd} &
         ${nm-applet} &
 
@@ -453,18 +450,19 @@
           '';
       };
 
-      xdg.configFile."hypr/hyprpaper.conf".text = ''
+      services.hyprpaper = {
+        enable = true;
+        package = hyprpaper_pkg;
+        settings = {
+          preload = [pro_theming.wallpaper];
+          ipc = "off";
+          splash = false;
+          wallpaper = [
+            ",${pro_theming.wallpaper}"
+          ];
+        };
+      };
 
-        preload = ${pro_theming.wallpaper}
-        ipc = off
-        splash = false
-        wallpaper = ,${pro_theming.wallpaper}
-
-      '';
-
-      home.packages = [
-        hyprpaper_pkg
-        pkgs.networkmanagerapplet
-      ];
+      home.packages = [pkgs.networkmanagerapplet];
     };
 }
