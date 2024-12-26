@@ -8,8 +8,6 @@
   imports = [
     ../../options.nix
     ./modules
-
-    inputs.nur.hmModules.nur
   ];
 
   config = let

@@ -76,8 +76,8 @@
       enable = true;
       fonts = {
         nerdfonts = [
-          "JetBrainsMono"
-          "Iosevka"
+          "jetbrains-mono"
+          "iosevka"
         ];
         main = {
           name = "Iosevka NF";
