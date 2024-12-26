@@ -93,6 +93,7 @@
         associations = {
           added = {
             "x-scheme-handler/tg" = ["org.telegram.desktop.desktop"];
+            "x-scheme-handler/tonsite" = ["org.telegram.desktop.desktop"];
             "x-scheme-handler/msteams" = ["teams-for-linux.desktop"];
           };
         };
@@ -103,6 +104,7 @@
           ];
         in {
           "x-scheme-handler/tg" = ["org.telegram.desktop.desktop"];
+          "x-scheme-handler/tonsite" = ["org.telegram.desktop.desktop"];
           "x-scheme-handler/msteams" = ["teams-for-linux.desktop"];
           "application/pdf" = ["org.pwmt.zathura-pdf-mupdf.desktop"];
           "image/png" = image_desktop_entries;
