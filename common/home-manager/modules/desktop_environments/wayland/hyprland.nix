@@ -37,26 +37,24 @@
       inherit config inputs pkgs;
     };
 
-    normal_desktops =
-      lib.listToAttrs (
-        builtins.map (ws: {
-          name = toString ws;
-          value = toString ws;
-        }) (lib.range 1 9)
-      )
-      // {
-        "0" = "10";
-      };
-    alt_desktops =
-      lib.listToAttrs (
-        builtins.map (ws: {
-          name = toString (ws - 10);
-          value = toString ws;
-        }) (lib.range 11 19)
-      )
-      // {
-        "0" = "20";
-      };
+    normal_desktops = (
+      lib.range 1 9
+      |> builtins.map toString
+      |> builtins.map (ws: {
+           name = ws;
+           value = ws;
+         })
+      |> lib.listToAttrs
+    ) // { "0" = "10"; };
+
+    alt_desktops = (
+      lib.range 11 19
+      |> builtins.map (ws: {
+           name = toString (ws - 10);
+           value = toString ws;
+         })
+      |> lib.listToAttrs
+    ) // { "0" = "20"; };
 
     launcher = pro_deskenvs.hyprland.launcher;
     ss_tool = pro_deskenvs.hyprland.screenshot_tool;
