@@ -180,6 +180,7 @@
           enable = true;
           font_size = 11;
         };
+        ghostty.enable = true;
       };
       browsers = {
         enable = true;

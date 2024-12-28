@@ -339,6 +339,9 @@
             enable = mkOption {type = types.bool;};
             font_size = mkOption {type = types.number;};
           };
+          ghostty = {
+            enable = mkOption {type = types.bool;};
+          };
         };
         browsers = {
           enable = mkOption {type = types.bool;};

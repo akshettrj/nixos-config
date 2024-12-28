@@ -44,10 +44,13 @@
       url = "github:Alexays/Waybar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Terminals
     wezterm = {
       url = "github:wez/wezterm?dir=nix";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+    ghostty.url = "github:ghostty-org/ghostty";
 
     # Text editors
     neovim.url = "github:nix-community/neovim-nightly-overlay";

@@ -23,4 +23,10 @@ in {
     cmd = "${bin} start --always-new-process";
     exec = "${cmd} -e";
   };
+  ghostty = rec {
+    pkg = inputs.ghostty.packages."${pkgs.system}".default;
+    bin = pkgs.lib.getBin pkg;
+    cmd = "${bin}";
+    exec = "${cmd} -e";
+  };
 }
