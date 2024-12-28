@@ -24,7 +24,7 @@
         pythonPackages = pkgs.python312Packages;
         projectDir = {forEnv}:
           nix-filter {
-            name = "<name>";
+            name = "name";
             root = ./.;
             include =
               [
@@ -46,14 +46,15 @@
             .env
             .overrideAttrs
             (oldAttrs: {
-              name = "<name>";
+              name = "name";
               buildInputs =
-                oldAttrs.buildInputs
+                (oldAttrs.buildInputs or [])
                 ++ [
-                  pyright
-                  ruff
                   poetry
+                  pyright
                   pythonPackages.ipython
+                  ruff
+                  taplo
                 ];
             })
           );
