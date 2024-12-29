@@ -6,6 +6,7 @@
   config = let
     pro_navidrome = config.propheci.services.self_hosted.navidrome;
     pro_nginx = config.propheci.services.nginx;
+    pro_user = config.propheci.user;
   in
     lib.mkIf pro_navidrome.enable {
       assertions = [
@@ -19,6 +20,7 @@
       ];
 
       users.users.navidrome.extraGroups = ["acme"];
+      users.users."${pro_user.username}".extraGroups = ["navidrome"];
 
       services.navidrome = {
         enable = true;
