@@ -295,6 +295,7 @@
           ffmpeg.enable = mkEnableOption "ffmpeg";
           rclone.enable = mkEnableOption "rclone";
           obs.enable = mkEnableOption "obs";
+          odesli.enable = mkEnableOption "odesli-rs";
         };
         social_media = {
           telegram.enable = mkEnableOption "telegram";

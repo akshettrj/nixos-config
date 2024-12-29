@@ -78,6 +78,9 @@
     watgbridge = {
       url = "github:akshettrj/watgbridge";
     };
+    odesli = {
+      url = "github:Propheci/odesli-rs?dir=nix";
+    };
   };
 
   outputs = {

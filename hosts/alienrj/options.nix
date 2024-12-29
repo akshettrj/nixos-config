@@ -145,6 +145,7 @@
         ffmpeg.enable = true;
         rclone.enable = true;
         obs.enable = true;
+        odesli.enable = true;
       };
       social_media = {
         telegram.enable = true;
