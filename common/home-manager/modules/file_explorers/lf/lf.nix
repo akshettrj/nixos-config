@@ -8,12 +8,14 @@
   config =
     let
       pro_shells = config.propheci.shells;
+      pro_theming = config.propheci.theming;
 
-      shells_meta = import ../../../metadata/programs/shells/metadata.nix { inherit pkgs; };
+      shells_meta = import ../../../../metadata/programs/shells/metadata.nix { inherit pkgs; };
     in
     lib.mkIf config.propheci.programs.file_explorers.lf.enable {
       programs.lf = {
         enable = true;
+        package = if pro_theming.enable then (import ./wrapper.nix {inherit pkgs;}) else pkgs.lf;
         settings = {
           shell = shells_meta."${pro_shells.main}".bin;
           shellopts = "-euy";
@@ -24,6 +26,7 @@
           icons = true;
           preview = true;
           drawbox = true;
+          cleaner = "${import ./cleaner.nix {inherit config pkgs;}}";
         };
         keybindings = {
           "<enter>" = "shell";
@@ -58,6 +61,10 @@
               }}
             '';
           };
+        previewer = {
+          keybinding = "i";
+          source = import ./previewer.nix { inherit config pkgs; };
+        };
         extraConfig = ''
           %[ $LF_LEVEL -eq 1 ] || echo "Warning: You're in a nested lf instance! [LEVEL $LF_LEVEL]"
         '';
