@@ -206,6 +206,11 @@
             enable = mkEnableOption "adguard dns";
             open_firewall = mkOption {type = types.bool;};
             port = mkOption {type = types.port;};
+            nginx = {
+              enable = mkOption {type = types.bool;};
+              hostname = mkOption {type = types.str;};
+              enable_ssl = mkOption {type = types.bool;};
+            };
           };
           vikunja = {
             enable = mkEnableOption "vikunja";
