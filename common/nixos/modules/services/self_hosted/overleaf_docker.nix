@@ -42,7 +42,7 @@
         };
 
         overleaf = {
-          image = "sharelatex:${pro_overleaf.version}";
+          image = "sharelatex/sharelatex:${pro_overleaf.version}";
           environment = let
             redis = "overleaf-redis";
           in {

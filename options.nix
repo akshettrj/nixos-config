@@ -177,6 +177,15 @@
         self_hosted = {
           overleaf = {
             enable = mkEnableOption "Overleaf";
+            version = mkOption {type = types.str;};
+            data_dir = mkOption {
+              type = types.oneOf [
+                types.str
+                types.path
+              ];
+            };
+            hostname = mkOption {type = types.str;};
+            port = mkOption {type = types.port;};
             nginx = {
               enable = mkOption {type = types.bool;};
               hostname = mkOption {type = types.str;};
