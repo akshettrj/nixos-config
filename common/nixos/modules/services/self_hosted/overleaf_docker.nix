@@ -56,12 +56,32 @@
             REDIS_HOST = redis;
           };
           ports = [
-            "localhost:${pro_overleaf.port}:80"
+            "${pro_overleaf.hostname}:${pro_overleaf.port}:80"
           ];
           volumes = [
             "${pro_overleaf.data_dir}-db:/data/db"
           ];
           extraOptions = ["--network=overleaf-net"];
+        };
+      };
+
+      services.nginx = lib.mkIf pro_overleaf.nginx.enable {
+        virtualHosts."${pro_overleaf.nginx.hostname}" = let
+          certDir = config.security.acme.certs."${pro_overleaf.hostname}".directory;
+        in {
+          forceSSL = pro_overleaf.nginx.enable_ssl;
+          sslCertificate = "${certDir}/cert.pem";
+          sslCertificateKey = "${certDir}/key.pem";
+          locations."/" = {
+            proxyPass = "http://localhost:${toString pro_overleaf.port}";
+            extraConfig = ''
+              proxy_http_version 1.1;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection 'upgrade';
+              proxy_set_header Host $host;
+              proxy_cache_bypass $http_upgrade;
+            '';
+          };
         };
       };
     };
