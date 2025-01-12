@@ -31,7 +31,8 @@
         };
 
         overleaf-db = {
-          image = "mongo:4.4";
+          image = "mongo:5.0.31-rc0";
+          cmd = ["--replSet" "rs0"];
           environment = {
             FERRETDB_HANDLER = "sqlite";
           };
@@ -46,13 +47,13 @@
           environment = let
             redis = "overleaf-redis";
           in {
-            SHARELATEX_APP_NAME = "Overleaf (The PropheC)";
+            OVERLEAF_APP_NAME = "Overleaf (The PropheC)";
 
             ENABLED_LINKED_FILE_TYPES = "project_file,project_output_file";
             ENABLE_CONVERSIONS = "true";
 
-            SHARELATEX_MONGO_URL = "mongodb://overleaf-db/overleaf";
-            SHARELATEX_REDIS_HOST = redis;
+            OVERLEAF_MONGO_URL = "mongodb://overleaf-db/overleaf";
+            OVERLEAF_REDIS_HOST = redis;
             REDIS_HOST = redis;
           };
           ports = [
