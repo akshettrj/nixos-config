@@ -27,7 +27,7 @@
 
     # Various Services
     services = {
-      virtualisation.enable = true;
+      virtualisation.enable = false;
       printing.enable = false;
       firewall = {
         enable = true;
