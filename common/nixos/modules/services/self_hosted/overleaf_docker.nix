@@ -31,7 +31,7 @@
         };
 
         overleaf-db = {
-          image = "mono:4.4";
+          image = "mongo:4.4";
           environment = {
             FERRETDB_HANDLER = "sqlite";
           };
@@ -51,15 +51,15 @@
             ENABLED_LINKED_FILE_TYPES = "project_file,project_output_file";
             ENABLE_CONVERSIONS = "true";
 
-            SHARELATEX_MONGO_URL = "mongodb://overleaf-db/sharelatex";
+            SHARELATEX_MONGO_URL = "mongodb://overleaf-db/overleaf";
             SHARELATEX_REDIS_HOST = redis;
             REDIS_HOST = redis;
           };
           ports = [
-            "0.0.0.0:${toString pro_overleaf.port}:80"
+            "${toString pro_overleaf.port}:80"
           ];
           volumes = [
-            "${pro_overleaf.data_dir}:/var/lib/sharelatex"
+            "${pro_overleaf.data_dir}:/var/lib/overleaf"
           ];
           extraOptions = ["--network=overleaf-net"];
         };
