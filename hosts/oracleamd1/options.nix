@@ -32,6 +32,17 @@
 
     # Various Services
     services = {
+      virtualisation = {
+        enable = true;
+        docker = {
+          enable = true;
+          rootless = true;
+        };
+        containers = {
+          enable = true;
+          backend = "docker";
+        };
+      };
       printing.enable = false;
       firewall = {
         enable = true;
@@ -51,6 +62,9 @@
       tailscale.enable = true;
       xdg_portal.enable = false;
       telegram_bot_api.enable = false;
+      self_hosted = {
+        overleaf.enable = true;
+      };
     };
 
     # Nix/NixOS specific
