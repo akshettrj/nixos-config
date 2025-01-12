@@ -46,7 +46,7 @@
       printing.enable = false;
       firewall = {
         enable = true;
-        tcp_ports = [22];
+        tcp_ports = [22 80 443];
         udp_ports = [];
       };
       pipewire.enable = false;
