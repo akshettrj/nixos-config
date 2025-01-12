@@ -36,6 +36,7 @@
 
     # Various Services
     services = {
+      docker.enable = false;
       printing.enable = false;
       firewall = {
         enable = true;

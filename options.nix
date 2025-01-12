@@ -123,6 +123,7 @@
 
       # Various Services
       services = {
+        docker.enable = mkOption {type = types.bool;};
         printing.enable = mkOption {type = types.bool;};
         firewall = {
           enable = mkOption {type = types.bool;};
@@ -174,6 +175,14 @@
         };
         nginx.enable = mkOption {type = types.bool;};
         self_hosted = {
+          overleaf = {
+            enable = mkEnableOption "Overleaf";
+            nginx = {
+              enable = mkOption {type = types.bool;};
+              hostname = mkOption {type = types.str;};
+              enable_ssl = mkOption {type = types.bool;};
+            };
+          };
           adguard = {
             enable = mkEnableOption "adguard dns";
             open_firewall = mkOption {type = types.bool;};

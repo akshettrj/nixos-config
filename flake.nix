@@ -81,6 +81,11 @@
     odesli = {
       url = "github:Propheci/odesli-rs?dir=nix";
     };
+
+    rubikoid_base = {
+      url = "github:Rubikoid/nix-base";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {

@@ -184,5 +184,7 @@
 
     # Fights with nix-index
     programs.command-not-found.enable = false;
+
+    virtualisation.docker.enable = pro_services.docker.enable;
   };
 }
