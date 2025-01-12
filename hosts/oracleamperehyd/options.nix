@@ -27,6 +27,17 @@
 
     # Various Services
     services = {
+      virtualisation = {
+        enable = true;
+        docker = {
+          enable = true;
+          rootless = true;
+        };
+        containers = {
+          enable = true;
+          backend = "docker";
+        };
+      };
       printing.enable = false;
       firewall = {
         enable = true;
@@ -56,6 +67,7 @@
       };
       nginx.enable = true;
       self_hosted = {
+        overleaf.enable = true;
         vikunja = {
           enable = true;
           settings = {

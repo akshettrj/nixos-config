@@ -56,10 +56,10 @@
             REDIS_HOST = redis;
           };
           ports = [
-            "${pro_overleaf.hostname}:${pro_overleaf.port}:80"
+            "0.0.0.0:${toString pro_overleaf.port}:80"
           ];
           volumes = [
-            "${pro_overleaf.data_dir}-db:/data/db"
+            "${pro_overleaf.data_dir}:/var/lib/sharelatex"
           ];
           extraOptions = ["--network=overleaf-net"];
         };

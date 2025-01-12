@@ -123,7 +123,17 @@
 
       # Various Services
       services = {
-        docker.enable = mkOption {type = types.bool;};
+        virtualisation = {
+          enable = mkOption {type = types.bool;};
+          docker = {
+            enable = mkOption {type = types.bool;};
+            rootless = mkOption {type = types.bool;};
+          };
+          containers = {
+            enable = mkOption {type = types.bool;};
+            backend = mkOption {type = types.enum ["docker" "podman"];};
+          };
+        };
         printing.enable = mkOption {type = types.bool;};
         firewall = {
           enable = mkOption {type = types.bool;};
