@@ -27,6 +27,8 @@
 
     # Various Services
     services = {
+      virtualisation.enable = false;
+      nginx.enable = false;
       printing.enable = false;
       firewall = {
         enable = true;
@@ -57,6 +59,7 @@
       nix_community_cache = true;
       hyprland_cache = true;
       helix_cache = true;
+      wezterm_cache = false;
     };
 
     # Appearance
@@ -89,6 +92,7 @@
           enable = true;
           nightly = false;
         };
+        zeditor.enable = false;
       };
       terminals.enable = false;
       browsers.enable = false;
