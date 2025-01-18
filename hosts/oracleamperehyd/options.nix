@@ -57,6 +57,12 @@
       };
       nginx.enable = true;
       self_hosted = {
+        dokuwiki = {
+          enable = true;
+          disable_registration = true;
+          hostname = "wiki.propheci.xyz";
+          nginx.enable_ssl = true;
+        };
         vikunja = {
           enable = true;
           settings = {

@@ -185,6 +185,14 @@
         };
         nginx.enable = mkOption {type = types.bool;};
         self_hosted = {
+          dokuwiki = {
+            enable = mkEnableOption "DokuWiki";
+            disable_registration = mkOption {type = types.bool;};
+            hostname = mkOption {type = types.str;};
+            nginx = {
+              enable_ssl = mkOption {type = types.bool;};
+            };
+          };
           overleaf = {
             enable = mkEnableOption "Overleaf";
             version = mkOption {type = types.str;};
