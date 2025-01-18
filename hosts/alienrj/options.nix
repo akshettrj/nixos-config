@@ -143,6 +143,7 @@
       };
       extra_utilities = {
         drivedlgo.enable = true;
+        pleezer.enable = true;
         ffmpeg.enable = true;
         rclone.enable = true;
         obs.enable = true;

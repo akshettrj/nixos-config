@@ -334,9 +334,10 @@
         extra_utilities = {
           drivedlgo.enable = mkEnableOption "drivedlgo";
           ffmpeg.enable = mkEnableOption "ffmpeg";
-          rclone.enable = mkEnableOption "rclone";
           obs.enable = mkEnableOption "obs";
           odesli.enable = mkEnableOption "odesli-rs";
+          pleezer.enable = mkEnableOption "drivedlgo";
+          rclone.enable = mkEnableOption "rclone";
         };
         social_media = {
           telegram.enable = mkEnableOption "telegram";
