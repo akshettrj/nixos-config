@@ -1512,11 +1512,11 @@
         "nixpkgs": "nixpkgs_8"
       },
       "locked": {
-        "lastModified": 1737198637,
-        "narHash": "sha256-8xZhJV6SH8cee0ejudKT/4kj/jnP4eJgaEynueyZVDI=",
+        "lastModified": 1737213186,
+        "narHash": "sha256-p9V9WB925EqBCMCiBaEw5Mb4uC8u5WghIn7pRg4i5WM=",
         "owner": "Propheci",
         "repo": "NixUR",
-        "rev": "ec36d8331cc61b5c0141c1121bae29a35d76fa29",
+        "rev": "3dd4f58ec5f7c69b9f802b4e748b28e2e8aea4b7",
         "type": "github"
       },
       "original": {
@@ -1595,11 +1595,11 @@
     "propheci_secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1736702685,
-        "narHash": "sha256-4UJBo49kqnTU/kdW/wcn7yqmnSO4097HHxNzZ09dKsw=",
+        "lastModified": 1737220294,
+        "narHash": "sha256-eneUn2y+LV3QSE9bu5/AQVXFRnp1Vtibd19a5WGt7U8=",
         "ref": "refs/heads/main",
-        "rev": "159122e030481eb44f6f46a533c53021e62e5ef6",
-        "revCount": 39,
+        "rev": "8abb3f454d1e1c25ef5e5fc1f6af5f571e76bc24",
+        "revCount": 40,
         "type": "git",
         "url": "ssh://git@github.com/akshettrj/nixos_flake_secrets.git"
       },

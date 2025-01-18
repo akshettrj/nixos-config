@@ -31,7 +31,7 @@
               useheading = 1;
 
               # Authentication Settings
-              useacl = 1;
+              useacl = true;
               autopasswd = 0;
               passcrypt = "argon2id";
               superuser = "@admin";
