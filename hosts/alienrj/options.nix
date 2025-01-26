@@ -259,8 +259,8 @@
       main = "zsh";
       aliases = import ../../common/home-manager/modules/shells/aliases.nix;
       bash.enable = true;
-      fish.enable = false;
-      nushell.enable = false;
+      fish.enable = true;
+      nushell.enable = true;
       zsh.enable = true;
 
       eza.enable = true;
