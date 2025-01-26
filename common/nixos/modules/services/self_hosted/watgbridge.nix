@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 {
@@ -19,6 +20,12 @@
               after = [ "network.target" ] ++ setting.after;
               requires = [ "network.target" ] ++ setting.requires;
               wantedBy = [ ] ++ lib.optionals setting.enabled [ "multi-user.target" ];
+
+              path = with pkgs; [
+                ffmpeg
+                imagemagick
+                libwebp
+              ];
 
               serviceConfig =
                 {
