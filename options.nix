@@ -193,6 +193,13 @@
               enable_ssl = mkOption {type = types.bool;};
             };
           };
+          firefly_iii = {
+            enable = mkEnableOption "Firefly-iii";
+            hostname = mkOption {type = types.str;};
+            nginx = {
+              enable_ssl = mkOption {type = types.bool;};
+            };
+          };
           overleaf = {
             enable = mkEnableOption "Overleaf";
             version = mkOption {type = types.str;};

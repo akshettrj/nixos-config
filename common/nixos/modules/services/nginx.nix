@@ -9,6 +9,12 @@
     lib.mkIf pro_nginx.enable {
       services.nginx = {
         enable = true;
+        recommendedTlsSettings = false;
+        recommendedGzipSettings = false;
+        recommendedOptimisation = false;
+        recommendedZstdSettings = false;
+        recommendedProxySettings = false;
+        recommendedBrotliSettings = false;
       };
 
       users.users.nginx.extraGroups = ["acme"];

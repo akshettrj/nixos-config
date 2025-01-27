@@ -57,6 +57,11 @@
       };
       nginx.enable = true;
       self_hosted = {
+        firefly_iii = {
+          enable = true;
+          hostname = "ff.propheci.xyz";
+          nginx.enable_ssl = true;
+        };
         dokuwiki = {
           enable = true;
           disable_registration = true;
