@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   pkgs,
   ...
@@ -7,6 +8,8 @@
     ./options.nix
     ./hardware-configuration.nix
     ../../common/nixos/configuration.nix
+
+    "${inputs.propheci_secrets}/hosts/raspi"
   ];
 
   boot.loader.grub.enable = lib.mkForce false;

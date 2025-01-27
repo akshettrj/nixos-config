@@ -43,9 +43,6 @@
           password_authentication = true;
           root_login = "prohibit-password";
           x11_forwarding = false;
-          public_keys = [
-            "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6S6G1MBgMoyiqroAz3gSKL548Xxr5XJ7CzRQECjc6ZotChGnRRENc3RjhAcHEi9dMKa3QOyfDSjw5/Cb59e7umpO6nhFtppIspzaR7MRD4WSveI3gOJ4faAfVYjeKLzITnvwHXYS6rJlVJjOKSFkq11cNhUhLi+T1U/wwNWVnCPBLid2APzE9bw2Mlz31QJrfS4d2sJr04rwEnmRkRCKqWvJazOMrINehZ1PEfYLDPk0ogJhWugG39unyYFgRuMRsXwicSeX/Y+aPJQ2t3sjcGm60w18r2JDyXr41wRvb+jTpPDdl4hNEebe28XrODfYfFsOHhTHgbZalYF9sqwUWly2KLvW/4qtn4IM+HINdMdv/14NgSjqj/H2hAhhlHIqZIXoTsV4xw7Uo8oVKbmcAl4kR4baFbkriKFBeGFh5LMi6A8+NL/Uyb8mBwUmMujdasTqHBB3iB70G2G3qEp/hgS0JrGFkJWkOps12I6JiK4zXQWAgLQElWsvcahfci8E="
-          ];
         };
       };
       tailscale.enable = true;
@@ -70,7 +67,6 @@
         enable = true;
         user = {
           name = "Akshett Rai Jindal";
-          email = "jindalakshett@gmail.com";
         };
         delta.enable = true;
         default_branch = "main";
