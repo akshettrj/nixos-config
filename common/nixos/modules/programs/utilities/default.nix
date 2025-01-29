@@ -6,5 +6,6 @@
     ./odesli.nix
     ./pleezer.nix
     ./rclone.nix
+    ./ueberzugpp.nix
   ];
 }

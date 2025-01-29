@@ -341,6 +341,7 @@
         extra_utilities = {
           drivedlgo.enable = mkEnableOption "drivedlgo";
           ffmpeg.enable = mkEnableOption "ffmpeg";
+          ueberzugpp.enable = mkEnableOption "ueberzugpp";
           obs.enable = mkEnableOption "obs";
           odesli.enable = mkEnableOption "odesli-rs";
           pleezer.enable = mkEnableOption "drivedlgo";
@@ -416,11 +417,7 @@
           main = mkOption {type = types.enum known_file_explorers;};
           backup = mkOption {type = types.enum known_file_explorers;};
           lf.enable = mkOption {type = types.bool;};
-          yazi = {
-            enable = mkOption {type = types.bool;};
-            enableUeberzugpp = mkOption {type = types.bool;};
-            enableFfmpeg = mkOption {type = types.bool;};
-          };
+          yazi.enable = mkOption {type = types.bool;};
         };
         launchers = {
           enable = mkOption {type = types.bool;};

@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: {
   config = let
@@ -17,11 +16,5 @@
         enableNushellIntegration = lib.mkIf pro_shells.nushell.enable true;
         enableZshIntegration = lib.mkIf pro_shells.zsh.enable true;
       };
-
-      home.packages = lib.optionals pro_explorers.yazi.enableUeberzugpp [pkgs.ueberzugpp];
-
-      propheci.programs.extra_utilities.ffmpeg.enable = lib.mkIf pro_explorers.yazi.enableFfmpeg (
-        lib.mkForce true
-      );
     };
 }
