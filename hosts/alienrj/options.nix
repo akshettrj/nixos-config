@@ -148,6 +148,7 @@
         rclone.enable = true;
         obs.enable = true;
         odesli.enable = true;
+        ueberzugpp.enable = true;
       };
       social_media = {
         telegram.enable = true;
@@ -200,11 +201,7 @@
         main = "lf";
         backup = "yazi";
         lf.enable = true;
-        yazi = {
-          enable = true;
-          enableUeberzugpp = true;
-          enableFfmpeg = true;
-        };
+        yazi.enable = true;
       };
       launchers = {
         enable = true;
