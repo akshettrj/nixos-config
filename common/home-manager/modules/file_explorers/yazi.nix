@@ -15,6 +15,27 @@
         enableFishIntegration = lib.mkIf pro_shells.fish.enable true;
         enableNushellIntegration = lib.mkIf pro_shells.nushell.enable true;
         enableZshIntegration = lib.mkIf pro_shells.zsh.enable true;
+
+        settings = {
+          manager = {
+            # Sorting
+            sort_by = "natural";
+            sort_dir_first = true;
+            sort_sensitive = false;
+
+            # Visibility
+            show_hidden = true;
+            show_symlink = true;
+
+            title_format = "[yazi]: {cwd}";
+          };
+
+          preview = {
+            wrap = "yes";
+            tab_size = 2;
+            image_delay = 100;
+          };
+        };
       };
     };
 }

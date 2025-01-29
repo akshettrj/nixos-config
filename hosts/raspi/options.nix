@@ -96,11 +96,7 @@
         main = "lf";
         backup = "yazi";
         lf.enable = true;
-        yazi = {
-          enable = true;
-          enableUeberzugpp = false;
-          enableFfmpeg = false;
-        };
+        yazi.enable = true;
       };
       launchers.enable = false;
       screenshot_tools.enable = false;
