@@ -184,7 +184,7 @@
           enable = true;
           font_size = 11;
         };
-        ghostty.enable = true;
+        ghostty.enable = false;
       };
       browsers = {
         enable = true;
