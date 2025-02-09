@@ -429,8 +429,9 @@
           ];
         };
 
-        extraConfig =
-          # hyprlang
+        extraConfig = let
+          ydotool = "${pkgs.ydotool}/bin/ydotool";
+        in # hyprlang
           ''
 
             # SCREENSHOTS BINDINGS
@@ -443,8 +444,23 @@
             bind = , R, exec, $resetSubmap & ${ss_tools_meta."${ss_tool}".cmd.region}
             bind = , F, exec, $resetSubmap & ${ss_tools_meta."${ss_tool}".cmd.fullscreen}
 
-
             submap = reset
+
+            binde = , KP_HOME, exec, ${ydotool} mousemove -- -10 -10 && sleep 0.1   # Left-Up
+            binde = , KP_PRIOR, exec, ${ydotool} mousemove -- 10 -10 && sleep 0.1   # Right-Up
+            binde = , KP_END, exec, ${ydotool} mousemove -- -10 10 && sleep 0.1     # Left-Down
+            binde = , KP_NEXT, exec, ${ydotool} mousemove -- 10 10 && sleep 0.1     # Right-Down
+            binde = , KP_LEFT, exec, ${ydotool} mousemove -- -10 0 && sleep 0.1  # Left
+            binde = , KP_RIGHT, exec, ${ydotool} mousemove -- 10 0 && sleep 0.1  # Right
+            binde = , KP_UP, exec, ${ydotool} mousemove -- 0 -10 && sleep 0.1  # Up
+            binde = , KP_DOWN, exec, ${ydotool} mousemove -- 0 10 && sleep 0.1  # Down
+            bind = , KP_BEGIN, exec, ${ydotool} click C0
+            bind = , KP_DIVIDE, exec, ${ydotool} click 0x40
+            bind = , KP_MULTIPLY, exec, ${ydotool} click 0x42 0x82
+            bind = , KP_SUBTRACT, exec, ${ydotool} click 0x41 0x81
+            bind = , KP_INSERT, exec, sh -c 'if [ "$(cat /tmp/mouse_state)" = "40" ]; then echo "80" > /tmp/mouse_state && ${ydotool} click 0x80; else echo "40" > /tmp/mouse_state && ${ydotool} click 0x40; fi'
+            bind = , KP_Enter, exec, sudo pkill ${ydotool}d
+            bind = , KP_Add, exec, sudo ${ydotool}d --socket-perm=0666 --socket-path=/run/user/1000/.ydotool_socket
           '';
       };
 
