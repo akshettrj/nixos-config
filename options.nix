@@ -392,6 +392,7 @@
           };
           ghostty = {
             enable = mkOption {type = types.bool;};
+            use_official_package = mkOption {type = types.bool;};
           };
         };
         browsers = {

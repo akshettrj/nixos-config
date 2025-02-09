@@ -273,7 +273,7 @@
       wayland.enable = true;
       hyprland = {
         enable = true;
-        use_official_packages = true;
+        use_official_packages = false;
         scroll_factor = 0.2;
         launcher = "bemenu";
         screenlock = "swaylock";

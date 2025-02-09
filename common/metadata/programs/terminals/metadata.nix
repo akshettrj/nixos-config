@@ -10,6 +10,12 @@
     then inputs.wezterm.packages."${pkgs.system}".default
     else pkgs.wezterm
   );
+
+  ghostty_package = (
+    if pro_terminals.ghostty.use_official_package
+    then inputs.ghostty.packages."${pkgs.system}".default
+    else pkgs.ghostty
+  );
 in {
   alacritty = rec {
     pkg = pkgs.alacritty;
@@ -24,7 +30,7 @@ in {
     exec = "${cmd} -e";
   };
   ghostty = rec {
-    pkg = inputs.ghostty.packages."${pkgs.system}".default;
+    pkg = ghostty_package;
     bin = pkgs.lib.getBin pkg;
     cmd = "${bin}";
     exec = "${cmd} -e";
