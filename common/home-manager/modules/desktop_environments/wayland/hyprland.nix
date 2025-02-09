@@ -361,10 +361,6 @@
 
               # BROWSER
               "$mainMod, F1, exec, ${browsers_meta."${pro_browsers.main}".cmd}"
-
-              # # SCREENSHOTS
-              # "$mainMod SHIFT, S, exec, ${ss_tools_meta."${ss_tool}".cmd.region}"
-              # "$mainMod CONTROL, S, exec, ${ss_tools_meta."${ss_tool}".cmd.fullscreen}"
             ]
             ++ lib.optionals pro_services.pipewire.enable [
               "$mainMod, F6, exec, wpctl set-mute '@DEFAULT_AUDIO_SINK@' toggle"
@@ -431,9 +427,10 @@
 
         extraConfig = let
           ydotool = "${pkgs.ydotool}/bin/ydotool";
+
+          ss_group_help = "- Escape: Abort\\n- R: Region\\n- F: Fullscreen\\n- H: This help";
         in # hyprlang
           ''
-
             # SCREENSHOTS BINDINGS
             bind = $mainMod SHIFT, S, submap, screenshot
 
@@ -441,6 +438,7 @@
 
             bind = , Escape, submap, reset
 
+            bind = , H, exec, ${pkgs.libnotify}/bin/notify-send -- "Screenshot Keybinds" "${ss_group_help}"
             bind = , R, exec, $resetSubmap & ${ss_tools_meta."${ss_tool}".cmd.region}
             bind = , F, exec, $resetSubmap & ${ss_tools_meta."${ss_tool}".cmd.fullscreen}
 
@@ -450,10 +448,10 @@
             binde = , KP_PRIOR, exec, ${ydotool} mousemove -- 10 -10 && sleep 0.1   # Right-Up
             binde = , KP_END, exec, ${ydotool} mousemove -- -10 10 && sleep 0.1     # Left-Down
             binde = , KP_NEXT, exec, ${ydotool} mousemove -- 10 10 && sleep 0.1     # Right-Down
-            binde = , KP_LEFT, exec, ${ydotool} mousemove -- -10 0 && sleep 0.1  # Left
-            binde = , KP_RIGHT, exec, ${ydotool} mousemove -- 10 0 && sleep 0.1  # Right
-            binde = , KP_UP, exec, ${ydotool} mousemove -- 0 -10 && sleep 0.1  # Up
-            binde = , KP_DOWN, exec, ${ydotool} mousemove -- 0 10 && sleep 0.1  # Down
+            binde = , KP_LEFT, exec, ${ydotool} mousemove -- -10 0 && sleep 0.1     # Left
+            binde = , KP_RIGHT, exec, ${ydotool} mousemove -- 10 0 && sleep 0.1     # Right
+            binde = , KP_UP, exec, ${ydotool} mousemove -- 0 -10 && sleep 0.1       # Up
+            binde = , KP_DOWN, exec, ${ydotool} mousemove -- 0 10 && sleep 0.1      # Down
             bind = , KP_BEGIN, exec, ${ydotool} click C0
             bind = , KP_DIVIDE, exec, ${ydotool} click 0x40
             bind = , KP_MULTIPLY, exec, ${ydotool} click 0x42 0x82
