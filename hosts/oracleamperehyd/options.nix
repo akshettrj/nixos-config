@@ -91,7 +91,7 @@
               config_file = null;
               user = user.username;
               group = "users";
-              max_runtime = null;
+              max_runtime = "1d";
               working_directory = user.homedir + "/work/watgbridge/jio";
               after = ["tgbotapi.service"];
               requires = ["tgbotapi.service"];
@@ -102,7 +102,7 @@
               config_file = null;
               user = user.username;
               group = "users";
-              max_runtime = null;
+              max_runtime = "1d";
               working_directory = user.homedir + "/work/watgbridge/vi";
               after = ["tgbotapi.service"];
               requires = ["tgbotapi.service"];
